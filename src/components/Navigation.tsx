@@ -37,7 +37,7 @@ export function Navigation() {
           borderBottom: '1.5px solid #1a1a1a',
           paddingBottom: '1rem'
         }}>
-          <Link href="/" style={{ fontSize: '2rem', fontFamily: 'AvgBold' }}>
+          <Link href="/" style={{ fontSize: '2rem', fontFamily: 'var(--font-family-bold)' }}>
             Antje Worring
           </Link>
 
@@ -80,7 +80,7 @@ export function Navigation() {
             onClick={() => setIsOpen(!isOpen)}
             style={{
               fontSize: '1.5rem',
-              fontFamily: 'AvgBold',
+              fontFamily: 'var(--font-family-bold)',
               cursor: 'pointer',
               display: 'none'
             }}
