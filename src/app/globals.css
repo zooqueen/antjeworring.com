@@ -1,0 +1,283 @@
+/* Font Face Declarations - Load Blauer Neue */
+@font-face {
+  font-family: 'Blauer Neue';
+  src: url('/fonts/BlauerNue-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Blauer Neue';
+  src: url('/fonts/BlauerNue-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Blauer Neue';
+  src: url('/fonts/BlauerNue-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-black: #1a1a1a;
+  --color-white: #ffffff;
+  --color-grey: #cccccc;
+  --color-grey-dark: #666666;
+}
+
+/* Base HTML Setup */
+:root {
+  font-size: 62.5%; /* 1rem = 10px for easier calculations */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Blauer Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 300;
+  color: #1a1a1a;
+  background: #ffffff;
+  font-size: 2.4rem; /* Base: 24px to match original */
+}
+
+body {
+  overscroll-behavior: none;
+  font-variation-settings: normal;
+  font-feature-settings: normal;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+::selection {
+  color: #ffffff;
+  background: #1a1a1a;
+}
+
+/* Typography Styles - SUPER BOLD & GRAPHIC */
+h1 {
+  font-size: 12.8rem; /* 128px to match original */
+  line-height: 110%;
+  font-family: 'Blauer Neue', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.4rem;
+  overflow: visible;
+}
+
+h2 {
+  font-size: 7.2rem; /* Larger H2 */
+  font-family: 'Blauer Neue', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.3rem;
+  line-height: 115%;
+  overflow: visible;
+}
+
+h3 {
+  font-size: 4.8rem; /* Larger H3 */
+  letter-spacing: -0.15rem;
+  font-family: 'Blauer Neue', sans-serif;
+  font-weight: 700;
+  line-height: 110%;
+  overflow: visible;
+}
+
+h5 {
+  font-size: 3.2rem;
+  letter-spacing: -0.1rem;
+  font-family: 'Blauer Neue', sans-serif;
+  font-weight: 700;
+}
+
+p {
+  font-size: 2.4rem; /* 24px to match original */
+  line-height: 145%;
+  font-family: 'Blauer Neue', sans-serif;
+  font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+  color: #1a1a1a;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.6;
+}
+
+/* Hero Heading - MASSIVE */
+.hero-heading {
+  font-size: 14.4rem; /* 144px - extra bold */
+  letter-spacing: -0.6rem;
+  line-height: 110%;
+  font-family: 'Blauer Neue', sans-serif;
+  font-weight: 700;
+  overflow: visible;
+}
+
+/* Main Container */
+#main {
+  width: 100%;
+  padding: 0 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12rem;
+}
+
+section {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Horizontal Divider Line */
+.horizontal-line {
+  width: 100%;
+  height: 2px;
+  background: #1a1a1a;
+  margin: 0;
+}
+
+/* Responsive Typography Breakpoints */
+@media (max-width: 1660px) {
+  .hero-heading {
+    font-size: 12.8rem; /* 128px */
+  }
+  h1 {
+    font-size: 11rem;
+    line-height: 105%;
+  }
+  h2 {
+    font-size: 6.4rem;
+  }
+  h3 {
+    font-size: 4.2rem;
+  }
+  #main {
+    gap: 10rem;
+  }
+}
+
+@media (max-width: 1440px) {
+  .hero-heading {
+    font-size: 11rem;
+  }
+  h1 {
+    font-size: 9.6rem;
+  }
+  h2 {
+    font-size: 5.6rem;
+  }
+  h3 {
+    font-size: 3.8rem;
+  }
+  #main {
+    gap: 8rem;
+  }
+}
+
+@media (max-width: 1140px) {
+  .hero-heading {
+    font-size: 9rem;
+    letter-spacing: -0.4rem;
+  }
+  h1 {
+    font-size: 7.2rem;
+  }
+  h2 {
+    font-size: 4.8rem;
+  }
+  h3 {
+    font-size: 3.2rem;
+  }
+  h5 {
+    font-size: 2.4rem;
+  }
+  p {
+    font-size: 2rem;
+    line-height: 155%;
+  }
+  #main {
+    gap: 6rem;
+    padding: 0 3rem;
+  }
+}
+
+@media (max-width: 868px) {
+  .hero-heading {
+    font-size: 7rem;
+    line-height: 95%;
+    letter-spacing: -0.3rem;
+  }
+  h1 {
+    font-size: 5.6rem;
+  }
+  h2 {
+    font-size: 4rem;
+  }
+  h3 {
+    font-size: 2.8rem;
+  }
+  #main {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero-heading {
+    font-size: 5.6rem;
+    letter-spacing: -0.2rem;
+    line-height: 95%;
+  }
+  h1 {
+    font-size: 4.8rem;
+  }
+  h2 {
+    font-size: 3.2rem;
+  }
+  p {
+    font-size: 1.8rem;
+  }
+  #main {
+    padding: 0 1.5rem;
+  }
+}
+
+/* Utility Classes */
+.text-balance {
+  text-wrap: balance;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

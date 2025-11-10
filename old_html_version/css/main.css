@@ -1,0 +1,925 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: AvgLight;
+  color: #1a1a1a;
+}
+
+body {
+  overscroll-behavior: none;
+  font-variation-settings: normal;
+  font-feature-settings: normal;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+::-moz-selection {
+  color: rgb(255, 255, 255);
+  background: #000;
+}
+
+::selection {
+  color: rgb(255, 255, 255);
+  background: #000;
+}
+
+html.has-scroll-smooth {
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.c-scrollbar_thumb {
+  background: #000;
+  opacity: 1;
+}
+
+@font-face {
+  font-family: AvgLight;
+  src: url(../../fonts/AVGARDN_L.TTF);
+}
+@font-face {
+  font-family: AvgBold;
+  src: url(../../fonts/AVGARDD_B.TTF);
+}
+h1 {
+  font-size: 6.4rem;
+  line-height: 100%;
+  font-family: AvgBold;
+  letter-spacing: -0.3rem;
+}
+
+h2 {
+  font-size: 4.8rem;
+  font-family: AvgBold;
+  letter-spacing: -0.2rem;
+}
+
+h3 {
+  font-size: 3rem;
+  letter-spacing: -0.05rem;
+  font-family: AvgBold;
+}
+
+h5 {
+  font-size: 2rem;
+  letter-spacing: -0.05rem;
+  font-family: AvgBold;
+}
+
+p {
+  font-size: 1.6rem;
+  line-height: 140%;
+}
+
+.headerH {
+  font-size: 9rem;
+  letter-spacing: -0.4rem;
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 1660px) {
+  .headerH {
+    font-size: 8rem;
+  }
+  h1 {
+    font-size: 5.5rem;
+    line-height: 120%;
+  }
+  h2 {
+    font-size: 4.2rem;
+  }
+  h3 {
+    font-size: 2.8rem;
+  }
+}
+@media (max-width: 1140px) {
+  .headerH {
+    font-size: 6rem;
+    letter-spacing: -0.25rem;
+  }
+  h1 {
+    font-size: 4.5rem;
+  }
+  h2 {
+    font-size: 3.5rem;
+  }
+  h3 {
+    font-size: 2.5rem;
+  }
+  h5 {
+    font-size: 1.8rem;
+  }
+  p {
+    font-size: 1.4rem;
+    line-height: 160%;
+  }
+}
+@media (max-width: 868px) {
+  .headerH {
+    font-size: 5rem;
+    line-height: 95%;
+  }
+  h1 {
+    font-size: 3.8rem;
+  }
+  h2 {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 430px) {
+  .headerH {
+    font-size: 4.6rem;
+    letter-spacing: -0.1rem;
+    line-height: 95%;
+  }
+  h1 {
+    font-size: 3.5rem;
+  }
+}
+#main {
+  width: 100%;
+  padding: 0 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+}
+
+section {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+/* ======================== Margins ======================== */
+.mT2 {
+  margin-top: 2rem;
+}
+
+.mT4 {
+  margin-top: 3.9rem;
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 1660px) {
+  #main {
+    gap: 8rem;
+  }
+}
+@media (max-width: 1440px) {
+  #main {
+    gap: 6rem;
+  }
+}
+@media (max-width: 868px) {
+  .mT2 {
+    margin-top: 1.6rem;
+  }
+  .mT4 {
+    margin-top: 3.2rem;
+  }
+  #main {
+    padding: 0 2rem;
+  }
+}
+@media (max-width: 430px) {
+  #main {
+    padding: 0 1rem;
+  }
+}
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #1a1a1a;
+  color: #fff;
+  z-index: 99;
+}
+.loader .loader_wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 5rem;
+}
+.loader .loader_wrapper .bar {
+  width: 100%;
+  height: 2px;
+  background: rgb(63, 63, 63);
+  margin-top: 4rem;
+}
+.loader .loader_wrapper .bar .bar_progress {
+  width: 0%;
+  height: 2px;
+  background: #fff;
+}
+.loader .loader_wrapper h1 {
+  font-size: 10rem;
+}
+
+nav {
+  width: 100%;
+  height: 6rem;
+}
+nav > div {
+  width: 100%;
+  padding: 3rem 0 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1.5px solid #1a1a1a;
+}
+nav > div .links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+nav > div .menu {
+  font-size: 1.5rem;
+  font-family: AvgBold;
+  display: none;
+}
+
+.navigation_menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background: #1a1a1a;
+  padding: 2rem 3rem;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(100%);
+  transition: all 0.4s ease-in-out;
+  visibility: hidden;
+}
+.navigation_menu .links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.navigation_menu a {
+  font-size: 2rem;
+  color: #fff;
+}
+.navigation_menu .close {
+  color: #fff;
+  text-align: right;
+  font-size: 1.5rem;
+  padding-bottom: 2rem;
+}
+.navigation_menu.active {
+  transform: translateX(0%);
+  visibility: visible;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #1a1a1a;
+  opacity: 0;
+  z-index: 98;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+#overlay.active {
+  opacity: 0.6;
+  visibility: visible;
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 868px) {
+  nav {
+    height: 4rem;
+  }
+  nav > div {
+    padding: 2rem 0 0.7rem 0;
+  }
+  nav > div .links,
+  nav > div .hoverLinks {
+    display: none;
+  }
+  nav > div .menu {
+    display: block;
+  }
+}
+@media (max-width: 600px) {
+  .navigation_menu {
+    width: 80%;
+    padding: 2rem 2rem;
+  }
+  .navigation_menu a {
+    font-size: 1.5rem;
+  }
+}
+.hoverLinks {
+  font-family: AvgBold;
+  font-size: 1.4rem;
+  letter-spacing: -0.02rem;
+  position: relative;
+  overflow: hidden;
+  padding: 0.2rem 0;
+  display: flex;
+  align-items: center;
+}
+.hoverLinks::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background: #1a1a1a;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+.hoverLinks:hover::before {
+  transform: translateX(0);
+}
+
+.arrowLink {
+  gap: 1.5rem;
+  border-bottom: 1px solid #cccccc;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.arrowLink img {
+  width: 28px;
+  transition: transform 0.3s ease-in-out;
+}
+.arrowLink:hover img {
+  transform: translateX(-10px);
+}
+
+footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+footer .footer_links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+footer h1 {
+  color: #1a1a1a;
+  font-size: 25vw;
+  word-spacing: -4vw;
+  letter-spacing: -1vw;
+  line-height: 80%;
+  margin-bottom: -1vw;
+  text-align: center;
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 1440px) {
+  footer h1 {
+    font-size: 23.5vw;
+  }
+}
+@media (max-width: 868px) {
+  footer h1 {
+    font-size: 24vw;
+  }
+  footer .footer_links {
+    gap: 2rem;
+  }
+}
+@media (max-width: 600px) {
+  footer {
+    gap: 3rem;
+  }
+  footer h1 {
+    font-size: 22vw;
+    margin-bottom: -0.5vw;
+  }
+}
+/* Horizontal Line */
+.horizontalLine {
+  width: 100%;
+  height: 1px;
+  background: #1a1a1a;
+}
+
+/* Parallax Image full */
+.fullImage {
+  width: 100%;
+  overflow: hidden;
+}
+.fullImage img {
+  width: 100%;
+  height: 100vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 1140px) {
+  .fullImage img {
+    max-height: 700px;
+  }
+}
+@media (max-width: 600px) {
+  .fullImage img {
+    max-height: 400px;
+  }
+}
+.hero {
+  width: 100%;
+}
+.hero > div {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-right: 1rem;
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0;
+}
+.hero > div h1 {
+  max-width: 1200px;
+  width: 100%;
+  text-align: right;
+}
+.hero > div img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px; /* smaller size for the example */
+  height: 300px; /* smaller size for the example */
+  pointer-events: none; /* ensure the cursor doesn't interact with the images */
+  will-change: transform;
+  z-index: -1;
+}
+
+.about {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8rem;
+}
+.about h2,
+.about > div {
+  flex: 1 1;
+}
+.about .separator {
+  flex: 0 0 1px;
+  background: #1a1a1a;
+}
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+.projects .heading > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.projects #projectWrapper a {
+  position: relative;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid #cccccc;
+}
+.projects #projectWrapper a p {
+  width: 50%;
+  letter-spacing: -0.05rem;
+}
+.projects #projectWrapper a h3,
+.projects #projectWrapper a h5 {
+  width: 100%;
+}
+.projects #projectWrapper a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #1a1a1a;
+  transform: translateX(-105%);
+  transition: all 0.5s ease-in-out;
+}
+.projects #projectWrapper a:hover::before {
+  transform: translateX(0);
+}
+
+/* Hover project image frame */
+#image-reveal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 450px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  display: none;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.clients {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  padding: 5rem 0;
+}
+.clients .clientsWrapper > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1rem 0;
+  border-bottom: 1px solid #cccccc;
+}
+.clients .clientsWrapper > div p {
+  width: 50%;
+  letter-spacing: -0.05rem;
+}
+.clients .clientsWrapper > div h3,
+.clients .clientsWrapper > div h5 {
+  width: 100%;
+}
+.clients .clientsWrapper > div:last-child {
+  border-bottom: none;
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 1660px) {
+  .hero > div h1 {
+    max-width: 1030px;
+  }
+  .about {
+    gap: 5rem;
+  }
+}
+@media (max-width: 1440px) {
+  .hero > div {
+    padding-right: 0rem;
+  }
+  .projects {
+    gap: 3rem;
+  }
+  .projects #projectWrapper a p {
+    width: 20%;
+  }
+  .clients {
+    gap: 3rem;
+    padding: 3rem 0;
+  }
+  .clients .clientsWrapper > div p {
+    width: 20%;
+  }
+}
+@media (max-width: 1140px) {
+  .about {
+    gap: 4rem;
+  }
+}
+@media (max-width: 868px) {
+  .hero > div img {
+    display: none;
+  }
+  .about {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .about .separator {
+    background: #cccccc;
+  }
+  .projects #projectWrapper a {
+    padding: 2rem 0;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .projects #projectWrapper a p {
+    width: 100%;
+  }
+  #image-reveal {
+    visibility: hidden;
+  }
+  .clients {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0rem 0;
+  }
+  .clients .clientsWrapper > div {
+    flex-direction: column;
+    padding: 2rem 0;
+    gap: 1rem;
+  }
+  .clients .clientsWrapper > div p {
+    width: 100%;
+  }
+}
+.projectDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8rem;
+}
+.projectDetails h2,
+.projectDetails > div {
+  flex: 1 1;
+}
+.projectDetails .separator {
+  flex: 0 0 1px;
+  background: #1a1a1a;
+}
+.projectDetails > div .list h5 {
+  padding: 1rem 0;
+  border-bottom: 1px solid #cccccc;
+}
+
+.nextProject {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  align-items: stretch;
+}
+.nextProject a {
+  flex: 1 1;
+}
+.nextProject a .image {
+  height: 60vh;
+  overflow: hidden;
+}
+.nextProject a .image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+.nextProject a .name {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 2rem;
+  transition: padding 0.3s ease-in-out;
+}
+.nextProject a .name h3 {
+  line-height: 100%;
+}
+.nextProject a:hover .image img {
+  transform: scale(1.1);
+}
+.nextProject a:hover .name {
+  padding: 0 2rem;
+}
+.nextProject .separator {
+  flex: 0 0 1px;
+  background: #1a1a1a;
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 1660px) {
+  .projectDetails {
+    gap: 5rem;
+  }
+  .nextProject a .image {
+    max-height: 400px;
+  }
+}
+@media (max-width: 1140px) {
+  .abprojectDetailsout {
+    gap: 4rem;
+  }
+}
+@media (max-width: 868px) {
+  .projectDetails {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .projectDetails .separator {
+    background: #cccccc;
+  }
+  .nextProject {
+    gap: 2rem;
+  }
+  .nextProject a .image {
+    max-height: 300px;
+  }
+  .nextProject a .name {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .nextProject {
+    gap: 3rem;
+    flex-direction: column;
+  }
+  .nextProject a .image {
+    max-height: 350px;
+  }
+  .nextProject .separator {
+    background: #cccccc;
+  }
+}
+.tabs_block {
+  display: flex;
+  gap: 8rem;
+  flex-direction: row;
+  align-items: stretch;
+  /* Image */
+  /* Seprator line */
+  /* Right contact details tabs */
+}
+.tabs_block .tabs_img {
+  overflow: hidden;
+  flex: 1;
+}
+.tabs_block .tabs_img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  filter: brightness(90%);
+}
+.tabs_block #sperator {
+  flex: 0 0 1px;
+  background: #1a1a1a;
+}
+.tabs_block .right_contact_details {
+  flex: 1;
+  /* Tabs */
+  /* Details Wrapper */
+}
+.tabs_block .right_contact_details .tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.tabs_block .right_contact_details .tabs .contactTab,
+.tabs_block .right_contact_details .tabs .socialTab {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.tabs_block .right_contact_details .tabs .contactTab::before,
+.tabs_block .right_contact_details .tabs .socialTab::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  left: -100%;
+  bottom: 0%;
+  background: #1a1a1a;
+  transition: all 0.3s ease-in-out;
+}
+.tabs_block .right_contact_details .tabs .contactTab.active-tab::before,
+.tabs_block .right_contact_details .tabs .socialTab.active-tab::before {
+  left: 0%;
+}
+.tabs_block .right_contact_details .contact_details .contactTabWrapper p,
+.tabs_block .right_contact_details .contact_details .socialTabWrapper p {
+  border-bottom: 1px solid #cccccc;
+  padding: 1.4rem 0;
+}
+.tabs_block .right_contact_details .contact_details .contactTabWrapper a,
+.tabs_block .right_contact_details .contact_details .socialTabWrapper a {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.tabs_block .right_contact_details .contact_details .contactTabWrapper a::before,
+.tabs_block .right_contact_details .contact_details .socialTabWrapper a::before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  bottom: 0;
+  background: #1a1a1a;
+  width: 100%;
+  height: 1px;
+  transition: all 0.3s ease-in-out;
+}
+.tabs_block .right_contact_details .contact_details .contactTabWrapper a:hover::before,
+.tabs_block .right_contact_details .contact_details .socialTabWrapper a:hover::before {
+  left: 0%;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1140px) {
+  .tabs_block {
+    gap: 4rem;
+  }
+}
+@media (max-width: 868px) {
+  .tabs_block {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .tabs_block #sperator {
+    background: #cccccc;
+  }
+}
+@media (max-width: 670px) {
+  .tabs_block .tabs_img img {
+    min-height: 400px;
+  }
+}
+#about_block {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8rem;
+}
+#about_block h1,
+#about_block > div {
+  flex: 1 1;
+}
+#about_block .separator {
+  flex: 0 0 1px;
+  background: #1a1a1a;
+}
+
+.swiperCnt {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+.swiperCnt .swiper {
+  width: 100%;
+  cursor: grab;
+  align-items: stretch;
+}
+.swiperCnt .swiper .swiper-slide {
+  border: 1px solid #1a1a1a;
+  padding: 4rem 3rem;
+  height: unset;
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 1660px) {
+  #about_block {
+    gap: 5rem;
+  }
+}
+@media (max-width: 1440px) {
+  .swiperCnt {
+    gap: 3rem;
+  }
+}
+@media (max-width: 868px) {
+  #about_block {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  #about_block .separator {
+    background: #cccccc;
+  }
+}
+@media (max-width: 640px) {
+  .swiperCnt .swiper .swiper-slide {
+    padding: 2rem 1rem;
+  }
+}/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,69 @@
+#about_block {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; // This will stretch all children to fill the container height
+    gap: 8rem;
+
+    h1,
+    > div {
+        flex: 1 1; // Flex-grow, flex-shrink
+    }
+
+    .separator {
+        flex: 0 0 1px; // No grow, no shrink, and fixed width of 1px
+        background: $black;
+    }
+}
+
+//======================================== What We DO
+.swiperCnt {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+
+    .swiper {
+        width: 100%;
+        cursor: grab;
+        align-items: stretch;
+
+        .swiper-slide {
+            border: 1px solid $black;
+            padding: 4rem 3rem;
+            height: unset;
+        }
+    }
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 1660px) {
+    #about_block {
+        gap: 5rem;
+    }
+}
+
+@media (max-width: 1440px) {
+    .swiperCnt {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 868px) {
+    #about_block {
+        flex-direction: column;
+        gap: 3rem;
+
+        .separator {
+            background: $grey;
+        }
+    }
+}
+
+@media (max-width: 640px){
+    .swiperCnt {
+        .swiper {
+            .swiper-slide {
+                padding: 2rem 1rem;
+            }
+        }
+    }
+}
