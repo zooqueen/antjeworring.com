@@ -3,39 +3,12 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-
-const projects = [
-  {
-    id: 1,
-    title: 'Wildlife Wander Portal',
-    category: 'Metaverse × Conservation',
-    image: '/assets/project1.jpg',
-    year: '2024',
-  },
-  {
-    id: 2,
-    title: 'Zoo Labs Foundation',
-    category: 'Web3 × Impact',
-    image: '/assets/project2.png',
-    year: '2023',
-  },
-  {
-    id: 3,
-    title: 'Digital Habitat Series',
-    category: 'NFT × Art',
-    image: '/assets/project3.png',
-    year: '2024',
-  },
-  {
-    id: 4,
-    title: 'Fashion Forward',
-    category: 'Blockchain × Fashion',
-    image: '/assets/project4.png',
-    year: '2023',
-  },
-]
+import { getLatestProjects } from '@/data/projects'
 
 export function Projects() {
+  // Get latest 4 projects for home page
+  const projects = getLatestProjects(4)
+
   return (
     <section>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6rem', flexWrap: 'wrap', gap: '3rem' }}>
@@ -46,15 +19,15 @@ export function Projects() {
         >
           <h1 style={{ marginBottom: '1.5rem' }}>Selected Works</h1>
           <p style={{ color: '#666', fontSize: '2rem', fontFamily: 'var(--font-family-light)' }}>
-            (2023 - 2024)
+            (2015 - 2025)
           </p>
         </motion.div>
 
         <Link
           href="/work"
-          style={{ 
-            display: 'inline-flex', 
-            alignItems: 'center', 
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
             gap: '1.5rem',
             fontSize: '2rem',
             fontFamily: 'var(--font-family-bold)',
@@ -93,10 +66,10 @@ export function Projects() {
               }
             }}
           >
-            <div style={{ 
-              position: 'relative', 
-              aspectRatio: '4/3', 
-              overflow: 'hidden', 
+            <div style={{
+              position: 'relative',
+              aspectRatio: '4/3',
+              overflow: 'hidden',
               marginBottom: '2.5rem',
               border: '1px solid #f0f0f0'
             }}>
@@ -104,8 +77,8 @@ export function Projects() {
                 src={project.image}
                 alt={project.title}
                 fill
-                style={{ 
-                  objectFit: 'cover', 
+                style={{
+                  objectFit: 'cover',
                   transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                   filter: 'contrast(1.05)'
                 }}
@@ -113,9 +86,9 @@ export function Projects() {
               />
             </div>
             <div>
-              <p style={{ 
-                fontSize: '1.8rem', 
-                color: '#999', 
+              <p style={{
+                fontSize: '1.8rem',
+                color: '#999',
                 marginBottom: '1rem',
                 fontFamily: 'var(--font-family-regular)',
                 letterSpacing: '0.05rem',
@@ -124,6 +97,39 @@ export function Projects() {
                 {project.category} · {project.year}
               </p>
               <h3 style={{ marginBottom: '1rem', fontSize: '4rem' }}>{project.title}</h3>
+              {project.description && (
+                <p style={{
+                  fontSize: '1.6rem',
+                  color: '#666',
+                  lineHeight: '1.6',
+                  fontFamily: 'var(--font-family-light)'
+                }}>
+                  {project.description}
+                </p>
+              )}
+              {project.tags && (
+                <div style={{ 
+                  display: 'flex', 
+                  gap: '1rem', 
+                  marginTop: '1.5rem',
+                  flexWrap: 'wrap'
+                }}>
+                  {project.tags.slice(0, 3).map(tag => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontSize: '1.2rem',
+                        padding: '0.5rem 1rem',
+                        background: '#f5f5f5',
+                        color: '#666',
+                        letterSpacing: '0.05rem'
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.article>
         ))}
