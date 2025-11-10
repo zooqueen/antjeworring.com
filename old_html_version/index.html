@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow Mint</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <!--========== CSS ==========-->
+    <!-- Locomotive -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <!--========== Loader
+        Loader added in every pages through js loader.js file from js folder
+    ==========-->
+
+    <!--========== Nav ==========-->
+    <div class="navigation_menu">
+        <div class="links">
+            <p class="close">close</p>
+            <a href="index.html" class="hoverLinks">Home</a>
+            <a href="work.html" class="hoverLinks">Work</a>
+            <a href="about.html" class="hoverLinks">About</a>
+            <a href="contact.html" class="hoverLinks">Contact</a>
+        </div>
+        <a href="https://ui8.net/inspirux-94e9e8/products?status=6" target="_blank">Get the template</a>
+    </div>
+    <div id="overlay"></div>
+
+    <!--========== Main ==========-->
+    <div id="main">
+
+        <!--========== Nav ==========-->
+        <nav>
+            <div>
+                <h5>Flow Mint</h5>
+
+                <!-- Links -->
+                <div class="links">
+                    <a href="index.html" class="hoverLinks">Home</a>
+                    <a href="work.html" class="hoverLinks">Work</a>
+                    <a href="about.html" class="hoverLinks">About</a>
+                    <a href="contact.html" class="hoverLinks">Contact</a>
+                </div>
+
+                <a href="https://ui8.net/inspirux-94e9e8/products?status=6" target="_blank" class="hoverLinks">Get the
+                    template</a>
+                <p class="menu">Menu</p>
+            </div>
+        </nav>
+
+        <!--========== Hero ==========-->
+        <header class="hero">
+            <div>
+                <h1 class="headerH">Every Pixels Tells a Different Story!</h1>
+                <img src="assets/project1.jpg" alt="" srcset="">
+                <img src="assets/project2.png" alt="" srcset="">
+                <img src="assets/project3.png" alt="" srcset="">
+                <img src="assets/project4.png" alt="" srcset="">
+                <img src="assets/project5.png" alt="" srcset="">
+            </div>
+        </header>
+
+        <!-- horizontal line -->
+        <div class="horizontalLine"></div>
+
+        <!--========== About ==========-->
+        <section class="about">
+            <!-- Left text -->
+            <h2>
+                We are imaginative and inquisitive, daring and driven.
+            </h2>
+
+            <!-- line -->
+            <div class="separator"></div>
+
+            <!-- Right Div-->
+            <div>
+                <p>
+                    As a team fueled by creativity and curiosity, we embrace each challenge with open minds and a bold
+                    approach. Our ambition drives us to push boundaries and redefine standards, ensuring that every
+                    project we undertake is not just completed, but transformed into a beacon of innovation and
+                    excellence. Through our daring initiatives, we aim to lead and inspire, forging paths where others
+                    see obstacles.
+                </p>
+
+                <p class="mT2">
+                    Our commitment to innovation extends beyond mere execution; it is woven into the very fabric of our
+                    strategy and daily operations. Each member of our team is empowered to think independently and
+                    creatively, which fuels a dynamic atmosphere where revolutionary ideas flourish. As pioneers in our
+                    field, we not only anticipate future trends but also create them, setting new benchmarks for others
+                    to follow. This proactive and visionary mindset is what distinguishes us in a competitive landscape.
+                </p>
+
+                <a href="about.html" class="hoverLinks arrowLink mT4"> About us <img src="assets/arrowRight.png"
+                        alt="arrow" loading="lazy"></a>
+            </div>
+        </section>
+
+        <!-- horizontal line -->
+        <div class="horizontalLine"></div>
+
+        <!--========== Projects ==========-->
+        <section class="projects">
+            <div class="heading">
+                <h1>Recent Works</h1>
+                <div class="mT2">
+                    <p>(2014 - 2024)</p>
+                    <a href="work.html" class="hoverLinks arrowLink"> View all works <img src="assets/arrowRight.png"
+                            alt="arrow" loading="lazy"></a>
+                </div>
+            </div>
+
+            <!-- all links block -->
+            <div id="projectWrapper" class="projectwrapper_HOME">
+                <!-- Display all data from js folder with projectHover.js file -->
+            </div>
+        </section>
+
+        <!--========== Clients ==========-->
+        <section class="clients">
+            <div class="heading">
+                <h1>Selected Clients</h1>
+            </div>
+
+            <!-- Clients details -->
+            <div class="clientsWrapper">
+                <!-- Display all data from js folder with clients.js file -->
+            </div>
+        </section>
+
+        <!-- horizontal line -->
+        <div class="horizontalLine"></div>
+
+        <!--========== Footer ==========-->
+        <div id="footerContainer">
+            <!-- Display footer from js folder with footer.js file -->
+        </div>
+
+    </div>
+
+    <!-- Mousemove Image for project section -->
+    <div id="image-reveal"></div>
+
+    <!--========== Scripts ==========-->
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Locomotive -->
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <!-- Custom -->
+    <script src="js/main.js" type="module"></script>
+</body>
+
+</html>

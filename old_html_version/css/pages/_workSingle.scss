@@ -1,0 +1,146 @@
+//======================================== Work
+.projectDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; // This will stretch all children to fill the container height
+    gap: 8rem;
+
+    h2,
+    > div {
+        flex: 1 1; // Flex-grow, flex-shrink
+    }
+
+    .separator {
+        flex: 0 0 1px; // No grow, no shrink, and fixed width of 1px
+        background: $black;
+    }
+
+    > div {
+        .list {
+            h5 {
+                padding: 1rem 0;
+                border-bottom: 1px solid $grey;
+            }
+        }
+    }
+}
+
+//======================================== Next Project
+.nextProject {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: stretch;
+
+    a {
+        flex: 1 1; // Flex-grow, flex-shrink
+
+        .image {
+            height: 60vh;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform $transition;
+            }
+        }
+
+        .name {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 2rem;
+            transition: padding $transition;
+
+            h3 {
+                line-height: 100%;
+            }
+        }
+
+        &:hover {
+            .image {
+                img {
+                    transform: scale(1.1);
+                }
+            }
+
+            .name {
+                padding: 0 2rem;
+            }
+        }
+    }
+
+    .separator {
+        flex: 0 0 1px; // No grow, no shrink, and fixed width of 1px
+        background: $black;
+    }
+}
+
+/*========================== Breakpoints ==========================*/
+@media (max-width: 1660px) {
+    .projectDetails {
+        gap: 5rem;
+    }
+
+    .nextProject {
+        a {
+            .image {
+                max-height: 400px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1140px) {
+    .abprojectDetailsout {
+        gap: 4rem;
+    }
+}
+
+@media (max-width: 868px) {
+    .projectDetails {
+        flex-direction: column;
+        gap: 3rem;
+
+        .separator {
+            background: $grey;
+        }
+    }
+
+    .nextProject {
+        gap: 2rem;
+
+        a {
+            .image {
+                max-height: 300px;
+            }
+
+            .name {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .nextProject {
+        gap: 3rem;
+        flex-direction: column;
+
+        a {
+            .image {
+                max-height: 350px;
+            }
+        }
+
+        .separator {
+            background: $grey;
+        }
+    }
+}
