@@ -180,7 +180,7 @@ export const featuredVideos: Video[] = [
     id: 'jungle-bikini-2025',
     title: 'Jungle Bikini Campaign 2025',
     description: 'Latest collection showcasing tropical-inspired designs in lush jungle settings.',
-    youtubeId: '', // Add actual YouTube ID
+    youtubeId: 'dQw4w9WgXcQ', // REPLACE WITH YOUR VIDEO ID
     category: 'Fashion Campaign',
     year: '2025',
   },
@@ -188,7 +188,7 @@ export const featuredVideos: Video[] = [
     id: 'summer-of-love',
     title: 'Summer of Love Campaign',
     description: 'Feel-good summer campaign celebrating connection, creativity, and coastal vibes.',
-    youtubeId: '', // Add actual YouTube ID
+    youtubeId: 'jNQXAC9IVRw', // REPLACE WITH YOUR VIDEO ID
     category: 'Fashion Campaign',
     year: '2020',
   },
@@ -200,7 +200,7 @@ export const allVideos: Video[] = [
     id: 'miami-swim-week-interview',
     title: 'Miami Swim Week Interview',
     description: 'Interview at Miami Swim Week discussing Karma Bikinis journey and fashion entrepreneurship.',
-    youtubeId: '', // Add actual YouTube ID
+    youtubeId: 'M7lc1UVf-VE', // REPLACE WITH YOUR VIDEO ID
     category: 'Interview',
     year: '2016',
   },
@@ -208,7 +208,7 @@ export const allVideos: Video[] = [
     id: 'less-boring-summer',
     title: 'Less Boring Summer - Escape from COVID',
     description: 'Creative campaign video promoting outdoor fun during the pandemic.',
-    youtubeId: '', // Add actual YouTube ID
+    youtubeId: '9bZkp7q19f0', // REPLACE WITH YOUR VIDEO ID
     category: 'Campaign',
     year: '2020',
   },
@@ -216,7 +216,7 @@ export const allVideos: Video[] = [
     id: 'polynesian-princess',
     title: 'Polynesian Princess Campaign',
     description: 'Tropical campaign celebrating island culture and natural beauty.',
-    youtubeId: '', // Add actual YouTube ID
+    youtubeId: 'YQHsXMglC9A', // REPLACE WITH YOUR VIDEO ID
     category: 'Campaign',
     year: '2020',
   },
@@ -224,7 +224,7 @@ export const allVideos: Video[] = [
     id: 'dayna-karma-2022',
     title: 'Dayna x Karma Collaboration',
     description: 'Behind the scenes of the Dayna x Karma collaboration collection.',
-    youtubeId: '', // Add actual YouTube ID
+    youtubeId: 'kJQP7kiw5Fk', // REPLACE WITH YOUR VIDEO ID
     category: 'Fashion Collaboration',
     year: '2022',
   },
@@ -232,7 +232,7 @@ export const allVideos: Video[] = [
     id: 'ai-bias-discussion',
     title: 'AI Bias Discussion',
     description: 'Discussing AI bias, ethics, and the importance of responsible AI development.',
-    youtubeId: '', // Add actual YouTube ID
+    youtubeId: '3-eo-khJMbk', // REPLACE WITH YOUR VIDEO ID
     category: 'Tech Talk',
     year: '2022',
   },
