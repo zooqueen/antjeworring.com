@@ -392,5 +392,8 @@ export const getAllYears = () =>
 export const getAllCategories = () => 
   Array.from(new Set(allProjects.map(p => p.category))).sort()
 
-export const getAllTags = () => 
+export const getAllTags = () =>
   Array.from(new Set(allProjects.flatMap(p => p.tags))).sort()
+
+export const getAllProjects = () =>
+  allProjects.sort((a, b) => b.order - a.order)

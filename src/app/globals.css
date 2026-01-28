@@ -1,4 +1,4 @@
-/* Font Face Declarations - Load Blauer Neue */
+/* Font Face Declarations */
 @font-face {
   font-family: 'Blauer Neue';
   src: url('/fonts/BlauerNue-Light.ttf') format('truetype');
@@ -25,17 +25,26 @@
 
 @import "tailwindcss";
 
-@theme {
-  /* Colors */
+/* Design System Colors */
+:root {
+  /* Primary Colors */
+  --color-pink: #FFE8FB;
+  --color-pink-light: #fff0fd;
+  --color-orange: #e85d04;
+  --color-orange-light: #f48c06;
+  --color-green: #3d5a3d;
+  --color-green-light: #4a6b4a;
+  --color-cream: #fef6f0;
+
+  /* Neutrals */
   --color-black: #1a1a1a;
   --color-white: #ffffff;
-  --color-grey: #cccccc;
-  --color-grey-dark: #666666;
-}
+  --color-grey: #888888;
 
-/* Base HTML Setup */
-:root {
-  font-size: 62.5%; /* 1rem = 10px for easier calculations */
+  /* Gradients */
+  --gradient-hero: linear-gradient(180deg, #e85d04 0%, #f48c06 30%, #FFE8FB 100%);
+
+  font-size: 62.5%;
 }
 
 * {
@@ -54,230 +63,302 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   font-family: 'Blauer Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-weight: 300;
-  color: #1a1a1a;
-  background: #ffffff;
-  font-size: 2.4rem; /* Base: 24px to match original */
+  font-weight: 400;
+  color: var(--color-black);
+  background: var(--color-pink);
+  font-size: 1.6rem;
+  position: relative;
 }
 
-body {
-  overscroll-behavior: none;
-  font-variation-settings: normal;
-  font-feature-settings: normal;
-}
 
-/* Scrollbar Styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  display: none;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  display: none;
+  background: var(--color-pink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-orange);
+  border-radius: 4px;
 }
 
 ::selection {
-  color: #ffffff;
-  background: #1a1a1a;
+  color: var(--color-white);
+  background: var(--color-orange);
 }
 
-/* Typography Styles - SUPER BOLD & GRAPHIC */
+/* Typography */
 h1 {
-  font-size: 12.8rem; /* 128px to match original */
-  line-height: 110%;
+  font-size: 10rem;
+  line-height: 100%;
   font-family: 'Blauer Neue', sans-serif;
   font-weight: 700;
-  letter-spacing: -0.4rem;
-  overflow: visible;
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: 7.2rem; /* Larger H2 */
-  font-family: 'Blauer Neue', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.3rem;
-  line-height: 115%;
-  overflow: visible;
-}
-
-h3 {
-  font-size: 4.8rem; /* Larger H3 */
-  letter-spacing: -0.15rem;
+  font-size: 6rem;
   font-family: 'Blauer Neue', sans-serif;
   font-weight: 700;
   line-height: 110%;
-  overflow: visible;
 }
 
-h5 {
+h3 {
   font-size: 3.2rem;
-  letter-spacing: -0.1rem;
+  font-family: 'Blauer Neue', sans-serif;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+h4 {
+  font-size: 2.4rem;
   font-family: 'Blauer Neue', sans-serif;
   font-weight: 700;
 }
 
 p {
-  font-size: 2.4rem; /* 24px to match original */
-  line-height: 145%;
+  font-size: 1.8rem;
+  line-height: 160%;
   font-family: 'Blauer Neue', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 a {
   text-decoration: none;
-  color: #1a1a1a;
+  color: inherit;
   transition: opacity 0.3s ease;
 }
 
 a:hover {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
-/* Hero Heading - MASSIVE */
-.hero-heading {
-  font-size: 14.4rem; /* 144px - extra bold */
-  letter-spacing: -0.6rem;
-  line-height: 110%;
+/* Hero Display Text - Playful Style */
+.display-name {
   font-family: 'Blauer Neue', sans-serif;
+  font-size: 48px;
+  line-height: 95%;
   font-weight: 700;
-  overflow: visible;
+  color: var(--color-orange);
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
 }
 
-/* Main Container */
+
+/* Off-Center Hero Text */
+.hero-offset {
+  text-align: left;
+  padding-left: 8%;
+}
+
+.hero-offset-right {
+  text-align: right;
+  padding-right: 8%;
+}
+
+/* Pill Buttons */
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 3rem;
+  border-radius: 100px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.pill-button.primary {
+  background: var(--color-orange);
+  color: var(--color-white);
+}
+
+.pill-button.primary:hover {
+  background: var(--color-orange-light);
+  opacity: 1;
+}
+
+.pill-button.outline {
+  background: transparent;
+  border-color: var(--color-black);
+  color: var(--color-black);
+}
+
+.pill-button.outline:hover {
+  background: var(--color-black);
+  color: var(--color-white);
+  opacity: 1;
+}
+
+.pill-button.white {
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+/* Section Backgrounds */
+.section-pink {
+  background: var(--color-pink);
+}
+
+.section-green {
+  background: var(--color-green);
+  color: var(--color-white);
+}
+
+.section-cream {
+  background: var(--color-cream);
+}
+
+/* Project Cards */
+.project-card {
+  background: transparent;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card img {
+  border-radius: 12px;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.03);
+}
+
+/* Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+/* Wide Container for asymmetric layouts */
+.container-wide {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+/* Main */
 #main {
   width: 100%;
-  padding: 0 4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 12rem;
 }
 
-section {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-/* Horizontal Divider Line */
-.horizontal-line {
-  width: 100%;
-  height: 2px;
-  background: #1a1a1a;
-  margin: 0;
-}
-
-/* Responsive Typography Breakpoints */
-@media (max-width: 1660px) {
-  .hero-heading {
-    font-size: 12.8rem; /* 128px */
+/* Responsive */
+@media (max-width: 1200px) {
+  .display-name {
+    font-size: 42px;
   }
   h1 {
-    font-size: 11rem;
-    line-height: 105%;
+    font-size: 7rem;
   }
   h2 {
-    font-size: 6.4rem;
+    font-size: 4.5rem;
   }
-  h3 {
-    font-size: 4.2rem;
-  }
-  #main {
-    gap: 10rem;
-  }
-}
-
-@media (max-width: 1440px) {
-  .hero-heading {
-    font-size: 11rem;
-  }
-  h1 {
-    font-size: 9.6rem;
-  }
-  h2 {
-    font-size: 5.6rem;
-  }
-  h3 {
-    font-size: 3.8rem;
-  }
-  #main {
-    gap: 8rem;
-  }
-}
-
-@media (max-width: 1140px) {
-  .hero-heading {
-    font-size: 9rem;
-    letter-spacing: -0.4rem;
-  }
-  h1 {
-    font-size: 7.2rem;
-  }
-  h2 {
-    font-size: 4.8rem;
-  }
-  h3 {
-    font-size: 3.2rem;
-  }
-  h5 {
-    font-size: 2.4rem;
-  }
-  p {
-    font-size: 2rem;
-    line-height: 155%;
-  }
-  #main {
-    gap: 6rem;
-    padding: 0 3rem;
+  .hero-offset,
+  .hero-offset-right {
+    padding-left: 4%;
+    padding-right: 4%;
   }
 }
 
 @media (max-width: 868px) {
-  .hero-heading {
-    font-size: 7rem;
-    line-height: 95%;
-    letter-spacing: -0.3rem;
+  .display-name {
+    font-size: 36px;
   }
   h1 {
-    font-size: 5.6rem;
+    font-size: 5rem;
   }
   h2 {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
   h3 {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
   }
-  #main {
+  p {
+    font-size: 1.6rem;
+  }
+  .container {
     padding: 0 2rem;
+  }
+  .hero-offset,
+  .hero-offset-right {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
-@media (max-width: 430px) {
-  .hero-heading {
-    font-size: 5.6rem;
-    letter-spacing: -0.2rem;
-    line-height: 95%;
+@media (max-width: 480px) {
+  .display-name {
+    font-size: 32px;
   }
   h1 {
-    font-size: 4.8rem;
+    font-size: 3.5rem;
   }
   h2 {
-    font-size: 3.2rem;
+    font-size: 2.8rem;
   }
-  p {
-    font-size: 1.8rem;
-  }
-  #main {
+  .container {
     padding: 0 1.5rem;
   }
 }
 
-/* Utility Classes */
-.text-balance {
-  text-wrap: balance;
+/* Falling Flowers Animation */
+.falling-flowers-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
 }
 
-.transition-all {
-  transition: all 0.3s ease;
+.falling-flower {
+  position: absolute;
+  top: -150px;
+  animation: fallDown linear infinite;
+  opacity: 0.6;
 }
 
-.cursor-pointer {
-  cursor: pointer;
+.falling-flower img {
+  animation: spinFlower 8s linear infinite;
+}
+
+@keyframes fallDown {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.6;
+  }
+  95% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(calc(100vh + 250px));
+    opacity: 0;
+  }
+}
+
+@keyframes spinFlower {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
