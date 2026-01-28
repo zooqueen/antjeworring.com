@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="#000">
+  <circle cx="40" cy="30" r="22" fill="none" stroke="#000" stroke-width="3"/>
+  <path d="M30 20 Q40 15 50 20 Q55 25 55 30 Q55 35 50 40 Q40 45 30 40 Q25 35 25 30 Q25 25 30 20" fill="none" stroke="#000" stroke-width="1.5"/>
+  <text x="130" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle">TODAY</text>
+</svg>
