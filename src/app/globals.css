@@ -44,6 +44,10 @@
   /* Gradients */
   --gradient-hero: linear-gradient(180deg, #e85d04 0%, #f48c06 30%, #FFE8FB 100%);
 
+  --hero-photo-width: min(150vw, 1700px);
+  --hero-photo-height: min(140vh, 1500px);
+  --hero-floor: 6%;
+
   font-size: 62.5%;
 }
 
@@ -157,6 +161,71 @@ a:hover {
 .hero-offset-right {
   text-align: right;
   padding-right: 8%;
+}
+
+.hero-grain {
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0, rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 2px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 3px);
+  filter: contrast(110%) brightness(105%);
+}
+
+.hero-vignette {
+  background: radial-gradient(circle at 50% 40%, rgba(0, 0, 0, 0) 0%, rgba(12, 10, 14, 0.12) 55%, rgba(12, 10, 14, 0.28) 100%);
+  mix-blend-mode: multiply;
+}
+
+.hero-light-sweep {
+  background: linear-gradient(110deg, rgba(255, 236, 226, 0) 25%, rgba(255, 236, 226, 0.45) 50%, rgba(255, 236, 226, 0) 75%);
+  filter: blur(6px);
+  opacity: 0.6;
+}
+
+.hero-dust {
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.18) 0.5px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.12) 0.5px, transparent 1px);
+  background-size: 120px 120px, 180px 180px;
+  background-position: 0 0, 60px 40px;
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  animation: hero-dust-float 16s linear infinite;
+}
+
+@keyframes hero-dust-float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.hero-photo {
+  width: var(--hero-photo-width);
+  height: var(--hero-photo-height);
+  bottom: var(--hero-floor);
+}
+
+@media (max-width: 700px) {
+  .hero-photo {
+    width: min(140vw, 1200px) !important;
+    height: 110vh !important;
+    bottom: 6vh !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  .hero-light-sweep {
+    opacity: 0.4;
+  }
+  .hero-dust {
+    opacity: 0.22;
+  }
 }
 
 /* Pill Buttons */
