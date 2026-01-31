@@ -1,8 +1,14 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 export function Hero() {
+  const { scrollY } = useScroll()
+  const backgroundShift = useTransform(scrollY, [0, 700], [0, 90])
+  const photoShift = useTransform(scrollY, [0, 700], [0, -70])
+  const glowShift = useTransform(scrollY, [0, 700], [0, 120])
+
   return (
     <header
       style={{
@@ -17,7 +23,7 @@ export function Hero() {
       }}
     >
       {/* S-Curve Gradient Background */}
-      <div
+      <motion.div
         style={{
           position: 'absolute',
           top: 0,
@@ -25,6 +31,7 @@ export function Hero() {
           right: 0,
           bottom: 0,
           zIndex: 0,
+          y: backgroundShift,
         }}
       >
         {/* Orange top section */}
@@ -100,7 +107,68 @@ export function Hero() {
             borderRadius: '0 0 40px 40px',
           }}
         />
-      </div>
+      </motion.div>
+
+      {/* Soft glow blobs */}
+      <motion.div
+        style={{
+          position: 'absolute',
+          top: '12%',
+          right: '8%',
+          width: '38vw',
+          height: '38vw',
+          maxWidth: 520,
+          maxHeight: 520,
+          background: 'radial-gradient(circle at 30% 30%, rgba(255,214,165,0.85), rgba(255,214,165,0) 60%)',
+          filter: 'blur(10px)',
+          opacity: 0.9,
+          zIndex: 1,
+          y: glowShift,
+        }}
+      />
+      <motion.div
+        style={{
+          position: 'absolute',
+          bottom: '-10%',
+          left: '-5%',
+          width: '45vw',
+          height: '45vw',
+          maxWidth: 620,
+          maxHeight: 620,
+          background: 'radial-gradient(circle at 40% 40%, rgba(255,146,183,0.7), rgba(255,146,183,0) 65%)',
+          filter: 'blur(6px)',
+          opacity: 0.85,
+          zIndex: 1,
+          y: glowShift,
+        }}
+      />
+
+      {/* Hero photo */}
+      <motion.div
+        style={{
+          position: 'absolute',
+          right: '4%',
+          bottom: 0,
+          width: 'min(42vw, 520px)',
+          height: 'min(60vh, 560px)',
+          zIndex: 2,
+          pointerEvents: 'none',
+          y: photoShift,
+        }}
+      >
+        <Image
+          src="/images/me.png"
+          alt="Antje in chair"
+          fill
+          sizes="(max-width: 900px) 70vw, 520px"
+          style={{
+            objectFit: 'contain',
+            objectPosition: 'bottom right',
+            filter: 'drop-shadow(0 40px 80px rgba(30, 10, 10, 0.25))',
+          }}
+          priority
+        />
+      </motion.div>
 
       {/* Content */}
       <div className="container-wide" style={{ position: 'relative', zIndex: 1 }}>
