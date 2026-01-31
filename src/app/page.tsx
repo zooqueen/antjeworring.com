@@ -106,8 +106,8 @@ export default function Home() {
     offset: ["start start", "end start"]
   })
 
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -150])
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 200])
+  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 0.85])
 
   return (
     <div id="main">
@@ -120,63 +120,101 @@ export default function Home() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          paddingTop: '10rem',
-          paddingBottom: '6rem',
           overflow: 'hidden',
         }}
       >
-        {/* Photo Background with parallax */}
-        <motion.div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, y: bgY }}>
+        {/* Room background */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 0,
+          }}
+        >
           <Image
             src="/assets/hero-bg.jpg"
-            alt="Antje Worring"
+            alt="Studio room"
             fill
             style={{ objectFit: 'cover', objectPosition: 'center' }}
             priority
           />
+        </div>
+
+        {/* Parallax text - behind me.png */}
+        <motion.div
+          style={{
+            position: 'absolute',
+            top: '-10%',
+            left: 0,
+            right: 0,
+            bottom: '10%',
+            zIndex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            padding: '2rem',
+            y: textY,
+          }}
+        >
+          <p style={{
+            fontSize: '1.4rem',
+            color: 'rgba(255,255,255,0.9)',
+            letterSpacing: '0.3rem',
+            marginBottom: '1.5rem',
+            textTransform: 'uppercase',
+          }}>
+            FOUNDER • DESIGNER • VISIONARY
+          </p>
+          <h1 style={{
+            fontSize: 'clamp(4rem, 12vw, 10rem)',
+            color: '#fff',
+            textTransform: 'lowercase',
+            marginBottom: '2rem',
+            lineHeight: 1,
+            textShadow: '0 4px 30px rgba(0,0,0,0.3)',
+          }}>
+            antje worring
+          </h1>
+          <p style={{
+            fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
+            color: 'rgba(255,255,255,0.9)',
+            maxWidth: '700px',
+            lineHeight: 1.6,
+            textShadow: '0 2px 20px rgba(0,0,0,0.4)',
+          }}>
+            From child athlete to fashion founder at 14, to AI research lab and public goods non-profit, to changing the world through conservation.
+          </p>
         </motion.div>
 
-        {/* Text content with parallax */}
-        <motion.div className="container-wide" style={{ position: 'relative', zIndex: 1, y: textY }}>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="hero-offset"
-            style={{ fontSize: '1.8rem', color: 'rgba(255,255,255,0.9)', marginBottom: '2rem', textTransform: 'uppercase', letterSpacing: '0.2rem' }}
-          >
-            Founder • Designer • Visionary
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="display-name hero-offset"
-            style={{ color: '#fff' }}
-          >
-            antje
-          </motion.h1>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-            className="display-name hero-offset-right"
-            style={{ color: '#fff' }}
-          >
-            worring
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="hero-offset"
-            style={{ fontSize: '2.4rem', color: 'rgba(255,255,255,0.9)', maxWidth: '600px' }}
-          >
-            From child athlete to fashion founder at 14, to building a $3.4B NFT project, to changing the world through conservation.
-          </motion.p>
+        {/* Me photo - same size as background */}
+        <motion.div
+          style={{
+            position: 'absolute',
+            top: '20%',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 2,
+            scale: photoScale,
+            transformOrigin: 'center bottom',
+          }}
+        >
+          <Image
+            src="/images/me.png"
+            alt="Antje"
+            fill
+            style={{
+              objectFit: 'contain',
+              objectPosition: 'center bottom',
+              filter: 'drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4)) drop-shadow(0 8px 25px rgba(0, 0, 0, 0.3))',
+            }}
+            priority
+          />
         </motion.div>
 
         {/* Scroll indicator */}
@@ -184,7 +222,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          style={{ position: 'absolute', bottom: '4rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center' }}
+          style={{ position: 'absolute', bottom: '4rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', zIndex: 3 }}
         >
           <p style={{ fontSize: '1.4rem', color: 'rgba(255,255,255,0.8)', marginBottom: '1rem' }}>scroll to explore</p>
           <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity }} style={{ fontSize: '2rem', color: '#fff' }}>↓</motion.div>
@@ -360,9 +398,8 @@ export default function Home() {
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p style={{ color: 'var(--color-orange)', fontSize: '1.6rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1rem' }}>Chapter 03</p>
           <h2 style={{ color: '#fff', fontSize: '6rem', marginBottom: '2rem', textTransform: 'lowercase' }}>zoo labs</h2>
-          <p style={{ color: '#fff', fontSize: '4rem', fontWeight: 700, marginBottom: '1rem' }}>$3.4 Billion</p>
           <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '2rem', maxWidth: '600px', lineHeight: '1.7', marginBottom: '3rem' }}>
-            Co-founded an NFT project that reached a $3.4 billion market cap — one of the most successful Web3 ventures ever.
+            Co-founded an AI research lab and public goods non-profit dedicated to building open-source technology for the future.
           </p>
           <a href="https://zoolabs.io" target="_blank" rel="noopener noreferrer" className="pill-button white">
             Visit Zoo Labs →
@@ -413,7 +450,7 @@ export default function Home() {
         {/* Background Image */}
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
           <Image
-            src="/assets/healing-farm.jpg"
+            src="/assets/healing-farm.webp"
             alt="Regenerative Healing Farm"
             fill
             style={{ objectFit: 'cover', objectPosition: 'center' }}
@@ -462,21 +499,29 @@ export default function Home() {
             <h2 style={{ color: 'var(--color-black)', fontSize: '6rem', marginBottom: '2rem', textTransform: 'lowercase' }}>building the future</h2>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '4rem' }} className="ventures-grid">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ padding: '3rem', background: 'var(--color-green)', borderRadius: '24px', color: '#fff' }}>
-              <h3 style={{ fontSize: '3rem', marginBottom: '1rem' }}>LUX Network</h3>
-              <p style={{ fontSize: '1.4rem', opacity: 0.8, marginBottom: '1rem' }}>Co-Founder & Chief Design Officer</p>
-              <p style={{ fontSize: '1.6rem', lineHeight: '1.6', marginBottom: '2rem' }}>Building the future of decentralized finance and blockchain technology.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3rem' }} className="ventures-grid">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ padding: '3rem', background: 'var(--color-black)', borderRadius: '24px', color: '#fff' }}>
+              <h3 style={{ fontSize: '2.4rem', marginBottom: '1rem' }}>Hanzo AI</h3>
+              <p style={{ fontSize: '1.2rem', opacity: 0.8, marginBottom: '1rem' }}>Techstars-Backed • Creative Agency & AI Tools</p>
+              <p style={{ fontSize: '1.4rem', lineHeight: '1.6', marginBottom: '2rem' }}>Helped scale and operate its creative agency, designing and building cutting-edge AI tools for the future of work.</p>
+              <a href="https://hanzo.ai" target="_blank" rel="noopener noreferrer" className="pill-button white">Visit Hanzo →</a>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} style={{ padding: '3rem', background: 'var(--color-green)', borderRadius: '24px', color: '#fff' }}>
+              <h3 style={{ fontSize: '2.4rem', marginBottom: '1rem' }}>LUX Network</h3>
+              <p style={{ fontSize: '1.2rem', opacity: 0.8, marginBottom: '1rem' }}>Co-Founder & Chief Design Officer</p>
+              <p style={{ fontSize: '1.4rem', lineHeight: '1.6', marginBottom: '2rem' }}>Private quantum-safe cryptography. Translating frontier research on fully homomorphic encryption for normal people.</p>
               <a href="https://lux.network" target="_blank" rel="noopener noreferrer" className="pill-button white">Visit LUX →</a>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} style={{ padding: '3rem', background: 'var(--color-orange)', borderRadius: '24px', color: '#fff' }}>
-              <h3 style={{ fontSize: '3rem', marginBottom: '1rem' }}>LUX Credit</h3>
-              <p style={{ fontSize: '1.4rem', opacity: 0.8, marginBottom: '1rem' }}>Co-Founder</p>
-              <p style={{ fontSize: '1.6rem', lineHeight: '1.6', marginBottom: '2rem' }}>Revolutionary credit platform powered by blockchain technology.</p>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ padding: '3rem', background: 'var(--color-orange)', borderRadius: '24px', color: '#fff' }}>
+              <h3 style={{ fontSize: '2.4rem', marginBottom: '1rem' }}>LUX Credit</h3>
+              <p style={{ fontSize: '1.2rem', opacity: 0.8, marginBottom: '1rem' }}>Co-Founder • Shariah-Compliant Finance</p>
+              <p style={{ fontSize: '1.4rem', lineHeight: '1.6', marginBottom: '2rem' }}>Designed the world's first Shariah law compliant credit card — serving 800 million unbanked Muslims globally.</p>
               <a href="https://lux.credit" target="_blank" rel="noopener noreferrer" className="pill-button white">Visit LUX Credit →</a>
             </motion.div>
           </div>
+
         </div>
       </section>
 
