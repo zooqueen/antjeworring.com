@@ -212,6 +212,19 @@ a:hover {
   bottom: var(--hero-floor);
 }
 
+/* Hero Me Image Responsive */
+.hero-me-image {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+@media (max-width: 768px) {
+  .hero-me-image {
+    object-fit: cover !important;
+    object-position: center 70% !important;
+  }
+}
+
 @media (max-width: 700px) {
   .hero-photo {
     width: min(140vw, 1200px) !important;
