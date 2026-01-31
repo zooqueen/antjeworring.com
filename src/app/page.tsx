@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { useRef } from 'react'
+import { FallingFlowers } from '@/components/FallingFlowers'
 
 
 // Clean YouTube embed - no controls, no branding, autoplay muted
@@ -108,12 +109,14 @@ export default function Home() {
 
   const textY = useTransform(scrollYProgress, [0, 1], [0, 200])
   const photoScale = useTransform(scrollYProgress, [0, 1], [1, 0.85])
+  const healingFarmRef = useRef<HTMLElement>(null)
 
   return (
     <div id="main">
       {/* Hero - Photo background */}
       <header
         ref={heroRef}
+        className="hero-header"
         style={{
           minHeight: '100vh',
           position: 'relative',
@@ -143,15 +146,43 @@ export default function Home() {
           />
         </div>
 
-        {/* Parallax text - behind me.png */}
+        {/* Me photo - behind text */}
+        <motion.div
+          className="hero-me-container"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 1,
+            scale: photoScale,
+            transformOrigin: 'center bottom',
+          }}
+        >
+          <Image
+            src="/images/me.png"
+            alt="Antje"
+            fill
+            className="hero-me-image"
+            style={{
+              objectFit: 'contain',
+              objectPosition: 'center bottom',
+              filter: 'drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4)) drop-shadow(0 8px 25px rgba(0, 0, 0, 0.3))',
+            }}
+            priority
+          />
+        </motion.div>
+
+        {/* Text overlay - in front of me.png */}
         <motion.div
           style={{
             position: 'absolute',
-            top: '-10%',
+            top: 0,
             left: 0,
             right: 0,
-            bottom: '10%',
-            zIndex: 1,
+            bottom: '40%',
+            zIndex: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -162,7 +193,7 @@ export default function Home() {
           }}
         >
           <p style={{
-            fontSize: '1.4rem',
+            fontSize: 'clamp(1rem, 1.5vw, 1.4rem)',
             color: 'rgba(255,255,255,0.9)',
             letterSpacing: '0.3rem',
             marginBottom: '1.5rem',
@@ -171,50 +202,14 @@ export default function Home() {
             FOUNDER • DESIGNER • VISIONARY
           </p>
           <h1 style={{
-            fontSize: 'clamp(4rem, 12vw, 10rem)',
+            fontSize: 'clamp(3rem, 10vw, 8rem)',
             color: '#fff',
             textTransform: 'lowercase',
-            marginBottom: '2rem',
             lineHeight: 1,
             textShadow: '0 4px 30px rgba(0,0,0,0.3)',
           }}>
             antje worring
           </h1>
-          <p style={{
-            fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
-            color: 'rgba(255,255,255,0.9)',
-            maxWidth: '700px',
-            lineHeight: 1.6,
-            textShadow: '0 2px 20px rgba(0,0,0,0.4)',
-          }}>
-            From child athlete to fashion founder at 14, to AI research lab and public goods non-profit, to changing the world through conservation.
-          </p>
-        </motion.div>
-
-        {/* Me photo - same size as background */}
-        <motion.div
-          style={{
-            position: 'absolute',
-            top: '20%',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 2,
-            scale: photoScale,
-            transformOrigin: 'center bottom',
-          }}
-        >
-          <Image
-            src="/images/me.png"
-            alt="Antje"
-            fill
-            style={{
-              objectFit: 'contain',
-              objectPosition: 'center bottom',
-              filter: 'drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4)) drop-shadow(0 8px 25px rgba(0, 0, 0, 0.3))',
-            }}
-            priority
-          />
         </motion.div>
 
         {/* Scroll indicator */}
@@ -222,8 +217,11 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          style={{ position: 'absolute', bottom: '4rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', zIndex: 3 }}
+          style={{ position: 'absolute', bottom: '4rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', zIndex: 3, maxWidth: '700px', padding: '0 2rem' }}
         >
+          <p style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginBottom: '2rem', textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
+            From child athlete to fashion founder at 14, to AI research lab and public goods non-profit, to changing the world through conservation.
+          </p>
           <p style={{ fontSize: '1.4rem', color: 'rgba(255,255,255,0.8)', marginBottom: '1rem' }}>scroll to explore</p>
           <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity }} style={{ fontSize: '2rem', color: '#fff' }}>↓</motion.div>
         </motion.div>
@@ -446,7 +444,8 @@ export default function Home() {
       </section>
 
       {/* Chapter 5: Regenerative Healing Farm */}
-      <section style={{ padding: '8rem 0', position: 'relative', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
+      <section ref={healingFarmRef} style={{ padding: '8rem 0', position: 'relative', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
+        <FallingFlowers containerRef={healingFarmRef} />
         {/* Background Image */}
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
           <Image
