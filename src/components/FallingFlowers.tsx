@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, RefObject } from 'react'
 
 interface CursorFlower {
   id: number
@@ -11,9 +11,14 @@ interface CursorFlower {
   opacity: number
 }
 
-export function FallingFlowers() {
+interface FallingFlowersProps {
+  containerRef: RefObject<HTMLElement | null>
+}
+
+export function FallingFlowers({ containerRef }: FallingFlowersProps) {
   const [flowers, setFlowers] = useState<CursorFlower[]>([])
   const [nextId, setNextId] = useState(0)
+  const [isInSection, setIsInSection] = useState(false)
 
   const addFlower = useCallback((x: number, y: number) => {
     const newFlower: CursorFlower = {
@@ -34,16 +39,33 @@ export function FallingFlowers() {
     const throttleMs = 80
 
     const handleMouseMove = (e: MouseEvent) => {
-      const now = Date.now()
-      if (now - lastTime >= throttleMs) {
-        lastTime = now
-        addFlower(e.clientX, e.clientY)
+      if (!containerRef.current) return
+
+      const rect = containerRef.current.getBoundingClientRect()
+      const isInside = (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      )
+
+      setIsInSection(isInside)
+
+      if (isInside) {
+        const now = Date.now()
+        if (now - lastTime >= throttleMs) {
+          lastTime = now
+          // Use position relative to the container
+          const relativeX = e.clientX - rect.left
+          const relativeY = e.clientY - rect.top
+          addFlower(relativeX, relativeY)
+        }
       }
     }
 
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [addFlower])
+  }, [addFlower, containerRef])
 
   useEffect(() => {
     if (flowers.length === 0) return
@@ -59,16 +81,18 @@ export function FallingFlowers() {
     return () => clearInterval(fadeInterval)
   }, [flowers.length])
 
+  if (!isInSection && flowers.length === 0) return null
+
   return (
     <div
       style={{
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
         pointerEvents: 'none',
-        zIndex: 9998,
+        zIndex: 10,
         overflow: 'hidden',
       }}
     >
