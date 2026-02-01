@@ -1,9 +1,46 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { FallingFlowers } from '@/components/FallingFlowers'
+
+// Magazine slideshow component - fills container completely
+function MagazineSlideshow({ images, interval = 1000 }: { images: string[], interval?: number }) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length)
+    }, interval)
+    return () => clearInterval(timer)
+  }, [images.length, interval])
+
+  return (
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          style={{ position: 'absolute', inset: 0 }}
+        >
+          <Image
+            src={images[currentIndex]}
+            alt="Magazine Cover"
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="400px"
+            quality={100}
+            unoptimized
+          />
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+}
 
 
 // Clean YouTube embed - no controls, no branding, autoplay muted
@@ -227,64 +264,57 @@ export default function Home() {
         </motion.div>
       </header>
 
-      {/* Press Logos Grid */}
-      <section style={{ background: '#fff', padding: '4rem 0' }}>
-        <div className="container">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            style={{ textAlign: 'center', fontSize: '1.4rem', color: 'var(--color-grey)', marginBottom: '3rem', textTransform: 'uppercase', letterSpacing: '0.15rem' }}
-          >
-            As Featured In
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="press-grid"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '2rem',
-              alignItems: 'center',
-            }}
-          >
-            {[
-              { src: '/assets/logos/british-vogue.png', alt: 'British Vogue', width: 140 },
-              { src: '/assets/logos/elle.svg', alt: 'Elle', width: 80 },
-              { src: '/assets/logos/people.png', alt: 'People', width: 140 },
-              { src: '/assets/logos/womens-health.png', alt: 'Womens Health', width: 160 },
-              { src: '/assets/logos/sf-chronicle.jpg', alt: 'San Francisco Chronicle', width: 180 },
-              { src: '/assets/logos/marin-ij.png', alt: 'Marin Independent Journal', width: 140 },
-              { src: '/assets/logos/washington-post.webp', alt: 'Washington Post', width: 140 },
-              { src: '/assets/logos/tmz.png', alt: 'TMZ', width: 100 },
-              { src: '/assets/logos/cointelegraph.png', alt: 'Cointelegraph', width: 160 },
-              { src: '/assets/logos/decrypt.png', alt: 'Decrypt', width: 140 },
-              { src: '/assets/logos/tech-times.webp', alt: 'Tech Times', width: 120 },
-            ].map((logo) => (
-              <div
-                key={logo.alt}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '1.5rem',
-                  minHeight: '80px',
-                }}
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={logo.width}
-                  height={50}
-                  style={{ maxWidth: '100%', height: 'auto', objectFit: 'contain', filter: 'grayscale(100%)', opacity: 0.8, transition: 'all 0.3s ease' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.filter = 'grayscale(0%)'; e.currentTarget.style.opacity = '1' }}
-                  onMouseLeave={(e) => { e.currentTarget.style.filter = 'grayscale(100%)'; e.currentTarget.style.opacity = '0.8' }}
-                />
-              </div>
-            ))}
-          </motion.div>
+      {/* Press Bento Grid - Sophie Amoruso Style */}
+      <section style={{ background: '#fff', width: '100%' }}>
+        <div className="press-grid-container" style={{
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          borderTop: '1px solid #000',
+        }}>
+          {/* Row 1: 4 logos */}
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/british-vogue.png" alt="British Vogue" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/people.png" alt="People" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/sf-chronicle.jpg" alt="SF Chronicle" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/washington-post.webp" alt="Washington Post" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+          {/* Magazine right - spans 2 rows, 2 cols */}
+          <div style={{
+            gridColumn: '5 / 7',
+            gridRow: '1 / 3',
+            position: 'relative',
+            overflow: 'hidden',
+            borderRight: '1px solid #000',
+            borderBottom: '1px solid #000',
+          }}>
+            <MagazineSlideshow
+              images={['/assets/magazine/1.jpg', '/assets/magazine/2.jpg', '/assets/magazine/3.jpg']}
+              interval={2000}
+            />
+          </div>
+
+          {/* Row 2: Magazine left starts + 2 logos */}
+          {/* Magazine left - spans 2 rows, 2 cols */}
+          <div style={{
+            gridColumn: '1 / 3',
+            gridRow: '2 / 4',
+            position: 'relative',
+            overflow: 'hidden',
+            borderRight: '1px solid #000',
+            borderBottom: '1px solid #000',
+          }}>
+            <MagazineSlideshow
+              images={['/assets/magazine/4.jpg', '/assets/magazine/5.jpg', '/assets/magazine/6.jpg']}
+              interval={2000}
+            />
+          </div>
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/cointelegraph.png" alt="Cointelegraph" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/decrypt.png" alt="Decrypt" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+
+          {/* Row 3: 4 logos */}
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/elle.svg" alt="Elle" width={60} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/tmz.png" alt="TMZ" width={80} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/tech-times.webp" alt="Tech Times" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/marin-ij.png" alt="Marin IJ" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
         </div>
       </section>
 
@@ -303,7 +333,7 @@ export default function Home() {
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p style={{ color: 'var(--color-orange)', fontSize: '1.6rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1rem' }}>Chapter 01</p>
-            <h2 style={{ color: '#fff', fontSize: '6rem', marginBottom: '2rem', textTransform: 'lowercase' }}>the athlete</h2>
+            <h2 style={{ color: '#fff', fontSize: '6rem', marginBottom: '2rem', textTransform: 'lowercase' }}>the beginning</h2>
             <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '2rem', maxWidth: '700px', lineHeight: '1.7' }}>
               Before the fashion empire, before the tech ventures — there was tennis. Training as a competitive athlete from childhood, I learned discipline, resilience, and the drive to be the best. These foundations shaped everything that came next.
             </p>
@@ -312,98 +342,137 @@ export default function Home() {
       </section>
 
       {/* Chapter 2: Karma Bikinis - Photo Gallery */}
-      <section style={{ padding: '6rem 0', background: 'var(--color-pink)' }}>
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3rem' }}>
+      <section style={{ background: 'var(--color-pink)', width: '100%' }}>
+        <div className="container" style={{ paddingTop: '6rem', paddingBottom: '3rem' }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p style={{ color: 'var(--color-orange)', fontSize: '1.6rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1rem' }}>Chapter 02</p>
             <h2 style={{ fontSize: '6rem', color: 'var(--color-black)', textTransform: 'lowercase' }}>karma bikinis</h2>
           </motion.div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', marginBottom: '4rem' }} className="karma-gallery">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((num, index) => (
-              <motion.div
-                key={num}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                style={{ position: 'relative', aspectRatio: '3/4', borderRadius: '12px', overflow: 'hidden' }}
-              >
-                <Image
-                  src={`/assets/karma-${num}.jpg`}
-                  alt={`Karma Bikinis ${num}`}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-              </motion.div>
-            ))}
-          </div>
+        </div>
+        {/* 4x2 Photo Grid - full width with black lines */}
+        <div style={{
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          borderTop: '1px solid #000',
+        }}>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((num, index) => (
+            <div
+              key={num}
+              style={{
+                aspectRatio: '1/1',
+                position: 'relative',
+                overflow: 'hidden',
+                borderRight: (index + 1) % 4 !== 0 ? '1px solid #000' : 'none',
+                borderBottom: '1px solid #000',
+              }}
+            >
+              <Image
+                src={`/assets/karma-${num}.jpg`}
+                alt={`Karma Bikinis ${num}`}
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="25vw"
+              />
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Karma Bikinis - Kickstarter Background Video */}
-      <BackgroundVideo videoId="isKrNe8LIho" endTime={135}>
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 style={{ color: '#fff', fontSize: '6rem', marginBottom: '2rem', textTransform: 'lowercase' }}>karma bikinis</h2>
-          <p style={{ color: '#fff', fontSize: '2.4rem', maxWidth: '600px', lineHeight: '1.6', marginBottom: '1rem' }}>
-            <strong>Started at 14. Worn by fashion models, celebrities and top influencers.</strong>
-          </p>
-          <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.8rem', maxWidth: '600px', lineHeight: '1.7' }}>
-            Over 10 years of collections. 100+ products brought to market. Featured in major publications worldwide.
-          </p>
-        </motion.div>
-      </BackgroundVideo>
-
-      {/* Karma Videos Grid */}
-      <section style={{ padding: '6rem 0', background: 'var(--color-pink)' }}>
+      {/* Karma Bikinis - Video + Text Side by Side */}
+      <section style={{ padding: '6rem 0', background: 'var(--color-black)' }}>
         <div className="container">
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{ fontSize: '3rem', color: 'var(--color-black)', marginBottom: '3rem', textTransform: 'lowercase' }}
-          >
-            videos
-          </motion.h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '3rem' }} className="video-grid">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <YouTubeEmbed videoId="dU0ndRpSS14" title="Karma Bikinis" />
-              <p style={{ marginTop: '1rem', fontSize: '1.4rem', color: 'var(--color-grey)' }}>Karma Bikinis Journey</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="karma-split">
+            {/* Video on left */}
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <YouTubeEmbed videoId="isKrNe8LIho" title="Karma Bikinis Kickstarter" />
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-              <YouTubeEmbed videoId="0lp1eXOyywc" title="Fashion Show" />
-              <p style={{ marginTop: '1rem', fontSize: '1.4rem', color: 'var(--color-grey)' }}>Miami Swim Week</p>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-              <YouTubeEmbed videoId="UAT2yVOzm8s" title="Collection" />
-              <p style={{ marginTop: '1rem', fontSize: '1.4rem', color: 'var(--color-grey)' }}>Collection Showcase</p>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
-              <YouTubeEmbed videoId="rMDadDkJTpo" title="Karma Feature" />
-              <p style={{ marginTop: '1rem', fontSize: '1.4rem', color: 'var(--color-grey)' }}>Featured Story</p>
+
+            {/* Text on right, left-aligned */}
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ textAlign: 'left' }}>
+              <h2 style={{ color: '#fff', fontSize: 'clamp(3rem, 6vw, 6rem)', marginBottom: '2rem', textTransform: 'lowercase' }}>karma bikinis</h2>
+              <p style={{ color: '#fff', fontSize: 'clamp(1.6rem, 2vw, 2.4rem)', lineHeight: '1.6', marginBottom: '1rem' }}>
+                <strong>Started at 14. Worn by fashion models, celebrities and top influencers.</strong>
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 'clamp(1.4rem, 1.6vw, 1.8rem)', lineHeight: '1.7' }}>
+                Over 10 years of collections. 100+ products brought to market. Featured in major publications worldwide.
+              </p>
             </motion.div>
           </div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginTop: '4rem', textAlign: 'center' }}>
-            <a href="https://www.facebook.com/KarmaBikinis/" target="_blank" rel="noopener noreferrer" className="pill-button primary">
-              View Full Collection →
-            </a>
-          </motion.div>
         </div>
       </section>
 
-      {/* Chapter 3: Zoo Labs - Background Video */}
-      <BackgroundVideo videoId="6yYuYtMWgOU">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p style={{ color: 'var(--color-orange)', fontSize: '1.6rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1rem' }}>Chapter 03</p>
-          <h2 style={{ color: '#fff', fontSize: '6rem', marginBottom: '2rem', textTransform: 'lowercase' }}>zoo labs</h2>
-          <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '2rem', maxWidth: '600px', lineHeight: '1.7', marginBottom: '3rem' }}>
-            Co-founded an AI research lab and public goods non-profit dedicated to building open-source technology for the future.
-          </p>
-          <a href="https://zoolabs.io" target="_blank" rel="noopener noreferrer" className="pill-button white">
-            Visit Zoo Labs →
+      {/* Karma Videos Grid - 2x2 full-width with black lines */}
+      <section style={{ background: 'var(--color-pink)', width: '100%' }}>
+        <div style={{
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          borderTop: '1px solid #000',
+        }}>
+          <div style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000', position: 'relative', overflow: 'hidden' }}>
+            <iframe
+              src="https://www.youtube.com/embed/dU0ndRpSS14?autoplay=1&mute=1&loop=1&playlist=dU0ndRpSS14&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
+              title="Karma Bikinis"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              style={{ position: 'absolute', top: '50%', left: '50%', width: '180%', height: '180%', transform: 'translate(-50%, -50%)', border: 'none' }}
+            />
+          </div>
+          <div style={{ aspectRatio: '1/1', borderBottom: '1px solid #000', position: 'relative', overflow: 'hidden' }}>
+            <iframe
+              src="https://www.youtube.com/embed/0lp1eXOyywc?autoplay=1&mute=1&loop=1&playlist=0lp1eXOyywc&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
+              title="Miami Swim Week"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              style={{ position: 'absolute', top: '50%', left: '50%', width: '180%', height: '180%', transform: 'translate(-50%, -50%)', border: 'none' }}
+            />
+          </div>
+          <div style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000', position: 'relative', overflow: 'hidden' }}>
+            <iframe
+              src="https://www.youtube.com/embed/UAT2yVOzm8s?autoplay=1&mute=1&loop=1&playlist=UAT2yVOzm8s&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
+              title="Collection Showcase"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              style={{ position: 'absolute', top: '50%', left: '50%', width: '180%', height: '180%', transform: 'translate(-50%, -50%)', border: 'none' }}
+            />
+          </div>
+          <div style={{ aspectRatio: '1/1', borderBottom: '1px solid #000', position: 'relative', overflow: 'hidden' }}>
+            <iframe
+              src="https://www.youtube.com/embed/rMDadDkJTpo?autoplay=1&mute=1&loop=1&playlist=rMDadDkJTpo&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
+              title="Featured Story"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              style={{ position: 'absolute', top: '50%', left: '50%', width: '180%', height: '180%', transform: 'translate(-50%, -50%)', border: 'none' }}
+            />
+          </div>
+        </div>
+        <div className="container" style={{ paddingTop: '4rem', paddingBottom: '4rem', textAlign: 'center' }}>
+          <a href="https://www.facebook.com/KarmaBikinis/" target="_blank" rel="noopener noreferrer" className="pill-button primary">
+            View Full Collection →
           </a>
-        </motion.div>
-      </BackgroundVideo>
+        </div>
+      </section>
+
+      {/* Chapter 3: Zoo Labs - Video + Text Side by Side */}
+      <section style={{ padding: '6rem 0', background: 'var(--color-black)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="zoolabs-split">
+            {/* Video on left */}
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <YouTubeEmbed videoId="6yYuYtMWgOU" title="Zoo Labs" />
+            </motion.div>
+
+            {/* Text on right, left-aligned */}
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ textAlign: 'left' }}>
+              <p style={{ color: 'var(--color-orange)', fontSize: '1.6rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1rem' }}>Chapter 03</p>
+              <h2 style={{ color: '#fff', fontSize: 'clamp(3rem, 6vw, 6rem)', marginBottom: '2rem', textTransform: 'lowercase' }}>zoo labs</h2>
+              <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 'clamp(1.4rem, 1.8vw, 2rem)', lineHeight: '1.7', marginBottom: '3rem' }}>
+                Co-founded an AI research lab and public goods non-profit dedicated to building open-source technology for the future.
+              </p>
+              <a href="https://zoolabs.io" target="_blank" rel="noopener noreferrer" className="pill-button white">
+                Visit Zoo Labs →
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Chapter 4: Zoo NGO */}
       <section style={{ padding: '8rem 0', background: 'var(--color-green)' }}>
