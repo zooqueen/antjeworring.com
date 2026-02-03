@@ -489,10 +489,10 @@ export default function Home() {
                 ZOO LABS
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                Co-founded an AI research lab and public goods non-profit dedicated to building open-source technology for the future. Zoo Labs represents a shift from fashion to technology — applying the same creative problem-solving approach to frontier AI development.
+                Co-founded an AI research lab and public goods non-profit. We build open-source tools and ship real products.
               </p>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
-                Our mission is democratizing access to cutting-edge AI tools, contributing to the open-source ecosystem, and building technology that serves humanity rather than exploiting it.
+                Making AI accessible to everyone. Contributing to open source. Building tech that helps people.
               </p>
               <a href="https://zoolabs.io" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                 VISIT ZOO LABS →

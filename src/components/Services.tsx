@@ -9,79 +9,79 @@ const serviceCards = [
   {
     category: "Creative Design",
     title: "Ad Creative",
-    description: "AI-powered designs that drive measurable performance across all digital platforms and campaigns",
+    description: "Ads that actually convert. Digital campaigns across all platforms.",
     image: "/assets/services/ad creative.jpeg"
   },
   {
     category: "Creative Design",
     title: "Social Media Creative",
-    description: "Algorithm-optimized assets for maximum engagement on Instagram, TikTok, LinkedIn, and more",
+    description: "Scroll-stopping content for Instagram, TikTok, LinkedIn, and beyond.",
     image: "/assets/services/social media creative.jpeg"
   },
   {
     category: "Creative Design",
     title: "Presentation Design",
-    description: "Strategic narratives that elevate your message with data visualization and compelling storytelling",
+    description: "Pitch decks that tell your story and close the deal.",
     image: "/assets/services/presentation design.jpg"
   },
   {
     category: "Creative Design",
     title: "Illustration Design",
-    description: "Visual storytelling engineered for brand recognition through custom icons, infographics, and artwork",
+    description: "Custom icons, infographics, and artwork that make your brand memorable.",
     image: "/assets/services/illustration design.jpeg"
   },
   {
     category: "Creative Design",
     title: "Web Design",
-    description: "User-centric experiences built for conversions with responsive layouts and intuitive navigation",
+    description: "Beautiful, fast websites that work on every device.",
     image: "/assets/services/web design.jpeg"
   },
   {
     category: "Creative Design",
     title: "Branding Services",
-    description: "Data-driven identity systems for market differentiation including logos, guidelines, and assets",
+    description: "Logos, brand guidelines, and visual identity systems.",
     image: "/assets/services/branding services.jpeg"
   },
   {
     category: "Specialized Production",
     title: "Video Production",
-    description: "Streamlined production systems for cinematic quality at scale from concept to final delivery",
+    description: "From concept to final cut. Commercials, promos, and brand films.",
     image: "/assets/services/video production.jpeg"
   },
   {
     category: "Specialized Production",
     title: "Motion Design",
-    description: "Dynamic visual systems for digital environments including animations, transitions, and effects",
+    description: "Animations, transitions, and kinetic typography that bring ideas to life.",
     image: "/assets/services/motion design.jpg"
   },
   {
     category: "Specialized Production",
     title: "3D & AR Design",
-    description: "Immersive experiences with practical implementation for products, spaces, and interactions",
+    description: "Product visualization, virtual spaces, and augmented reality experiences.",
     image: "/assets/services/3D and AR Design .jpeg"
   },
   {
     category: "AI Engineering",
     title: "RAG System Implementation",
-    description: "Custom knowledge systems for specialized applications with enterprise-grade retrieval accuracy",
+    description: "Custom AI knowledge bases that actually understand your business.",
     image: "/assets/services/RAG system implementation.png"
   },
   {
     category: "AI Engineering",
     title: "LLM Fine-Tuning",
-    description: "Precision model adaptation for domain-specific requirements with continuous optimization",
+    description: "Train AI models on your data for your specific use case.",
     image: "/assets/services/LLM Fine Tuning.jpeg"
   },
   {
     category: "AI Engineering",
     title: "AI Pipeline Development",
-    description: "End-to-end architecture from ingestion to deployment with scalable infrastructure design",
+    description: "Production-ready AI systems from data ingestion to deployment.",
     image: "/assets/services/ai pipeline development.jpeg"
   },
   {
     category: "AI Engineering",
     title: "AI-Enhanced Creative",
-    description: "Human expertise multiplied by computational intelligence for unprecedented creative output",
+    description: "Creative work powered by AI. Better results, faster turnaround.",
     image: "/assets/services/ai enhanced creative .jpg"
   }
 ]
