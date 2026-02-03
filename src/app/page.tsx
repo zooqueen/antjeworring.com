@@ -480,7 +480,7 @@ export default function Home() {
       <section style={{ background: 'var(--color-black)', padding: '6rem 0', borderTop: '1px solid #000', overflow: 'hidden' }}>
         <div className="container" style={{ marginBottom: '3rem' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 style={{ fontSize: 'clamp(4rem, 8vw, 7rem)', fontWeight: 400, textTransform: 'lowercase', letterSpacing: '0.02rem', marginBottom: '1rem', color: '#fff', fontFamily: "'Hippie Vintage', cursive" }}>
+            <h2 style={{ fontSize: 'clamp(3.5rem, 6vw, 6rem)', fontWeight: 400, textTransform: 'lowercase', marginBottom: '1rem', color: '#fff', fontFamily: "'Hippie Vintage', cursive", lineHeight: '110%' }}>
               zoo trading cards
             </h2>
             <p style={{ fontSize: '1.6rem', color: '#fff', opacity: 0.7 }}>
