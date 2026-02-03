@@ -20,12 +20,14 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             className="display-name"
             style={{
+              fontSize: 'clamp(4.5rem, 15vw, 12rem)',
               color: '#fff',
               textAlign: 'center',
               marginBottom: '1rem',
+              fontFamily: "'Hippie Vintage', cursive",
             }}
           >
-            antje worring
+            antje<br />worring
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
