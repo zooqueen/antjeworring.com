@@ -67,6 +67,7 @@ export default function AboutPage() {
                 aspectRatio: '3/4',
                 borderRadius: '20px',
                 overflow: 'hidden',
+                maxWidth: '60%',
               }}
             >
               <Image
