@@ -119,7 +119,7 @@ export function Services() {
   }
 
   return (
-    <section style={{ background: 'var(--color-cream)', width: '100%', paddingTop: '6rem', paddingBottom: '6rem' }}>
+    <section className="services-section" style={{ background: 'var(--color-cream)', width: '100%', paddingTop: '6rem', paddingBottom: '6rem', fontFamily: "'Blauer Neue', sans-serif" }}>
       {/* Section Header */}
       <div className="container" style={{ marginBottom: '3rem' }}>
         <motion.div
@@ -134,7 +134,8 @@ export function Services() {
               fontSize: '1.6rem',
               marginBottom: '1rem',
               textTransform: 'uppercase',
-              letterSpacing: '0.1rem'
+              letterSpacing: '0.1rem',
+              fontFamily: "'Blauer Neue', sans-serif"
             }}>
               Creative Services
             </p>
@@ -142,7 +143,8 @@ export function Services() {
               fontSize: 'clamp(3.5rem, 6vw, 6rem)',
               color: 'var(--color-black)',
               textTransform: 'lowercase',
-              lineHeight: 1.1
+              lineHeight: 1.1,
+              fontFamily: "'Hippie Vintage', cursive"
             }}>
               solutions architect
             </h2>
@@ -270,6 +272,7 @@ export function Services() {
                     textTransform: 'uppercase',
                     letterSpacing: '0.05rem',
                     marginBottom: '0.5rem',
+                    fontFamily: "'Hippie Vintage', cursive",
                   }}>
                     {service.category}
                   </p>
@@ -278,6 +281,7 @@ export function Services() {
                     color: 'var(--color-black)',
                     marginBottom: '1rem',
                     lineHeight: 1.2,
+                    fontFamily: "'Blauer Neue', sans-serif",
                   }}>
                     {service.title}
                   </h3>
