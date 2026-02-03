@@ -492,7 +492,7 @@ export default function Home() {
           className="trading-cards-scroll"
           style={{
             display: 'flex',
-            gap: '2rem',
+            gap: '1rem',
             overflowX: 'auto',
             paddingLeft: 'max(2rem, calc((100vw - 1400px) / 2 + 4rem))',
             paddingRight: '2rem',
