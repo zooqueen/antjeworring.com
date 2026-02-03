@@ -1,10 +1,19 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { useEffect } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
 export function Footer() {
+  const footerRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: footerRef,
+    offset: ['start end', 'end start']
+  })
+
+  // Transform scroll progress to background position for parallax through GIF frames
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+
   useEffect(() => {
     // Load Cal.com embed script
     const script = document.createElement('script')
@@ -34,14 +43,44 @@ export function Footer() {
 
   return (
     <footer
+      ref={footerRef}
       style={{
-        background: '#000',
+        position: 'relative',
         color: '#fff',
         padding: '8rem 0 4rem',
         borderTop: '1px solid #000',
+        overflow: 'hidden',
       }}
     >
-      <div className="container">
+      {/* Parallax Background GIF - scrolls through frames as you scroll */}
+      <motion.div
+        style={{
+          position: 'absolute',
+          top: '-50%',
+          left: 0,
+          right: 0,
+          height: '200%',
+          backgroundImage: 'url(/assets/footer.gif)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          zIndex: 0,
+          y: backgroundY,
+        }}
+      />
+      {/* Dark overlay for text readability */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.6)',
+          zIndex: 1,
+        }}
+      />
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         {/* Contact Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
