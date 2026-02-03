@@ -473,7 +473,7 @@ export default function Home() {
               </a>
               <br />
               <a href="https://zips.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem' }}>
-                ZOO DAO →
+                VOTE ON ZOO DAO →
               </a>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ position: 'relative' }}>
