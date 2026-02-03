@@ -52,7 +52,6 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
       style={{
         perspective: '1000px',
         cursor: 'pointer',
-        padding: '0.5rem',
       }}
       onClick={() => setIsFlipped(!isFlipped)}
     >
@@ -64,7 +63,6 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
           width: '100%',
           aspectRatio: '9/16',
           transformStyle: 'preserve-3d',
-          filter: 'drop-shadow(0 0 20px rgba(232, 93, 4, 0.4)) drop-shadow(0 0 40px rgba(232, 93, 4, 0.2))',
         }}
       >
         {/* Front Side */}
@@ -76,7 +74,7 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
             backfaceVisibility: 'hidden',
             borderRadius: '1rem',
             overflow: 'hidden',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+            boxShadow: '0 0 0 1px rgba(255,255,255,0.2), 0 10px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1)',
             background: '#000',
           }}
         >
@@ -111,7 +109,7 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
             transform: 'rotateY(180deg)',
             borderRadius: '1rem',
             overflow: 'hidden',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+            boxShadow: '0 0 0 1px rgba(255,255,255,0.2), 0 10px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1)',
             background: '#000',
           }}
         >
