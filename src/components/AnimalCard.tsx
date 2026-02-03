@@ -17,6 +17,17 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
   const frontVideoRef = useRef<HTMLVideoElement>(null)
   const backVideoRef = useRef<HTMLVideoElement>(null)
 
+  const handleCardClick = () => {
+    setIsFlipped(!isFlipped)
+    // Scroll to contact/footer after a short delay for the flip animation
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 800)
+  }
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -53,7 +64,7 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
         perspective: '1000px',
         cursor: 'pointer',
       }}
-      onClick={() => setIsFlipped(!isFlipped)}
+      onClick={handleCardClick}
     >
       <motion.div
         animate={{ rotateY: isFlipped ? 180 : 0 }}
