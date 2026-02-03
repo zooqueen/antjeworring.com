@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -92,18 +93,16 @@ export function Navigation() {
                 textDecoration: 'none',
               }}
             >
-              <span
+              <Image
+                src="/assets/antje-signature.png"
+                alt="Antje Worring"
+                width={120}
+                height={40}
                 style={{
-                  fontSize: '2.4rem',
-                  fontFamily: "'Hippie Vintage', cursive",
-                  fontWeight: 400,
-                  letterSpacing: '0.02em',
-                  color: 'var(--color-black)',
-                  textTransform: 'lowercase',
+                  objectFit: 'contain',
                 }}
-              >
-                antje
-              </span>
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}
