@@ -269,7 +269,7 @@ export function Services() {
           className="services-carousel"
           style={{
             display: 'flex',
-            gap: '2rem',
+            gap: '1rem',
             overflowX: 'auto',
             scrollSnapType: 'x mandatory',
             scrollBehavior: 'smooth',
