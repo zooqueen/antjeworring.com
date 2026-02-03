@@ -96,8 +96,8 @@ export function Navigation() {
               <Image
                 src="/assets/antje-signature.png"
                 alt="Antje Worring"
-                width={120}
-                height={40}
+                width={156}
+                height={52}
                 style={{
                   objectFit: 'contain',
                 }}
