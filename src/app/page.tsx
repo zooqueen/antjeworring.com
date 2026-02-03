@@ -626,40 +626,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      <style jsx>{`
-        .trading-cards-scroll::-webkit-scrollbar {
-          display: none;
-        }
-        .trading-cards-scroll {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        @media (max-width: 1200px) {
-          .karma-gallery,
-          .food-gallery {
-            grid-template-columns: repeat(3, 1fr) !important;
-          }
-          .press-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-          }
-        }
-        @media (max-width: 868px) {
-          .story-grid {
-            grid-template-columns: 1fr !important;
-            gap: 3rem !important;
-          }
-          .ventures-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .karma-gallery,
-          .food-gallery,
-          .press-grid,
-          .karma-videos-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }

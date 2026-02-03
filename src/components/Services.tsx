@@ -359,29 +359,6 @@ export function Services() {
           ))}
         </div>
       </div>
-
-
-      <style jsx>{`
-        .services-carousel::-webkit-scrollbar {
-          display: none;
-        }
-        .services-carousel {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .service-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        .service-card:hover img {
-          transform: scale(1.05);
-        }
-        @media (max-width: 768px) {
-          .carousel-nav-desktop {
-            display: none !important;
-          }
-        }
-      `}</style>
     </section>
   )
 }
