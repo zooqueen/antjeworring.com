@@ -4,8 +4,8 @@
 Personal portfolio website for Antje Worring - founder, designer, and creative director based in San Francisco.
 
 ## Tech Stack
-- **Framework**: Next.js 15.5 with React 19
-- **Styling**: CSS variables + inline styles (no styled-jsx due to React 19 compatibility issues)
+- **Framework**: Next.js 16 with React 19
+- **Styling**: Tailwind CSS 4 + CSS variables + inline styles (no styled-jsx)
 - **Animations**: Framer Motion
 - **Package Manager**: pnpm
 - **Deployment**: Vercel (via GitHub)
