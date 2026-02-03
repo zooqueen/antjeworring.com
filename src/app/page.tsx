@@ -480,9 +480,9 @@ export default function Home() {
       <section style={{ background: 'var(--color-black)', padding: '6rem 0', borderTop: '1px solid #000', overflow: 'hidden' }}>
         <div className="container" style={{ marginBottom: '3rem' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '1rem', color: '#fff', fontFamily: "'Blauer Neue', sans-serif" }}>
-              ZOO TRADING CARDS
-            </h3>
+            <h2 style={{ fontSize: 'clamp(4rem, 8vw, 7rem)', fontWeight: 400, textTransform: 'lowercase', letterSpacing: '0.02rem', marginBottom: '1rem', color: '#fff', fontFamily: "'Hippie Vintage', cursive" }}>
+              zoo trading cards
+            </h2>
             <p style={{ fontSize: '1.6rem', color: '#fff', opacity: 0.7 }}>
               Tap to flip • Scroll to explore
             </p>
