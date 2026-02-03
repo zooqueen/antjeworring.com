@@ -421,7 +421,7 @@ export default function Home() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
+              <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)', maxWidth: '60%' }}>
                 <Image src="/assets/karma-hero.jpg" alt="Karma Bikinis" fill style={{ objectFit: 'cover' }} />
               </div>
             </motion.div>
