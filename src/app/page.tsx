@@ -413,7 +413,7 @@ export default function Home() {
       {/* Karma Gallery - Full Width with Parallax */}
       <section style={{ background: 'var(--color-cream)', width: '100%' }}>
         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
-          {[1, 8, 4, 5, 6, 7, 2, 9, 11, 13, 14, 15].map((num, index) => (
+          {[1, 8, 2, 5, 6, 7, 4, 9, 11, 13, 14, 15].map((num, index) => (
             <div key={num} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: (index + 1) % 4 !== 0 ? '1px solid #000' : 'none', borderBottom: '1px solid #000' }}>
               <ParallaxImage src={`/assets/karma-${num}.jpg`} alt={`Karma Bikinis ${num}`} />
             </div>
