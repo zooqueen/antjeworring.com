@@ -111,7 +111,7 @@ export function Navigation() {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = 'var(--color-black)'
-                    e.currentTarget.style.background = scrolled ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.05)'
+                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.05)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.color = 'rgba(26, 26, 26, 0.7)'
