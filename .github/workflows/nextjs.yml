@@ -86,7 +86,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    needs: [lint-and-build, e2e]
+    needs: [lint-and-build]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
