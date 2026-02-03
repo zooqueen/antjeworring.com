@@ -701,3 +701,30 @@ a:focus-visible, button:focus-visible {
     bottom: 2rem !important;
   }
 }
+
+/* Trading Cards Grid Responsive */
+@media (max-width: 1200px) {
+  .trading-cards-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .trading-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Spinning Logo Animation */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
