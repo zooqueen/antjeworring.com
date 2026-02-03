@@ -337,12 +337,13 @@ export default function Home() {
 
         {/* Scroll indicator */}
         <motion.div
+          className="scroll-indicator"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          style={{ position: 'absolute', bottom: '4rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', zIndex: 3, maxWidth: '700px', padding: '0 2rem' }}
+          style={{ position: 'absolute', bottom: '4rem', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', zIndex: 3, maxWidth: '700px', padding: '0 2rem', pointerEvents: 'none' }}
         >
-          <p style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginBottom: '2rem', textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
+          <p className="scroll-indicator-text" style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginBottom: '2rem', textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
             From child athlete to fashion founder at 14, to AI research lab and public goods non-profit, to changing the world through conservation.
           </p>
           <p style={{ fontSize: '1.4rem', color: 'rgba(255,255,255,0.8)', marginBottom: '1rem' }}>scroll to explore</p>
@@ -423,9 +424,6 @@ export default function Home() {
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
                 These foundations shaped everything that came next. The athlete's mindset — always improving, never settling, seeing obstacles as opportunities — became the framework for building businesses and creating impact.
               </p>
-              <a href="#karma" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                EXPLORE STORY →
-              </a>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
@@ -455,9 +453,6 @@ export default function Home() {
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
                 Over 10 years of collections. 100+ products brought to market. Featured in major publications including British Vogue, Elle, and People Magazine. Runway shows at Miami Swim Week. A successful Kickstarter campaign that proved the power of community-driven fashion.
               </p>
-              <a href="https://www.facebook.com/KarmaBikinis/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                VIEW COLLECTION →
-              </a>
             </motion.div>
           </div>
         </div>
