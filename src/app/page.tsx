@@ -253,16 +253,17 @@ export default function Home() {
           FOUNDER • DESIGNER • VISIONARY
         </motion.p>
 
-        {/* Title image - behind me.png */}
+        {/* Title image - in front of me.png */}
         <div
           style={{
             position: 'absolute',
             top: '20%',
             left: 0,
             right: 0,
-            zIndex: 1,
+            zIndex: 3,
             display: 'flex',
             justifyContent: 'center',
+            pointerEvents: 'none',
           }}
         >
           <motion.div
