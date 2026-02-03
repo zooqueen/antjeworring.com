@@ -94,13 +94,15 @@ export function Navigation() {
             >
               <span
                 style={{
-                  fontSize: '1.2rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.15em',
+                  fontSize: '2.4rem',
+                  fontFamily: "'Hippie Vintage', cursive",
+                  fontWeight: 400,
+                  letterSpacing: '0.02em',
                   color: 'var(--color-black)',
+                  textTransform: 'lowercase',
                 }}
               >
-                ANTJE WORRING
+                antje
               </span>
             </Link>
 
