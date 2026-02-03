@@ -9,44 +9,14 @@ import { AnimalCard } from '@/components/AnimalCard'
 import { LazyYouTube } from '@/components/LazyYouTube'
 import { LazyYouTubeGrid } from '@/components/LazyVideo'
 
-// Animal card data with stats
+// Animal card video data
 const animalCards = [
-  {
-    name: 'Elephant',
-    frontVideo: '/assets/card-videos/Elephant_Card_Front.mp4',
-    backVideo: '/assets/card-videos/Elephant_Card_Back.mp4',
-    stats: { species: 'African Elephant', status: 'Vulnerable', population: '~415,000', habitat: 'Sub-Saharan Africa' }
-  },
-  {
-    name: 'Tiger',
-    frontVideo: '/assets/card-videos/TIGER_Card_front.mp4',
-    backVideo: '/assets/card-videos/TIGER_Card_Back.mp4',
-    stats: { species: 'Bengal Tiger', status: 'Endangered', population: '~4,500', habitat: 'South & Southeast Asia' }
-  },
-  {
-    name: 'Leopard',
-    frontVideo: '/assets/card-videos/Leopard_Card_Front.mp4',
-    backVideo: '/assets/card-videos/Leopard_Card_Back.mp4',
-    stats: { species: 'Amur Leopard', status: 'Critically Endangered', population: '~100', habitat: 'Russian Far East' }
-  },
-  {
-    name: 'Giraffe',
-    frontVideo: '/assets/card-videos/GIRAFFE_Card_Front.mp4',
-    backVideo: '/assets/card-videos/GIRAFFE_Card_Back.mp4',
-    stats: { species: 'Masai Giraffe', status: 'Endangered', population: '~35,000', habitat: 'East Africa' }
-  },
-  {
-    name: 'Red Wolf',
-    frontVideo: '/assets/card-videos/Redwolf_Card_front.mp4',
-    backVideo: '/assets/card-videos/Redwolf_Card_Back.mp4',
-    stats: { species: 'Red Wolf', status: 'Critically Endangered', population: '~20 wild', habitat: 'North Carolina, USA' }
-  },
-  {
-    name: 'Rhino',
-    frontVideo: '/assets/card-videos/RHINO_Card_front.mp4',
-    backVideo: '/assets/card-videos/RHINO_Card_back.mp4',
-    stats: { species: 'Black Rhino', status: 'Critically Endangered', population: '~5,500', habitat: 'Eastern & Southern Africa' }
-  },
+  { name: 'Elephant', frontVideo: '/assets/card-videos/Elephant_Card_Front.mp4', backVideo: '/assets/card-videos/Elephant_Card_Back.mp4' },
+  { name: 'Tiger', frontVideo: '/assets/card-videos/TIGER_Card_front.mp4', backVideo: '/assets/card-videos/TIGER_Card_Back.mp4' },
+  { name: 'Leopard', frontVideo: '/assets/card-videos/Leopard_Card_Front.mp4', backVideo: '/assets/card-videos/Leopard_Card_Back.mp4' },
+  { name: 'Giraffe', frontVideo: '/assets/card-videos/GIRAFFE_Card_Front.mp4', backVideo: '/assets/card-videos/GIRAFFE_Card_Back.mp4' },
+  { name: 'Red Wolf', frontVideo: '/assets/card-videos/Redwolf_Card_front.mp4', backVideo: '/assets/card-videos/Redwolf_Card_Back.mp4' },
+  { name: 'Rhino', frontVideo: '/assets/card-videos/RHINO_Card_front.mp4', backVideo: '/assets/card-videos/RHINO_Card_back.mp4' },
 ]
 
 // Magazine slideshow component - fills container completely, crossfade with no gap
