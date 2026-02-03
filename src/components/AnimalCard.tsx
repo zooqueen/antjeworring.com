@@ -52,6 +52,7 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
       style={{
         perspective: '1000px',
         cursor: 'pointer',
+        padding: '0.5rem',
       }}
       onClick={() => setIsFlipped(!isFlipped)}
     >
@@ -63,6 +64,7 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
           width: '100%',
           aspectRatio: '9/16',
           transformStyle: 'preserve-3d',
+          filter: 'drop-shadow(0 0 20px rgba(232, 93, 4, 0.4)) drop-shadow(0 0 40px rgba(232, 93, 4, 0.2))',
         }}
       >
         {/* Front Side */}
