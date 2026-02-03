@@ -476,7 +476,7 @@ export default function Home() {
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)', fontFamily: "'Blauer Neue', sans-serif" }}>
-                THE KICKSTARTER CAMPAIGN
+                my first million
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
                 A successful crowdfunding campaign that proved the power of community-driven fashion. Backers from around the world helped bring our vision to life, validating the demand for sustainable, beautifully designed swimwear.
