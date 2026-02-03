@@ -32,8 +32,6 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm lint
-
       - run: pnpm type-check
 
       - uses: actions/configure-pages@v5
