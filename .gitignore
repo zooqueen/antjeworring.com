@@ -8,6 +8,13 @@
 
 # testing
 /coverage
+*.png
+!public/**/*.png
+/tests/*.png
+/playwright-report/
+/test-results/
+/.playwright-mcp/
+/playwright-snapshots/
 
 # next.js
 /.next/
