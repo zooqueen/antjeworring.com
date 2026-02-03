@@ -206,14 +206,14 @@ export default function Home() {
             className="hero-ground-shadow"
             style={{
               position: 'absolute',
-              bottom: '2%',
+              bottom: '1%',
               left: '50%',
               transform: 'translateX(-50%)',
-              width: '45%',
-              height: '10%',
-              background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 35%, rgba(0,0,0,0.08) 60%, transparent 80%)',
+              width: '50%',
+              height: '12%',
+              background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 75%, transparent 100%)',
               borderRadius: '50%',
-              filter: 'blur(20px)',
+              filter: 'blur(30px)',
               zIndex: -1,
             }}
           />
@@ -225,7 +225,7 @@ export default function Home() {
             style={{
               objectFit: 'contain',
               objectPosition: 'center bottom',
-              filter: 'drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3)) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25)) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.15))',
+              filter: 'drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5)) drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4)) drop-shadow(0 8px 15px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 80px rgba(0, 0, 0, 0.2))',
             }}
             priority
           />

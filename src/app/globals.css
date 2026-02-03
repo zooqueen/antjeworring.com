@@ -239,10 +239,25 @@ a:focus-visible, button:focus-visible {
   object-position: center bottom;
 }
 
+.hero-me-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+@media (max-width: 1200px) {
+  .hero-me-image {
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    max-height: 85vh !important;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-me-image {
     object-fit: contain !important;
     object-position: center bottom !important;
+    max-height: 80vh !important;
   }
   .hero-ground-shadow {
     width: 60% !important;
