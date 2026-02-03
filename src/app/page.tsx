@@ -475,32 +475,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Zoo Trading Cards Gallery */}
-      <section style={{ background: 'var(--color-black)', padding: '6rem 0', borderTop: '1px solid #000' }}>
+      {/* Zoo Trading Cards Gallery - Horizontal Scroll */}
+      <section style={{ background: 'var(--color-black)', padding: '6rem 0', borderTop: '1px solid #000', overflow: 'hidden' }}>
         <div className="container" style={{ marginBottom: '3rem' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '1rem', color: '#fff', fontFamily: "'Blauer Neue', sans-serif" }}>
               ZOO TRADING CARDS
             </h3>
             <p style={{ fontSize: '1.6rem', color: '#fff', opacity: 0.7 }}>
-              Tap to flip • Collectible digital art cards featuring endangered species
+              Tap to flip • Scroll to explore
             </p>
           </motion.div>
         </div>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }} className="trading-cards-grid">
-            {animalCards.map((card, index) => (
-              <motion.div
-                key={card.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <AnimalCard {...card} />
-              </motion.div>
-            ))}
-          </div>
+        <div
+          className="trading-cards-scroll"
+          style={{
+            display: 'flex',
+            gap: '2rem',
+            overflowX: 'auto',
+            paddingLeft: 'max(2rem, calc((100vw - 1400px) / 2 + 4rem))',
+            paddingRight: '2rem',
+            paddingBottom: '2rem',
+            scrollSnapType: 'x mandatory',
+          }}
+        >
+          {animalCards.map((card, index) => (
+            <motion.div
+              key={card.name}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              style={{ flexShrink: 0, width: 'clamp(250px, 30vw, 320px)', scrollSnapAlign: 'start' }}
+            >
+              <AnimalCard {...card} />
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -618,6 +628,13 @@ export default function Home() {
       </section>
 
       <style jsx>{`
+        .trading-cards-scroll::-webkit-scrollbar {
+          display: none;
+        }
+        .trading-cards-scroll {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
         @media (max-width: 1200px) {
           .karma-gallery,
           .food-gallery {
