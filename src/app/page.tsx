@@ -458,11 +458,11 @@ export default function Home() {
               <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
                 ZOO LABS
               </h3>
-              <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                Co-founded an AI research lab and public goods non-profit. We build open-source tools and ship real products.
+              <p style={{ fontSize: 'clamp(1.4rem, 2vw, 1.6rem)', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
+                From early generative AI demos to open AI mining protocols and multisensory immersive experiences in the metaverse. We build child-friendly, educational AI tools that make learning about wildlife fun and accessible.
               </p>
-              <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
-                Making AI accessible to everyone. Contributing to open source. Building tech that helps people.
+              <p style={{ fontSize: 'clamp(1.4rem, 2vw, 1.6rem)', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
+                Partnering with ocean and wildlife conservation organizations to leverage technology for real-world impact. Open source, public goods, and purpose-driven innovation.
               </p>
               <a href="https://zoolabs.io" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                 VISIT ZOO LABS →
