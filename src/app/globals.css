@@ -673,3 +673,31 @@ a:focus-visible, button:focus-visible {
     gap: 1.5rem !important;
   }
 }
+
+/* Story Sections - Use Blauer Neue for all text */
+.story-section,
+.story-section h3,
+.story-section h4,
+.story-section p,
+.story-section a,
+.story-section strong {
+  font-family: 'Blauer Neue', sans-serif;
+}
+
+/* Services Section - Use Blauer Neue for all text */
+.services-section,
+.services-section h2,
+.services-section h3,
+.services-section p {
+  font-family: 'Blauer Neue', sans-serif;
+}
+
+/* Scroll Indicator - Hide text on mobile to prevent covering image */
+@media (max-width: 768px) {
+  .scroll-indicator-text {
+    display: none;
+  }
+  .scroll-indicator {
+    bottom: 2rem !important;
+  }
+}
