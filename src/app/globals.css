@@ -1,5 +1,14 @@
 /* Font Face Declarations */
 @font-face {
+  font-family: 'Hippie Vintage';
+  src: url('/fonts/HippieVintage.woff') format('woff'),
+       url('/fonts/HippieVintage.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Blauer Neue';
   src: url('/fonts/BlauerNue-Light.ttf') format('truetype');
   font-weight: 300;
@@ -98,29 +107,29 @@ body {
 h1 {
   font-size: 10rem;
   line-height: 100%;
-  font-family: 'Blauer Neue', sans-serif;
-  font-weight: 700;
+  font-family: 'Hippie Vintage', cursive;
+  font-weight: 400;
   letter-spacing: -0.02em;
 }
 
 h2 {
   font-size: 6rem;
-  font-family: 'Blauer Neue', sans-serif;
-  font-weight: 700;
+  font-family: 'Hippie Vintage', cursive;
+  font-weight: 400;
   line-height: 110%;
 }
 
 h3 {
   font-size: 3.2rem;
-  font-family: 'Blauer Neue', sans-serif;
-  font-weight: 700;
+  font-family: 'Hippie Vintage', cursive;
+  font-weight: 400;
   line-height: 120%;
 }
 
 h4 {
   font-size: 2.4rem;
-  font-family: 'Blauer Neue', sans-serif;
-  font-weight: 700;
+  font-family: 'Hippie Vintage', cursive;
+  font-weight: 400;
 }
 
 p {
@@ -142,10 +151,10 @@ a:hover {
 
 /* Hero Display Text - Playful Style */
 .display-name {
-  font-family: 'Blauer Neue', sans-serif;
+  font-family: 'Hippie Vintage', cursive;
   font-size: 48px;
   line-height: 95%;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--color-orange);
   letter-spacing: -0.02em;
   text-transform: lowercase;

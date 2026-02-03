@@ -139,6 +139,8 @@ function BackgroundVideo({ videoId, children, endTime }: { videoId: string; chil
 
 export default function Home() {
   const heroRef = useRef(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [showVideo, setShowVideo] = useState(false)
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
@@ -147,6 +149,34 @@ export default function Home() {
   const textY = useTransform(scrollYProgress, [0, 1], [0, 200])
   const photoScale = useTransform(scrollYProgress, [0, 1], [1, 0.85])
   const healingFarmRef = useRef<HTMLElement>(null)
+
+  // Check connection speed and load video for fast connections
+  useEffect(() => {
+    const checkConnection = () => {
+      const nav = navigator as Navigator & { connection?: { effectiveType?: string; downlink?: number; saveData?: boolean } }
+      const connection = nav.connection
+
+      // If saveData is on, don't load video
+      if (connection?.saveData) return false
+
+      // Check effective connection type (4g is fast)
+      if (connection?.effectiveType) {
+        return connection.effectiveType === '4g'
+      }
+
+      // Check downlink speed (> 5 Mbps is good)
+      if (connection?.downlink) {
+        return connection.downlink > 5
+      }
+
+      // Default to showing video on desktop (assume good connection)
+      return window.innerWidth > 768
+    }
+
+    if (checkConnection()) {
+      setShowVideo(true)
+    }
+  }, [])
 
   return (
     <div id="main">
@@ -163,7 +193,7 @@ export default function Home() {
           overflow: 'hidden',
         }}
       >
-        {/* Room background */}
+        {/* Room background - Video or Image based on connection */}
         <div
           style={{
             position: 'absolute',
@@ -174,13 +204,40 @@ export default function Home() {
             zIndex: 0,
           }}
         >
+          {/* Always render image as fallback/poster */}
           <Image
             src="/assets/hero-bg.jpg"
             alt="Studio room"
             fill
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center',
+              opacity: showVideo ? 0 : 1,
+              transition: 'opacity 0.5s ease',
+            }}
             priority
           />
+          {/* Video for fast connections */}
+          {showVideo && (
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+            >
+              <source src="/assets/background-video.mp4" type="video/mp4" />
+            </video>
+          )}
         </div>
 
         {/* Me photo - behind text */}
@@ -239,13 +296,14 @@ export default function Home() {
             FOUNDER • DESIGNER • VISIONARY
           </p>
           <h1 style={{
-            fontSize: 'clamp(3rem, 10vw, 8rem)',
+            fontSize: 'clamp(4.5rem, 15vw, 12rem)',
+            fontFamily: "'Hippie Vintage', cursive",
             color: '#fff',
             textTransform: 'lowercase',
             lineHeight: 1,
             textShadow: '0 4px 30px rgba(0,0,0,0.3)',
           }}>
-            antje worring
+            antje<br />worring
           </h1>
         </motion.div>
 
@@ -266,7 +324,6 @@ export default function Home() {
 
       {/* Press Bento Grid - Sophie Amoruso Style */}
       <section style={{ background: 'var(--color-pink)', width: '100%' }}>
-        {/* Desktop Grid */}
         <div className="press-grid-desktop" style={{
           width: '100%',
           display: 'grid',
@@ -278,8 +335,8 @@ export default function Home() {
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/people.png" alt="People" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/sf-chronicle.jpg" alt="SF Chronicle" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/washington-post.webp" alt="Washington Post" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
-          {/* Magazine right - spans 2 rows, 2 cols */}
-          <div className="press-magazine-right" style={{
+          {/* Magazine 1 - spans 2 rows, 2 cols (4x size) */}
+          <div style={{
             gridColumn: '5 / 7',
             gridRow: '1 / 3',
             position: 'relative',
@@ -294,8 +351,8 @@ export default function Home() {
           </div>
 
           {/* Row 2: Magazine left starts + 2 logos */}
-          {/* Magazine left - spans 2 rows, 2 cols */}
-          <div className="press-magazine-left" style={{
+          {/* Magazine 2 - spans 2 rows, 2 cols (4x size) */}
+          <div style={{
             gridColumn: '1 / 3',
             gridRow: '2 / 4',
             position: 'relative',
@@ -325,11 +382,11 @@ export default function Home() {
       {/* Editorial Story Sections - Magazine Style */}
 
       {/* Story 1: The Beginning - Athletic Foundation */}
-      <section style={{ background: '#f5f0e8', padding: '8rem 0', borderTop: '1px solid #000' }}>
+      <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05rem', marginBottom: '2rem', color: 'var(--color-black)' }}>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
                 THE BEGINNING
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
@@ -352,7 +409,7 @@ export default function Home() {
       </section>
 
       {/* Story 2: Karma Bikinis */}
-      <section id="karma" style={{ background: '#f5f0e8', padding: '8rem 0', borderTop: '1px solid #000' }}>
+      <section id="karma" className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -361,7 +418,7 @@ export default function Home() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05rem', marginBottom: '2rem', color: 'var(--color-black)' }}>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
                 KARMA BIKINIS
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
@@ -379,7 +436,7 @@ export default function Home() {
       </section>
 
       {/* Karma Gallery - Full Width */}
-      <section style={{ background: '#f5f0e8', width: '100%' }}>
+      <section style={{ background: 'var(--color-cream)', width: '100%' }}>
         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
           {[1, 8, 4, 5, 6, 7, 2, 9, 11, 13, 14, 15].map((num, index) => (
             <div key={num} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: (index + 1) % 4 !== 0 ? '1px solid #000' : 'none', borderBottom: '1px solid #000' }}>
@@ -390,14 +447,14 @@ export default function Home() {
       </section>
 
       {/* Karma Bikinis - Kickstarter Video */}
-      <section style={{ background: '#f5f0e8', padding: '6rem 0', borderTop: '1px solid #000' }}>
+      <section style={{ background: 'var(--color-cream)', padding: '6rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <YouTubeEmbed videoId="isKrNe8LIho" title="Karma Bikinis Kickstarter" />
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05rem', marginBottom: '2rem', color: 'var(--color-black)' }}>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
                 THE KICKSTARTER CAMPAIGN
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
@@ -409,7 +466,7 @@ export default function Home() {
       </section>
 
       {/* Karma Videos Grid - 1 row of 4 */}
-      <section style={{ background: '#f5f0e8', width: '100%' }}>
+      <section style={{ background: 'var(--color-cream)', width: '100%' }}>
         <div className="karma-videos-grid" style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
           <div style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000', position: 'relative', overflow: 'hidden' }}>
             <iframe
@@ -447,11 +504,11 @@ export default function Home() {
       </section>
 
       {/* Story 3: Zoo Labs */}
-      <section style={{ background: '#f5f0e8', padding: '8rem 0', borderTop: '1px solid #000' }}>
+      <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05rem', marginBottom: '2rem', color: 'var(--color-black)' }}>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
                 ZOO LABS
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
@@ -474,7 +531,7 @@ export default function Home() {
       </section>
 
       {/* Story 4: Zoo NGO */}
-      <section style={{ background: '#f5f0e8', padding: '8rem 0', borderTop: '1px solid #000' }}>
+      <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -483,7 +540,7 @@ export default function Home() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05rem', marginBottom: '2rem', color: 'var(--color-black)' }}>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
                 ZOO NGO & THE HEALING FARM
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
@@ -505,10 +562,10 @@ export default function Home() {
       </section>
 
       {/* Story 5: Current Ventures */}
-      <section style={{ background: '#f5f0e8', padding: '8rem 0', borderTop: '1px solid #000' }}>
+      <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '5rem' }}>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05rem', marginBottom: '2rem', color: 'var(--color-black)' }}>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
               BUILDING THE FUTURE
             </h3>
             <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', maxWidth: '700px' }}>
@@ -527,32 +584,32 @@ export default function Home() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-              <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--color-black)' }}>LUX Network</h4>
+              <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--color-black)' }}>Lux Network</h4>
               <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Co-Founder & Chief Design Officer</p>
               <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
                 Private quantum-safe cryptography. Translating frontier research on fully homomorphic encryption for normal people.
               </p>
-              <a href="https://lux.network" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT LUX →</a>
+              <a href="https://lux.network" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT Lux →</a>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-              <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--color-black)' }}>LUX Credit</h4>
+              <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--color-black)' }}>Lux Credit</h4>
               <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Co-Founder • Shariah-Compliant Finance</p>
               <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                Designed the world's first Shariah law compliant credit card — serving 800 million unbanked Muslims globally.
+                The world's first Shariah law compliant credit card — empowering 800 million unbanked Muslims globally.
               </p>
-              <a href="https://lux.credit" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT LUX CREDIT →</a>
+              <a href="https://lux.credit" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT Lux Credit →</a>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Story 6: SF Secret Menu */}
-      <section style={{ background: '#f5f0e8', padding: '8rem 0', borderTop: '1px solid #000' }}>
+      <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05rem', marginBottom: '2rem', color: 'var(--color-black)' }}>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
                 SF SECRET MENU
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
@@ -575,7 +632,7 @@ export default function Home() {
       </section>
 
       {/* Food Gallery */}
-      <section style={{ background: '#f5f0e8', width: '100%' }}>
+      <section style={{ background: 'var(--color-cream)', width: '100%' }}>
         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
           {[
             { src: '/assets/food-1.png', alt: 'Seared Duck Breast' },
