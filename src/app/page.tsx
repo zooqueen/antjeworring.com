@@ -473,7 +473,7 @@ export default function Home() {
               </a>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.15)' }}>
+              <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.15)', maxWidth: '50%', marginLeft: 'auto' }}>
                 <Image src="/assets/zoo-labs-event.jpg" alt="Zoo Labs Event" fill style={{ objectFit: 'cover' }} />
               </div>
             </motion.div>
