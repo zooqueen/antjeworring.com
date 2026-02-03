@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
 import { FallingFlowers } from '@/components/FallingFlowers'
 import { Services } from '@/components/Services'
+import SeedOfLife from '@/components/SeedOfLife'
 
 // Magazine slideshow component - fills container completely, crossfade with no gap
 function MagazineSlideshow({ images, interval = 1000 }: { images: string[], interval?: number }) {
@@ -158,9 +159,8 @@ export default function Home() {
       const nav = navigator as Navigator & { connection?: { effectiveType?: string; downlink?: number; saveData?: boolean } }
       const connection = nav.connection
       if (connection?.saveData) return false
-      if (connection?.effectiveType) return connection.effectiveType === '4g'
-      if (connection?.downlink) return connection.downlink > 5
-      return window.innerWidth > 768
+      // Show video on all devices - mobile browsers handle autoplay muted videos fine
+      return true
     }
 
     // Step 1: After 300ms, pop in the "me" image
@@ -318,21 +318,28 @@ export default function Home() {
           >
             FOUNDER • DESIGNER • VISIONARY
           </motion.p>
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={meVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ delay: 0.6, duration: 0.8, type: 'spring', stiffness: 100 }}
             style={{
-              fontSize: 'clamp(4.5rem, 15vw, 12rem)',
-              fontFamily: "'Hippie Vintage', cursive",
-              color: '#fff',
-              textTransform: 'lowercase',
-              lineHeight: 1,
-              textShadow: '0 4px 30px rgba(0,0,0,0.3)',
+              width: 'clamp(280px, 60vw, 700px)',
+              position: 'relative',
+              filter: 'drop-shadow(0 4px 30px rgba(0,0,0,0.3))',
             }}
           >
-            antje<br />worring
-          </motion.h1>
+            <Image
+              src="/assets/antje-worring-title.png"
+              alt="antje worring"
+              width={700}
+              height={350}
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              priority
+            />
+          </motion.div>
         </motion.div>
 
         {/* Scroll indicator */}
@@ -477,7 +484,7 @@ export default function Home() {
               <YouTubeEmbed videoId="isKrNe8LIho" title="Karma Bikinis Kickstarter" />
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
+              <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)', fontFamily: "'Blauer Neue', sans-serif" }}>
                 THE KICKSTARTER CAMPAIGN
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
@@ -550,6 +557,47 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Zoo Trading Cards Gallery */}
+      <section style={{ background: 'var(--color-cream)', padding: '6rem 0', borderTop: '1px solid #000' }}>
+        <div className="container" style={{ marginBottom: '3rem' }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '1rem', color: 'var(--color-black)', fontFamily: "'Blauer Neue', sans-serif" }}>
+              ZOO TRADING CARDS
+            </h3>
+            <p style={{ fontSize: '1.6rem', color: 'var(--color-black)', opacity: 0.7 }}>
+              Collectible digital art cards featuring endangered species
+            </p>
+          </motion.div>
+        </div>
+        <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', borderTop: '1px solid #000' }} className="trading-cards-grid">
+          {[
+            { src: '/assets/trading-cards/elephant_card.png', alt: 'Elephant Card' },
+            { src: '/assets/trading-cards/tiger_card.png', alt: 'Tiger Card' },
+            { src: '/assets/trading-cards/leopard_card.png', alt: 'Leopard Card' },
+            { src: '/assets/trading-cards/giraffe_card.png', alt: 'Giraffe Card' },
+            { src: '/assets/trading-cards/wolf_card.png', alt: 'Wolf Card' },
+            { src: '/assets/trading-cards/rhino_card.png', alt: 'Rhino Card' },
+          ].map((card, index) => (
+            <motion.div
+              key={card.alt}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              style={{
+                aspectRatio: '3/4',
+                position: 'relative',
+                overflow: 'hidden',
+                borderRight: index < 5 ? '1px solid #000' : 'none',
+                borderBottom: '1px solid #000',
+              }}
+            >
+              <Image src={card.src} alt={card.alt} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 50vw, 16vw" />
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -630,27 +678,23 @@ export default function Home() {
       {/* Story 6: SF Secret Menu */}
       <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
-                SF SECRET MENU
-              </h3>
-              <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                Organic farm-to-table ghost kitchen bringing sustainable, chef-crafted meals to San Francisco. From our healing farm directly to your table — closing the loop between the food we grow and the communities we serve.
-              </p>
-              <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
-                Every dish tells a story of regenerative agriculture, local sourcing, and culinary creativity. We believe that good food should nourish both people and planet.
-              </p>
-              <a href="https://sfsecretmenu.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                ORDER NOW →
-              </a>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
-                <Image src="/assets/food-1.png" alt="SF Secret Menu" fill style={{ objectFit: 'cover' }} />
-              </div>
-            </motion.div>
-          </div>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+              <SeedOfLife size={80} color="#daa520" />
+            </div>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
+              SF SECRET MENU
+            </h3>
+            <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
+              Organic farm-to-table ghost kitchen bringing sustainable, chef-crafted meals to San Francisco. From our healing farm directly to your table — closing the loop between the food we grow and the communities we serve.
+            </p>
+            <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
+              Every dish tells a story of regenerative agriculture, local sourcing, and culinary creativity. We believe that good food should nourish both people and planet.
+            </p>
+            <a href="https://sfsecretmenu.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+              ORDER NOW →
+            </a>
+          </motion.div>
         </div>
       </section>
 
