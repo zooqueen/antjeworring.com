@@ -241,8 +241,12 @@ a:focus-visible, button:focus-visible {
 
 @media (max-width: 768px) {
   .hero-me-image {
-    object-fit: cover !important;
-    object-position: center 70% !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+  }
+  .hero-ground-shadow {
+    width: 60% !important;
+    bottom: 3% !important;
   }
 }
 
