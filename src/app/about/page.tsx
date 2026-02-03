@@ -15,32 +15,33 @@ export default function AboutPage() {
         }}
       >
         <div className="container">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="display-name"
-            style={{
-              fontSize: 'clamp(4.5rem, 15vw, 12rem)',
-              color: '#fff',
-              textAlign: 'center',
-              marginBottom: '1rem',
-              fontFamily: "'Hippie Vintage', cursive",
-            }}
-          >
-            antje<br />worring
-          </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
             style={{
               color: 'rgba(255,255,255,0.8)',
               textAlign: 'center',
-              fontSize: '2rem',
+              fontSize: '1.4rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.2rem',
+              marginBottom: '1rem',
             }}
           >
-            ( Wait, who? )
+            Get to know
           </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            style={{
+              fontSize: 'clamp(4rem, 12vw, 10rem)',
+              color: '#fff',
+              textAlign: 'center',
+              fontFamily: "'Hippie Vintage', cursive",
+            }}
+          >
+            me
+          </motion.h1>
         </div>
       </section>
 
@@ -69,12 +70,13 @@ export default function AboutPage() {
               }}
             >
               <Image
-                src="/assets/about.jpg"
+                src="https://secretmenusf.com/assets/chef-antje-DGBw0JvD.jpg"
                 alt="Antje Worring"
                 fill
                 style={{ objectFit: 'cover' }}
                 sizes="50vw"
                 priority
+                unoptimized
               />
             </motion.div>
 
@@ -124,7 +126,7 @@ export default function AboutPage() {
                   color: 'var(--color-black)',
                 }}
               >
-                Her work has been featured in British Vogue, People Magazine, Elle, The Washington Post, and more.
+                Her work, designs, and companies have been featured in British Vogue, People Magazine, Elle, The Washington Post, and more.
               </p>
             </motion.div>
           </div>
