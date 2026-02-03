@@ -480,10 +480,10 @@ export default function Home() {
       <section style={{ background: 'var(--color-black)', padding: '6rem 0', borderTop: '1px solid #000', overflow: 'hidden' }}>
         <div className="container" style={{ marginBottom: '3rem' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 400, textTransform: 'lowercase', marginBottom: '1rem', color: '#fff', fontFamily: "'Hippie Vintage', cursive" }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 400, textTransform: 'lowercase', marginBottom: '1rem', color: '#fff', fontFamily: "'Hippie Vintage', cursive", textAlign: 'center' }}>
               zoo trading cards
             </h2>
-            <p style={{ fontSize: '1.6rem', color: '#fff', opacity: 0.7 }}>
+            <p style={{ fontSize: '1.6rem', color: '#fff', opacity: 0.7, textAlign: 'center' }}>
               Tap to flip • Scroll to explore
             </p>
           </motion.div>
