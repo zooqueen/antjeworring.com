@@ -96,13 +96,22 @@ export default function ContactPage() {
 
               <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
                 <a
-                  href="https://instagram.com/zooqueen"
+                  href="https://instagram.com/antje_worring"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pill-button outline"
                   style={{ textTransform: 'lowercase' }}
                 >
                   instagram
+                </a>
+                <a
+                  href="https://github.com/zooqueen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pill-button outline"
+                  style={{ textTransform: 'lowercase' }}
+                >
+                  github
                 </a>
                 <a
                   href="https://twitter.com/zoo_labs"

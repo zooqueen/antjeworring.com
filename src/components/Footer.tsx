@@ -57,7 +57,7 @@ export function Footer() {
             San Francisco, CA
           </p>
           <p style={{ fontSize: '1.6rem', color: 'rgba(255,255,255,0.9)' }}>
-            IG: @zooqueen
+            IG: @antje_worring
           </p>
         </motion.div>
 
@@ -103,8 +103,10 @@ export function Footer() {
             >
               work
             </Link>
-            <Link
-              href="/contact"
+            <a
+              href="https://cal.com/antje-worring/15min?overlayCalendar=true"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 fontSize: '1.6rem',
                 color: '#fff',
@@ -112,8 +114,8 @@ export function Footer() {
                 textUnderlineOffset: '4px',
               }}
             >
-              contact ↗
-            </Link>
+              lets talk!
+            </a>
           </div>
         </div>
       </div>
