@@ -294,6 +294,12 @@ export function Services() {
             >
               <div
                 className="service-card"
+                onClick={() => {
+                  const footer = document.getElementById('contact')
+                  if (footer) {
+                    footer.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
                 style={{
                   background: '#fff',
                   border: '1px solid rgba(0,0,0,0.1)',
