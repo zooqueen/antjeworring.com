@@ -56,16 +56,15 @@ export function Footer() {
       <motion.div
         style={{
           position: 'absolute',
-          top: '-50%',
+          top: 0,
           left: 0,
           right: 0,
-          height: '200%',
+          bottom: 0,
           backgroundImage: 'url(/assets/footer.gif)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundRepeat: 'repeat',
           zIndex: 0,
-          y: backgroundY,
         }}
       />
       {/* Dark overlay for text readability */}
@@ -76,7 +75,7 @@ export function Footer() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'rgba(0, 0, 0, 0.6)',
+          background: 'rgba(0, 0, 0, 0.4)',
           zIndex: 1,
         }}
       />
