@@ -1,11 +1,53 @@
 'use client'
 
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
-import { FallingFlowers } from '@/components/FallingFlowers'
 import { Services } from '@/components/Services'
 import SeedOfLife from '@/components/SeedOfLife'
+import { AnimalCard } from '@/components/AnimalCard'
+import { LazyYouTube } from '@/components/LazyYouTube'
+import { LazyYouTubeGrid } from '@/components/LazyVideo'
+
+// Animal card data with stats
+const animalCards = [
+  {
+    name: 'Elephant',
+    frontVideo: '/assets/card-videos/Elephant_Card_Front.mp4',
+    backVideo: '/assets/card-videos/Elephant_Card_Back.mp4',
+    stats: { species: 'African Elephant', status: 'Vulnerable', population: '~415,000', habitat: 'Sub-Saharan Africa' }
+  },
+  {
+    name: 'Tiger',
+    frontVideo: '/assets/card-videos/TIGER_Card_front.mp4',
+    backVideo: '/assets/card-videos/TIGER_Card_Back.mp4',
+    stats: { species: 'Bengal Tiger', status: 'Endangered', population: '~4,500', habitat: 'South & Southeast Asia' }
+  },
+  {
+    name: 'Leopard',
+    frontVideo: '/assets/card-videos/Leopard_Card_Front.mp4',
+    backVideo: '/assets/card-videos/Leopard_Card_Back.mp4',
+    stats: { species: 'Amur Leopard', status: 'Critically Endangered', population: '~100', habitat: 'Russian Far East' }
+  },
+  {
+    name: 'Giraffe',
+    frontVideo: '/assets/card-videos/GIRAFFE_Card_Front.mp4',
+    backVideo: '/assets/card-videos/GIRAFFE_Card_Back.mp4',
+    stats: { species: 'Masai Giraffe', status: 'Endangered', population: '~35,000', habitat: 'East Africa' }
+  },
+  {
+    name: 'Red Wolf',
+    frontVideo: '/assets/card-videos/Redwolf_Card_front.mp4',
+    backVideo: '/assets/card-videos/Redwolf_Card_Back.mp4',
+    stats: { species: 'Red Wolf', status: 'Critically Endangered', population: '~20 wild', habitat: 'North Carolina, USA' }
+  },
+  {
+    name: 'Rhino',
+    frontVideo: '/assets/card-videos/RHINO_Card_front.mp4',
+    backVideo: '/assets/card-videos/RHINO_Card_back.mp4',
+    stats: { species: 'Black Rhino', status: 'Critically Endangered', population: '~5,500', habitat: 'Eastern & Southern Africa' }
+  },
+]
 
 // Magazine slideshow component - fills container completely, crossfade with no gap
 function MagazineSlideshow({ images, interval = 1000 }: { images: string[], interval?: number }) {
@@ -44,103 +86,26 @@ function MagazineSlideshow({ images, interval = 1000 }: { images: string[], inte
 }
 
 
-// Clean YouTube embed - no controls, no branding, autoplay muted
-function YouTubeEmbed({ videoId, title }: { videoId: string; title: string }) {
+// Parallax Image component for gallery images
+function ParallaxImage({ src, alt, sizes = "25vw" }: { src: string; alt: string; sizes?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start']
+  })
+  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
+
   return (
-    <div
-      style={{
-        position: 'relative',
-        paddingBottom: '56.25%',
-        height: 0,
-        overflow: 'hidden',
-        border: '1px solid #000',
-        background: '#000',
-      }}
-    >
-      <iframe
-        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1`}
-        title={title}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        style={{
-          position: 'absolute',
-          top: '-60px',
-          left: 0,
-          width: '100%',
-          height: 'calc(100% + 120px)',
-          border: 'none',
-        }}
-      />
-      {/* Overlay to hide YouTube logo in corner */}
-      <div style={{ position: 'absolute', bottom: 0, right: 0, width: '150px', height: '40px', background: 'linear-gradient(to right, transparent, #000)' }} />
+    <div ref={ref} style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+      <motion.div style={{ y, position: 'absolute', inset: '-10%', width: '120%', height: '120%' }}>
+        <Image src={src} alt={alt} fill style={{ objectFit: 'cover' }} sizes={sizes} loading="lazy" />
+      </motion.div>
     </div>
-  )
-}
-
-// Background video - fullscreen, autoplay, no controls
-function BackgroundVideo({ videoId, children, endTime }: { videoId: string; children: React.ReactNode; endTime?: number }) {
-  const endParam = endTime ? `&end=${endTime}` : ''
-  return (
-    <section
-      style={{
-        position: 'relative',
-        minHeight: '80vh',
-        display: 'flex',
-        alignItems: 'center',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Video Background */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 0,
-          overflow: 'hidden',
-        }}
-      >
-        <iframe
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1${endParam}`}
-          title="Background Video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: '180%',
-            height: '180%',
-            transform: 'translate(-50%, -50%)',
-            border: 'none',
-            pointerEvents: 'none',
-          }}
-        />
-        {/* Dark overlay */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0,0,0,0.5)',
-          }}
-        />
-      </div>
-
-      {/* Content */}
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        {children}
-      </div>
-    </section>
   )
 }
 
 export default function Home() {
   const heroRef = useRef(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const [showVideo, setShowVideo] = useState(false)
   const [meVisible, setMeVisible] = useState(false)
   const [videoPlaying, setVideoPlaying] = useState(false)
@@ -149,9 +114,7 @@ export default function Home() {
     offset: ["start start", "end start"]
   })
 
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 200])
   const photoScale = useTransform(scrollYProgress, [0, 1], [1, 0.85])
-  const healingFarmRef = useRef<HTMLElement>(null)
 
   // Sequenced hero animation: bg -> me pops in -> video plays
   useEffect(() => {
@@ -224,7 +187,6 @@ export default function Home() {
           {/* Video for fast connections - fades in after me pops */}
           {showVideo && (
             <motion.video
-              ref={videoRef}
               autoPlay
               muted
               loop
@@ -269,6 +231,21 @@ export default function Home() {
             transformOrigin: 'center bottom',
           }}
         >
+          {/* Ground shadow for grounding effect */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '2%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '40%',
+              height: '8%',
+              background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, transparent 70%)',
+              borderRadius: '50%',
+              filter: 'blur(15px)',
+              zIndex: -1,
+            }}
+          />
           <Image
             src="/images/me.png"
             alt="Antje"
@@ -277,7 +254,7 @@ export default function Home() {
             style={{
               objectFit: 'contain',
               objectPosition: 'center bottom',
-              filter: 'drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4)) drop-shadow(0 8px 25px rgba(0, 0, 0, 0.3))',
+              filter: 'drop-shadow(0 15px 40px rgba(0, 0, 0, 0.25)) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2))',
             }}
             priority
           />
@@ -463,12 +440,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Karma Gallery - Full Width */}
+      {/* Karma Gallery - Full Width with Parallax */}
       <section style={{ background: 'var(--color-cream)', width: '100%' }}>
         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
           {[1, 8, 4, 5, 6, 7, 2, 9, 11, 13, 14, 15].map((num, index) => (
             <div key={num} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: (index + 1) % 4 !== 0 ? '1px solid #000' : 'none', borderBottom: '1px solid #000' }}>
-              <Image src={`/assets/karma-${num}.jpg`} alt={`Karma Bikinis ${num}`} fill style={{ objectFit: 'cover' }} sizes="25vw" />
+              <ParallaxImage src={`/assets/karma-${num}.jpg`} alt={`Karma Bikinis ${num}`} />
             </div>
           ))}
         </div>
@@ -479,7 +456,7 @@ export default function Home() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <YouTubeEmbed videoId="isKrNe8LIho" title="Karma Bikinis Kickstarter" />
+              <LazyYouTube videoId="isKrNe8LIho" title="Karma Bikinis Kickstarter" />
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)', fontFamily: "'Blauer Neue', sans-serif" }}>
@@ -496,38 +473,10 @@ export default function Home() {
       {/* Karma Videos Grid - 1 row of 4 */}
       <section style={{ background: 'var(--color-cream)', width: '100%' }}>
         <div className="karma-videos-grid" style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
-          <div style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000', position: 'relative', overflow: 'hidden' }}>
-            <iframe
-              src="https://www.youtube.com/embed/dU0ndRpSS14?autoplay=1&mute=1&loop=1&playlist=dU0ndRpSS14&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
-              title="Karma Bikinis"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              style={{ position: 'absolute', top: '50%', left: '50%', width: '180%', height: '180%', transform: 'translate(-50%, -50%)', border: 'none' }}
-            />
-          </div>
-          <div style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000', position: 'relative', overflow: 'hidden' }}>
-            <iframe
-              src="https://www.youtube.com/embed/0lp1eXOyywc?list=TLGGc-UaUEdnfGgwMjAyMjAyNg&autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
-              title="Karma Bikinis At Planet Fashion Swim Week at SLS"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              style={{ position: 'absolute', top: '50%', left: '50%', width: '180%', height: '180%', transform: 'translate(-50%, -50%)', border: 'none' }}
-            />
-          </div>
-          <div style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000', position: 'relative', overflow: 'hidden' }}>
-            <iframe
-              src="https://www.youtube.com/embed/UAT2yVOzm8s?autoplay=1&mute=1&loop=1&playlist=UAT2yVOzm8s&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
-              title="Collection Showcase"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              style={{ position: 'absolute', top: '50%', left: '50%', width: '180%', height: '180%', transform: 'translate(-50%, -50%)', border: 'none' }}
-            />
-          </div>
-          <div style={{ aspectRatio: '1/1', borderBottom: '1px solid #000', position: 'relative', overflow: 'hidden' }}>
-            <iframe
-              src="https://www.youtube.com/embed/rMDadDkJTpo?autoplay=1&mute=1&loop=1&playlist=rMDadDkJTpo&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1"
-              title="Featured Story"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              style={{ position: 'absolute', top: '50%', left: '50%', width: '180%', height: '180%', transform: 'translate(-50%, -50%)', border: 'none' }}
-            />
-          </div>
+          <LazyYouTubeGrid videoId="dU0ndRpSS14" title="Karma Bikinis" style={{ borderRight: '1px solid #000', borderBottom: '1px solid #000' }} />
+          <LazyYouTubeGrid videoId="0lp1eXOyywc" title="Karma Bikinis At Planet Fashion Swim Week" style={{ borderRight: '1px solid #000', borderBottom: '1px solid #000' }} />
+          <LazyYouTubeGrid videoId="UAT2yVOzm8s" title="Collection Showcase" style={{ borderRight: '1px solid #000', borderBottom: '1px solid #000' }} />
+          <LazyYouTubeGrid videoId="rMDadDkJTpo" title="Featured Story" style={{ borderBottom: '1px solid #000' }} />
         </div>
       </section>
 
@@ -550,52 +499,38 @@ export default function Home() {
               </a>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', border: '1px solid #000' }}>
-                <YouTubeEmbed videoId="6yYuYtMWgOU" title="Zoo Labs" />
-              </div>
+              <LazyYouTube videoId="6yYuYtMWgOU" title="Zoo Labs" />
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Zoo Trading Cards Gallery */}
-      <section style={{ background: 'var(--color-cream)', padding: '6rem 0', borderTop: '1px solid #000' }}>
+      <section style={{ background: 'var(--color-black)', padding: '6rem 0', borderTop: '1px solid #000' }}>
         <div className="container" style={{ marginBottom: '3rem' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '1rem', color: 'var(--color-black)', fontFamily: "'Blauer Neue', sans-serif" }}>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '1rem', color: '#fff', fontFamily: "'Blauer Neue', sans-serif" }}>
               ZOO TRADING CARDS
             </h3>
-            <p style={{ fontSize: '1.6rem', color: 'var(--color-black)', opacity: 0.7 }}>
-              Collectible digital art cards featuring endangered species
+            <p style={{ fontSize: '1.6rem', color: '#fff', opacity: 0.7 }}>
+              Tap to flip • Collectible digital art cards featuring endangered species
             </p>
           </motion.div>
         </div>
-        <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', borderTop: '1px solid #000' }} className="trading-cards-grid">
-          {[
-            { src: '/assets/trading-cards/elephant_card.png', alt: 'Elephant Card' },
-            { src: '/assets/trading-cards/tiger_card.png', alt: 'Tiger Card' },
-            { src: '/assets/trading-cards/leopard_card.png', alt: 'Leopard Card' },
-            { src: '/assets/trading-cards/giraffe_card.png', alt: 'Giraffe Card' },
-            { src: '/assets/trading-cards/wolf_card.png', alt: 'Wolf Card' },
-            { src: '/assets/trading-cards/rhino_card.png', alt: 'Rhino Card' },
-          ].map((card, index) => (
-            <motion.div
-              key={card.alt}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              style={{
-                aspectRatio: '3/4',
-                position: 'relative',
-                overflow: 'hidden',
-                borderRight: index < 5 ? '1px solid #000' : 'none',
-                borderBottom: '1px solid #000',
-              }}
-            >
-              <Image src={card.src} alt={card.alt} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 50vw, 16vw" />
-            </motion.div>
-          ))}
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }} className="trading-cards-grid">
+            {animalCards.map((card, index) => (
+              <motion.div
+                key={card.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <AnimalCard {...card} />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -696,7 +631,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Food Gallery */}
+      {/* Food Gallery with Parallax */}
       <section style={{ background: 'var(--color-cream)', width: '100%' }}>
         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
           {[
@@ -706,7 +641,7 @@ export default function Home() {
             { src: '/assets/food-4.png', alt: 'Bulgur Salad' },
           ].map((food, index) => (
             <div key={food.alt} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: index < 3 ? '1px solid #000' : 'none', borderBottom: '1px solid #000' }}>
-              <Image src={food.src} alt={food.alt} fill style={{ objectFit: 'cover' }} sizes="25vw" />
+              <ParallaxImage src={food.src} alt={food.alt} />
             </div>
           ))}
         </div>
