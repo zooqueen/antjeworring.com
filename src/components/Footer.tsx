@@ -72,7 +72,6 @@ export function Footer() {
       )}
 
       <footer
-        id="contact"
         ref={footerRef}
         style={{
           position: 'relative',
