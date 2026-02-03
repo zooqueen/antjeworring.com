@@ -9,7 +9,7 @@ const navLinks = [
   { href: '/', label: 'ANTJE' },
   { href: '/contact', label: 'CONTACT' },
   { href: '/press', label: 'PRESS' },
-  { href: '/work', label: 'WORK' },
+  { href: 'https://dribbble.com/antjekarina', label: 'WORK', external: true },
 ]
 
 export function Navigation() {
@@ -100,6 +100,7 @@ export function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   style={{
                     fontSize: '1.1rem',
                     fontWeight: 400,
@@ -259,6 +260,7 @@ export function Navigation() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
+                    {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     style={{
                       fontSize: '2.4rem',
                       color: '#fff',

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
@@ -88,16 +88,38 @@ const serviceCards = [
 
 export function Services() {
   const carouselRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
+  const [isVideoVisible, setIsVideoVisible] = useState(false)
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+
+  // Lazy load video when section is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVideoVisible(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '200px', threshold: 0 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   // Slow down video to 0.5x speed (16 second loop instead of 8)
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current && isVideoLoaded) {
       videoRef.current.playbackRate = 0.5
     }
-  }, [])
+  }, [isVideoLoaded])
 
   const checkScroll = () => {
     if (carouselRef.current) {
@@ -127,26 +149,31 @@ export function Services() {
   }
 
   return (
-    <section className="services-section" style={{ position: 'relative', width: '100%', paddingTop: '6rem', paddingBottom: '6rem', fontFamily: "'Blauer Neue', sans-serif", overflow: 'hidden' }}>
-      {/* Background Video */}
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: 0,
-        }}
-      >
-        <source src="/assets/services-bg-video.mp4" type="video/mp4" />
-      </video>
+    <section ref={sectionRef} className="services-section" style={{ position: 'relative', width: '100%', paddingTop: '6rem', paddingBottom: '6rem', fontFamily: "'Blauer Neue', sans-serif", overflow: 'hidden' }}>
+      {/* Background Video - Lazy Loaded */}
+      {isVideoVisible && (
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          onLoadedData={() => setIsVideoLoaded(true)}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0,
+            opacity: isVideoLoaded ? 1 : 0,
+            transition: 'opacity 0.5s ease',
+          }}
+        >
+          <source src="/assets/services-bg-video.mp4" type="video/mp4" />
+        </video>
+      )}
       {/* Overlay for readability */}
       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: 1 }} />
       {/* Section Header */}
