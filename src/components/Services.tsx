@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
@@ -88,8 +88,16 @@ const serviceCards = [
 
 export function Services() {
   const carouselRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
+
+  // Slow down video to 0.5x speed (16 second loop instead of 8)
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5
+    }
+  }, [])
 
   const checkScroll = () => {
     if (carouselRef.current) {
@@ -119,9 +127,30 @@ export function Services() {
   }
 
   return (
-    <section className="services-section" style={{ background: 'var(--color-cream)', width: '100%', paddingTop: '6rem', paddingBottom: '6rem', fontFamily: "'Blauer Neue', sans-serif" }}>
+    <section className="services-section" style={{ position: 'relative', width: '100%', paddingTop: '6rem', paddingBottom: '6rem', fontFamily: "'Blauer Neue', sans-serif", overflow: 'hidden' }}>
+      {/* Background Video */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: 0,
+        }}
+      >
+        <source src="/assets/services-bg-video.mp4" type="video/mp4" />
+      </video>
+      {/* Overlay for readability */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: 1 }} />
       {/* Section Header */}
-      <div className="container" style={{ marginBottom: '3rem' }}>
+      <div className="container" style={{ marginBottom: '3rem', position: 'relative', zIndex: 2 }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -141,7 +170,7 @@ export function Services() {
             </p>
             <h2 style={{
               fontSize: 'clamp(3.5rem, 6vw, 6rem)',
-              color: 'var(--color-black)',
+              color: '#fff',
               textTransform: 'lowercase',
               lineHeight: 1.1,
               fontFamily: "'Hippie Vintage', cursive"
@@ -149,10 +178,10 @@ export function Services() {
               solutions architect
             </h2>
             <p style={{
-              color: 'var(--color-black)',
+              color: '#fff',
               fontSize: '1.8rem',
               marginTop: '1rem',
-              opacity: 0.7
+              opacity: 0.9
             }}>
               Rent my time, I share my mind and will be using AI about half of the time
             </p>
@@ -207,7 +236,7 @@ export function Services() {
       </div>
 
       {/* Carousel Container - Full Width */}
-      <div style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', width: '100%', overflow: 'hidden', zIndex: 2 }}>
         <div
           ref={carouselRef}
           className="services-carousel"
