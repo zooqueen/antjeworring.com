@@ -89,7 +89,7 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
+                objectFit: 'contain',
                 opacity: videosLoaded.front ? 1 : 0,
                 transition: 'opacity 0.5s ease',
               }}
@@ -124,7 +124,7 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
+                objectFit: 'contain',
                 opacity: videosLoaded.back ? 1 : 0,
                 transition: 'opacity 0.5s ease',
               }}
