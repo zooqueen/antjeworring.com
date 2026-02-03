@@ -306,32 +306,39 @@ export default function Home() {
         </motion.p>
 
         {/* Title image - behind me.png */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={meVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-          transition={{ delay: 0.6, duration: 0.8, type: 'spring', stiffness: 100 }}
+        <div
           style={{
             position: 'absolute',
             top: '20%',
-            left: '50%',
-            transform: 'translateX(-50%)',
+            left: 0,
+            right: 0,
             zIndex: 1,
-            width: 'clamp(280px, 60vw, 700px)',
-            filter: 'drop-shadow(0 4px 30px rgba(0,0,0,0.3))',
+            display: 'flex',
+            justifyContent: 'center',
           }}
         >
-          <Image
-            src="/assets/antje-worring-title.png"
-            alt="antje worring"
-            width={700}
-            height={350}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={meVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            transition={{ delay: 0.6, duration: 0.8, type: 'spring', stiffness: 100 }}
             style={{
-              width: '100%',
-              height: 'auto',
+              width: 'clamp(280px, 60vw, 700px)',
+              filter: 'drop-shadow(0 4px 30px rgba(0,0,0,0.3))',
             }}
-            priority
-          />
-        </motion.div>
+          >
+            <Image
+              src="/assets/antje-worring-title.png"
+              alt="antje worring"
+              width={700}
+              height={350}
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              priority
+            />
+          </motion.div>
+        </div>
 
         {/* Scroll indicator */}
         <motion.div
