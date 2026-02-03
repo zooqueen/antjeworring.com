@@ -75,7 +75,7 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
             borderRadius: '1rem',
             overflow: 'hidden',
             boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-            background: '#1a1a1a',
+            background: '#000',
           }}
         >
           {isVisible && (
@@ -110,7 +110,7 @@ export function AnimalCard({ name, frontVideo, backVideo }: AnimalCardProps) {
             borderRadius: '1rem',
             overflow: 'hidden',
             boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-            background: '#1a1a1a',
+            background: '#000',
           }}
         >
           {isVisible && (
