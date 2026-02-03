@@ -5,10 +5,11 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
-  { href: '/work', label: 'WORK' },
-  { href: '/press', label: 'PRESS' },
   { href: '/about', label: 'ABOUT' },
+  { href: '/', label: 'ANTJE' },
   { href: '/contact', label: 'CONTACT' },
+  { href: '/press', label: 'PRESS' },
+  { href: '/work', label: 'WORK' },
 ]
 
 export function Navigation() {
