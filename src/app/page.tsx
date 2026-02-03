@@ -203,16 +203,17 @@ export default function Home() {
         >
           {/* Ground shadow for grounding effect */}
           <div
+            className="hero-ground-shadow"
             style={{
               position: 'absolute',
               bottom: '2%',
               left: '50%',
               transform: 'translateX(-50%)',
-              width: '40%',
-              height: '8%',
-              background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, transparent 70%)',
+              width: '45%',
+              height: '10%',
+              background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 35%, rgba(0,0,0,0.08) 60%, transparent 80%)',
               borderRadius: '50%',
-              filter: 'blur(15px)',
+              filter: 'blur(20px)',
               zIndex: -1,
             }}
           />
@@ -224,7 +225,7 @@ export default function Home() {
             style={{
               objectFit: 'contain',
               objectPosition: 'center bottom',
-              filter: 'drop-shadow(0 15px 40px rgba(0, 0, 0, 0.25)) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2))',
+              filter: 'drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3)) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25)) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.15))',
             }}
             priority
           />
