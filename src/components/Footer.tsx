@@ -52,18 +52,18 @@ export function Footer() {
         overflow: 'hidden',
       }}
     >
-      {/* Parallax Background GIF - scrolls through frames as you scroll */}
-      <motion.div
+      {/* Animated GIF Background */}
+      <img
+        src="/assets/footer.gif"
+        alt=""
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: 'url(/assets/footer.gif)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'repeat',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
           zIndex: 0,
         }}
       />
