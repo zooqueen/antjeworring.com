@@ -472,9 +472,13 @@ export default function Home() {
                 VISIT ZOO LABS →
               </a>
             </motion.div>
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ position: 'relative' }}>
               <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.15)', maxWidth: '50%', marginLeft: 'auto' }}>
                 <Image src="/assets/zoo-labs-event.jpg" alt="Zoo Labs Event" fill style={{ objectFit: 'cover' }} />
+              </div>
+              {/* Overlapping scrapbook-style image */}
+              <div style={{ position: 'absolute', bottom: '-15%', left: '5%', width: '55%', aspectRatio: '1/1', overflow: 'hidden', borderRadius: '1rem', boxShadow: '0 10px 30px rgba(0,0,0,0.25)', transform: 'rotate(-3deg)' }}>
+                <Image src="/assets/zoo-labs-hands.jpg" alt="Human and ape hands reaching" fill style={{ objectFit: 'cover' }} />
               </div>
             </motion.div>
           </div>
