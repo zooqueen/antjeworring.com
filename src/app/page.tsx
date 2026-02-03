@@ -454,6 +454,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Zoo Labs Full-Width Video */}
+      <section style={{ background: 'var(--color-black)', width: '100%', borderTop: '1px solid #000' }}>
+        <div style={{ width: '100%', aspectRatio: '16/9' }}>
+          <LazyYouTube videoId="6yYuYtMWgOU" title="Zoo Labs" />
+        </div>
+      </section>
+
       {/* Story 3: Zoo Labs */}
       <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
