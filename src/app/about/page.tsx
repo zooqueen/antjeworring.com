@@ -133,15 +133,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .about-grid {
-            grid-template-columns: 1fr !important;
-            gap: 3rem !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }

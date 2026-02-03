@@ -317,17 +317,6 @@ export function Navigation() {
           </>
         )}
       </AnimatePresence>
-
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-menu {
-            display: block !important;
-          }
-        }
-      `}</style>
     </>
   )
 }

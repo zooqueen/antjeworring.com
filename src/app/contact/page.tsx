@@ -183,15 +183,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .contact-grid {
-            grid-template-columns: 1fr !important;
-            gap: 4rem !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }

@@ -215,24 +215,6 @@ export function LogoGrid() {
           For press inquiries, please <a href="/contact" style={{ color: '#333', textDecoration: 'underline' }}>contact me</a>
         </p>
       </div>
-
-      <style jsx global>{`
-        @media (max-width: 1024px) {
-          .logo-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-          }
-        }
-        @media (max-width: 768px) {
-          .logo-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .logo-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </section>
   )
 }

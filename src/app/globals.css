@@ -728,3 +728,92 @@ a:focus-visible, button:focus-visible {
 .spin-slow {
   animation: spin-slow 10s linear infinite;
 }
+
+/* About Page Grid Responsive */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
+}
+
+/* Footer Responsive */
+@media (max-width: 768px) {
+  footer h2 {
+    font-size: 5rem !important;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Navigation Responsive */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu {
+    display: block !important;
+  }
+}
+
+/* Contact Page Grid Responsive */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 4rem !important;
+  }
+}
+
+/* Logo Grid Responsive */
+@media (max-width: 1024px) {
+  .logo-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+@media (max-width: 768px) {
+  .logo-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 480px) {
+  .logo-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Trading Cards Scroll Hide Scrollbar */
+.trading-cards-scroll::-webkit-scrollbar {
+  display: none;
+}
+.trading-cards-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Main Page Galleries Responsive */
+@media (max-width: 1200px) {
+  .karma-gallery,
+  .food-gallery {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .press-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+@media (max-width: 868px) {
+  .story-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
+  .ventures-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .karma-gallery,
+  .food-gallery,
+  .press-grid,
+  .karma-videos-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
