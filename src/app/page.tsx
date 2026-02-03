@@ -490,8 +490,28 @@ export default function Home() {
       </section>
 
       {/* Zoo Trading Cards Gallery - Horizontal Scroll */}
-      <section style={{ background: 'var(--color-black)', padding: '6rem 0', borderTop: '1px solid #000', overflow: 'hidden' }}>
-        <div className="container" style={{ marginBottom: '3rem' }}>
+      <section style={{ background: 'var(--color-black)', padding: '6rem 0', borderTop: '1px solid #000', overflow: 'hidden', position: 'relative' }}>
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0,
+          }}
+        >
+          <source src="/assets/services-bg-video.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay for readability */}
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: 1 }} />
+        <div className="container" style={{ marginBottom: '3rem', position: 'relative', zIndex: 2 }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 400, textTransform: 'lowercase', marginBottom: '1rem', color: '#fff', fontFamily: "'Hippie Vintage', cursive", textAlign: 'center' }}>
               zoo trading cards
@@ -511,6 +531,8 @@ export default function Home() {
             paddingRight: '2rem',
             paddingBottom: '2rem',
             scrollSnapType: 'x mandatory',
+            position: 'relative',
+            zIndex: 2,
           }}
         >
           {animalCards.map((card, index) => (
