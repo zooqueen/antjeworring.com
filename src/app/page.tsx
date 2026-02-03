@@ -391,9 +391,12 @@ export default function Home() {
       <section id="karma" className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)', maxWidth: '60%' }}>
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+              <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)', width: '55%', flexShrink: 0 }}>
                 <Image src="/assets/karma-hero.jpg" alt="Karma Bikinis" fill style={{ objectFit: 'cover' }} />
+              </div>
+              <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)', width: '33%', flexShrink: 0 }}>
+                <Image src="/assets/karma-bikinis-2.jpg" alt="Antje at Miami Swim Week" fill style={{ objectFit: 'cover' }} />
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -470,7 +473,9 @@ export default function Home() {
               </a>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <LazyYouTube videoId="6yYuYtMWgOU" title="Zoo Labs" />
+              <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.15)' }}>
+                <Image src="/assets/zoo-labs-event.jpg" alt="Zoo Labs Event" fill style={{ objectFit: 'cover' }} />
+              </div>
             </motion.div>
           </div>
         </div>
