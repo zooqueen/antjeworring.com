@@ -247,7 +247,7 @@ export default function Home() {
           )}
         </div>
 
-        {/* Me photo - behind text */}
+        {/* Me photo - in front of title */}
         <motion.div
           className="hero-me-container"
           initial={{ scale: 0, opacity: 0 }}
@@ -264,7 +264,7 @@ export default function Home() {
             left: 0,
             right: 0,
             bottom: 0,
-            zIndex: 1,
+            zIndex: 2,
             scale: photoScale,
             transformOrigin: 'center bottom',
           }}
@@ -283,63 +283,54 @@ export default function Home() {
           />
         </motion.div>
 
-        {/* Text overlay - in front of me.png */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={meVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
+        {/* Subtitle - always visible on top */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={meVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
           style={{
             position: 'absolute',
-            top: 0,
+            top: '15%',
             left: 0,
             right: 0,
-            bottom: '40%',
-            zIndex: 2,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
+            zIndex: 4,
+            fontSize: 'clamp(1rem, 1.5vw, 1.4rem)',
+            color: 'rgba(255,255,255,0.9)',
+            letterSpacing: '0.3rem',
+            textTransform: 'uppercase',
             textAlign: 'center',
-            padding: '2rem',
-            y: textY,
+            textShadow: '0 2px 10px rgba(0,0,0,0.5)',
           }}
         >
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={meVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
+          FOUNDER • DESIGNER • VISIONARY
+        </motion.p>
+
+        {/* Title image - behind me.png */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={meVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          transition={{ delay: 0.6, duration: 0.8, type: 'spring', stiffness: 100 }}
+          style={{
+            position: 'absolute',
+            top: '20%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1,
+            width: 'clamp(280px, 60vw, 700px)',
+            filter: 'drop-shadow(0 4px 30px rgba(0,0,0,0.3))',
+          }}
+        >
+          <Image
+            src="/assets/antje-worring-title.png"
+            alt="antje worring"
+            width={700}
+            height={350}
             style={{
-              fontSize: 'clamp(1rem, 1.5vw, 1.4rem)',
-              color: 'rgba(255,255,255,0.9)',
-              letterSpacing: '0.3rem',
-              marginBottom: '1.5rem',
-              textTransform: 'uppercase',
+              width: '100%',
+              height: 'auto',
             }}
-          >
-            FOUNDER • DESIGNER • VISIONARY
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={meVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-            transition={{ delay: 0.6, duration: 0.8, type: 'spring', stiffness: 100 }}
-            style={{
-              width: 'clamp(280px, 60vw, 700px)',
-              position: 'relative',
-              filter: 'drop-shadow(0 4px 30px rgba(0,0,0,0.3))',
-            }}
-          >
-            <Image
-              src="/assets/antje-worring-title.png"
-              alt="antje worring"
-              width={700}
-              height={350}
-              style={{
-                width: '100%',
-                height: 'auto',
-              }}
-              priority
-            />
-          </motion.div>
+            priority
+          />
         </motion.div>
 
         {/* Scroll indicator */}
