@@ -243,18 +243,6 @@ export function Footer() {
             </div>
           </div>
         </div>
-
-        <style jsx>{`
-          @media (max-width: 768px) {
-            h2 {
-              font-size: 5rem !important;
-            }
-            .footer-bottom {
-              flex-direction: column;
-              text-align: center;
-            }
-          }
-        `}</style>
       </footer>
     </>
   )
