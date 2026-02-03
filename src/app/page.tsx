@@ -477,7 +477,7 @@ export default function Home() {
                 <Image src="/assets/zoo-labs-event.jpg" alt="Zoo Labs Event" fill style={{ objectFit: 'cover' }} />
               </div>
               {/* Overlapping scrapbook-style image */}
-              <div style={{ position: 'absolute', bottom: '-10%', left: '0%', width: '38%', aspectRatio: '1/1', overflow: 'hidden', borderRadius: '1rem', boxShadow: '0 10px 30px rgba(0,0,0,0.25)', transform: 'rotate(90deg)' }}>
+              <div style={{ position: 'absolute', bottom: '-15%', left: '-5%', width: '50%', aspectRatio: '1/1', overflow: 'hidden', borderRadius: '1rem', boxShadow: '0 10px 30px rgba(0,0,0,0.25)', transform: 'rotate(-3deg)' }}>
                 <Image src="/assets/zoo-labs-hands.jpg" alt="Human and ape hands reaching" fill style={{ objectFit: 'cover' }} />
               </div>
             </motion.div>
