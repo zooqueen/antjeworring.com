@@ -817,3 +817,16 @@ a:focus-visible, button:focus-visible {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
+
+/* Work Page Grid Responsive */
+@media (max-width: 1200px) {
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 768px) {
+  .work-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
