@@ -13,11 +13,12 @@ const navLinks = [
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [showNav, setShowNav] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      // Show nav after scrolling 100px
+      setShowNav(window.scrollY > 100)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -25,31 +26,34 @@ export function Navigation() {
 
   return (
     <>
-      <header
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          transition: 'all 0.5s ease',
-          ...(scrolled ? {
-            background: 'rgba(202, 186, 215, 0.95)',
-            backdropFilter: 'blur(10px)',
-            borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-          } : {}),
-        }}
-      >
-        {/* Floating bar container */}
-        <div
-          style={{
-            margin: scrolled ? '0' : '1rem',
-            borderRadius: scrolled ? '0' : '2rem',
-            background: scrolled ? 'transparent' : 'rgba(255, 255, 255, 0.8)',
-            backdropFilter: scrolled ? 'none' : 'blur(10px)',
-            transition: 'all 0.5s ease',
-          }}
-        >
+      <AnimatePresence>
+        {showNav && (
+          <motion.header
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -100, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 100,
+              padding: '1rem',
+            }}
+          >
+            {/* Floating pill bar - always pill shaped */}
+            <div
+              style={{
+                maxWidth: '900px',
+                margin: '0 auto',
+                borderRadius: '2rem',
+                background: 'rgba(255, 255, 255, 0.95)',
+                backdropFilter: 'blur(10px)',
+                boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+              }}
+            >
           <nav
             style={{
               maxWidth: '1400px',
@@ -194,7 +198,9 @@ export function Navigation() {
             </button>
           </nav>
         </div>
-      </header>
+      </motion.header>
+        )}
+      </AnimatePresence>
 
       {/* Mobile Navigation */}
       <AnimatePresence>

@@ -141,6 +141,8 @@ export default function Home() {
   const heroRef = useRef(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [showVideo, setShowVideo] = useState(false)
+  const [meVisible, setMeVisible] = useState(false)
+  const [videoPlaying, setVideoPlaying] = useState(false)
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
@@ -150,31 +152,33 @@ export default function Home() {
   const photoScale = useTransform(scrollYProgress, [0, 1], [1, 0.85])
   const healingFarmRef = useRef<HTMLElement>(null)
 
-  // Check connection speed and load video for fast connections
+  // Sequenced hero animation: bg -> me pops in -> video plays
   useEffect(() => {
     const checkConnection = () => {
       const nav = navigator as Navigator & { connection?: { effectiveType?: string; downlink?: number; saveData?: boolean } }
       const connection = nav.connection
-
-      // If saveData is on, don't load video
       if (connection?.saveData) return false
-
-      // Check effective connection type (4g is fast)
-      if (connection?.effectiveType) {
-        return connection.effectiveType === '4g'
-      }
-
-      // Check downlink speed (> 5 Mbps is good)
-      if (connection?.downlink) {
-        return connection.downlink > 5
-      }
-
-      // Default to showing video on desktop (assume good connection)
+      if (connection?.effectiveType) return connection.effectiveType === '4g'
+      if (connection?.downlink) return connection.downlink > 5
       return window.innerWidth > 768
     }
 
-    if (checkConnection()) {
-      setShowVideo(true)
+    // Step 1: After 300ms, pop in the "me" image
+    const meTimer = setTimeout(() => {
+      setMeVisible(true)
+    }, 300)
+
+    // Step 2: After me animation (800ms later), start video if good connection
+    const videoTimer = setTimeout(() => {
+      if (checkConnection()) {
+        setShowVideo(true)
+        setVideoPlaying(true)
+      }
+    }, 1100)
+
+    return () => {
+      clearTimeout(meTimer)
+      clearTimeout(videoTimer)
     }
   }, [])
 
@@ -217,14 +221,17 @@ export default function Home() {
             }}
             priority
           />
-          {/* Video for fast connections */}
+          {/* Video for fast connections - fades in after me pops */}
           {showVideo && (
-            <video
+            <motion.video
               ref={videoRef}
               autoPlay
               muted
               loop
               playsInline
+              initial={{ opacity: 0 }}
+              animate={{ opacity: videoPlaying ? 1 : 0 }}
+              transition={{ duration: 1, ease: 'easeOut' }}
               style={{
                 position: 'absolute',
                 top: 0,
@@ -236,13 +243,21 @@ export default function Home() {
               }}
             >
               <source src="/assets/background-video.mp4" type="video/mp4" />
-            </video>
+            </motion.video>
           )}
         </div>
 
         {/* Me photo - behind text */}
         <motion.div
           className="hero-me-container"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={meVisible ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+          transition={{
+            type: 'spring',
+            stiffness: 200,
+            damping: 20,
+            duration: 0.8,
+          }}
           style={{
             position: 'absolute',
             top: 0,
@@ -270,6 +285,9 @@ export default function Home() {
 
         {/* Text overlay - in front of me.png */}
         <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={meVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
           style={{
             position: 'absolute',
             top: 0,
@@ -286,25 +304,35 @@ export default function Home() {
             y: textY,
           }}
         >
-          <p style={{
-            fontSize: 'clamp(1rem, 1.5vw, 1.4rem)',
-            color: 'rgba(255,255,255,0.9)',
-            letterSpacing: '0.3rem',
-            marginBottom: '1.5rem',
-            textTransform: 'uppercase',
-          }}>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={meVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            style={{
+              fontSize: 'clamp(1rem, 1.5vw, 1.4rem)',
+              color: 'rgba(255,255,255,0.9)',
+              letterSpacing: '0.3rem',
+              marginBottom: '1.5rem',
+              textTransform: 'uppercase',
+            }}
+          >
             FOUNDER • DESIGNER • VISIONARY
-          </p>
-          <h1 style={{
-            fontSize: 'clamp(4.5rem, 15vw, 12rem)',
-            fontFamily: "'Hippie Vintage', cursive",
-            color: '#fff',
-            textTransform: 'lowercase',
-            lineHeight: 1,
-            textShadow: '0 4px 30px rgba(0,0,0,0.3)',
-          }}>
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={meVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            transition={{ delay: 0.6, duration: 0.8, type: 'spring', stiffness: 100 }}
+            style={{
+              fontSize: 'clamp(4.5rem, 15vw, 12rem)',
+              fontFamily: "'Hippie Vintage', cursive",
+              color: '#fff',
+              textTransform: 'lowercase',
+              lineHeight: 1,
+              textShadow: '0 4px 30px rgba(0,0,0,0.3)',
+            }}
+          >
             antje<br />worring
-          </h1>
+          </motion.h1>
         </motion.div>
 
         {/* Scroll indicator */}
