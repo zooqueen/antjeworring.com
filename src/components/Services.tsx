@@ -119,7 +119,7 @@ export function Services() {
   }
 
   return (
-    <section style={{ background: 'var(--color-pink)', width: '100%', paddingTop: '6rem', paddingBottom: '6rem' }}>
+    <section style={{ background: 'var(--color-cream)', width: '100%', paddingTop: '6rem', paddingBottom: '6rem' }}>
       {/* Section Header */}
       <div className="container" style={{ marginBottom: '3rem' }}>
         <motion.div

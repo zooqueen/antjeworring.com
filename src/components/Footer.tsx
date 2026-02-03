@@ -7,11 +7,10 @@ export function Footer() {
   return (
     <footer
       style={{
-        background: 'var(--color-green)',
+        background: '#000',
         color: '#fff',
         padding: '8rem 0 4rem',
-        borderRadius: '40px 40px 0 0',
-        marginTop: '4rem',
+        borderTop: '1px solid #000',
       }}
     >
       <div className="container">
@@ -37,7 +36,7 @@ export function Footer() {
             contact
           </h2>
           <p style={{ fontSize: '2rem', color: 'rgba(255,255,255,0.8)' }}>
-            Let&apos;s work together ★
+            Let&apos;s work together
           </p>
         </motion.div>
 

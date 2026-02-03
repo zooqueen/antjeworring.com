@@ -34,7 +34,7 @@ export function Navigation() {
           zIndex: 100,
           transition: 'all 0.5s ease',
           ...(scrolled ? {
-            background: 'rgba(255, 232, 251, 0.95)',
+            background: 'rgba(202, 186, 215, 0.95)',
             backdropFilter: 'blur(10px)',
             borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
           } : {}),
@@ -80,7 +80,6 @@ export function Navigation() {
               >
                 ANTJE WORRING
               </span>
-              <span style={{ color: 'var(--color-orange)', fontSize: '1rem' }}>★</span>
             </Link>
 
             {/* Desktop Navigation */}
