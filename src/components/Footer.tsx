@@ -81,10 +81,12 @@ export function Footer() {
           overflow: 'hidden',
         }}
       >
-        {/* Animated GIF Background */}
-        <img
-          src="/assets/footer.gif"
-          alt=""
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           style={{
             position: 'absolute',
             top: 0,
@@ -95,7 +97,9 @@ export function Footer() {
             objectPosition: 'center',
             zIndex: 0,
           }}
-        />
+        >
+          <source src="/assets/footer-video.mp4" type="video/mp4" />
+        </video>
         {/* Dark overlay for text readability */}
         <div
           style={{
