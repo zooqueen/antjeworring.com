@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
@@ -12,18 +13,35 @@ const navLinks = [
   { href: 'https://dribbble.com/antjekarina', label: 'WORK', external: true },
 ]
 
+// Pages where nav should always be visible
+const alwaysShowNavPages = ['/about', '/contact', '/press']
+
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
-  const [showNav, setShowNav] = useState(false)
+  const pathname = usePathname()
+
+  // Check if current page should always show nav
+  const shouldAlwaysShow = alwaysShowNavPages.includes(pathname)
+  const [showNav, setShowNav] = useState(shouldAlwaysShow)
 
   useEffect(() => {
+    // If on a page that always shows nav, set it immediately
+    if (shouldAlwaysShow) {
+      setShowNav(true)
+      return
+    }
+
     const handleScroll = () => {
       // Show nav after scrolling 100px
       setShowNav(window.scrollY > 100)
     }
+
+    // Check initial scroll position
+    handleScroll()
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [shouldAlwaysShow])
 
   return (
     <>
