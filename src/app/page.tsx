@@ -400,7 +400,7 @@ export default function Home() {
               </a>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', border: '1px solid #000' }}>
+              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
                 <Image src="/assets/tennis-bg.jpg" alt="Tennis Court" fill style={{ objectFit: 'cover' }} />
               </div>
             </motion.div>
@@ -413,7 +413,7 @@ export default function Home() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', border: '1px solid #000' }}>
+              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
                 <Image src="/assets/karma-1.jpg" alt="Karma Bikinis" fill style={{ objectFit: 'cover' }} />
               </div>
             </motion.div>
@@ -535,7 +535,7 @@ export default function Home() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', border: '1px solid #000' }}>
+              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
                 <Image src="/assets/healing-farm.webp" alt="Zoo NGO Healing Farm" fill style={{ objectFit: 'cover' }} />
               </div>
             </motion.div>
@@ -623,7 +623,7 @@ export default function Home() {
               </a>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', border: '1px solid #000' }}>
+              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
                 <Image src="/assets/food-1.png" alt="SF Secret Menu" fill style={{ objectFit: 'cover' }} />
               </div>
             </motion.div>

@@ -238,9 +238,8 @@ export function Services() {
                 className="service-card"
                 style={{
                   background: '#fff',
-                  border: '1px solid #000',
+                  border: '1px solid rgba(0,0,0,0.1)',
                   overflow: 'hidden',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                   cursor: 'pointer',
                 }}
               >
@@ -250,7 +249,6 @@ export function Services() {
                   width: '100%',
                   aspectRatio: '4/3',
                   overflow: 'hidden',
-                  borderBottom: '1px solid #000',
                 }}>
                   <Image
                     src={service.image}
