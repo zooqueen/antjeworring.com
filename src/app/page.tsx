@@ -398,7 +398,7 @@ export default function Home() {
                 KARMA BIKINIS
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                <strong>The original baby, my college education and all access path to over 35 countries, started when I was 14</strong> -- Now, worn by top models, celebrities and influencers worldwide. What began as an after-school project became a decade-long journey in fashion, manufacturing, leadership, design and branding.
+                <strong>The original baby, my college education and an all-access pass to over 35 countries.</strong> Started when I was a teen and still worn by top models, celebrities, and influencers worldwide. What started as a protest of fast-fashion, became a decade-long journey in fashion, leadership, design, and building a brand from the ground-up.
               </p>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
                 Over 10 years of collections. 100+ products brought to market. Featured in major publications including British Vogue, Elle, and People Magazine. Runway shows at Miami Swim Week. A successful Kickstarter campaign that proved the power of community-driven fashion.
