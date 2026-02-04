@@ -574,7 +574,7 @@ export default function Home() {
                 ZOO NGO & THE HEALING FARM
               </h3>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                Founded a 501(c)(3) non-profit dedicated to making real impact. Our initiatives span preservation of endangered species, food security programs, and a holistic healing medicinal farm growing organic herbs and adaptogenic mushrooms.
+                Founded a 501(c)(3) non-profit dedicated to providing aid and access to underprivileged and low-income individuals world-wide, to making real impact. In a broader sense our initiatives include but are not limited to: pursuing legal avenues, advocacy, business/charity partnerships, securitization of animals, land, and nature preservation. Most recently our main focus has spanned across the preservation of endangered species, food security programs, and a holistic healing medicinal farm growing organic herbs and adaptogenic mushrooms — a project we just initiated in January.
               </p>
               <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
                 From lion's mane and reishi mushrooms to turmeric and ancient medicinal herbs — we cultivate nature's pharmacy to promote wellness, support local communities, and restore the land through regenerative agricultural practices.
