@@ -662,9 +662,9 @@ export default function Home() {
       <section style={{ background: 'var(--color-cream)', width: '100%' }}>
         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
           {[
-            { src: '/assets/food-1.png', alt: 'Seared Duck Breast' },
-            { src: '/assets/food-2.png', alt: 'Miso Glazed Cod' },
-            { src: '/assets/food-3.jpg', alt: 'Chicken Picatta' },
+            { src: '/assets/food-new-1.jpg', alt: 'Spring Chicken with Red Pepper' },
+            { src: '/assets/food-new-2.jpg', alt: 'Roasted Cauliflower Green Salad' },
+            { src: '/assets/food-new-3.jpg', alt: 'Moms Meatloaf with Mashed Potatoes' },
             { src: '/assets/food-4.png', alt: 'Bulgur Salad' },
           ].map((food, index) => (
             <div key={food.alt} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: index < 3 ? '1px solid #000' : 'none', borderBottom: '1px solid #000' }}>
