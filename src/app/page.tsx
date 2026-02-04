@@ -524,7 +524,7 @@ export default function Home() {
               zoo trading cards
             </h2>
             <p style={{ fontSize: '1.4rem', color: '#fff', opacity: 0.8, textAlign: 'center', marginBottom: '1rem' }}>
-              Educational NFT Game for all
+              Educational NFT Game from 2021
             </p>
             <p style={{ fontSize: '1.6rem', color: '#fff', opacity: 0.7, textAlign: 'center' }}>
               Tap to flip • Scroll to explore
