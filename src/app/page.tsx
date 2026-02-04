@@ -233,12 +233,13 @@ export default function Home() {
 
         {/* Subtitle - always visible on top */}
         <motion.p
+          className="hero-subtitle"
           initial={{ opacity: 0, y: 20 }}
           animate={meVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.5, duration: 0.6 }}
           style={{
             position: 'absolute',
-            top: '15%',
+            top: '8%',
             left: 0,
             right: 0,
             zIndex: 4,
@@ -253,18 +254,9 @@ export default function Home() {
           FOUNDER • DESIGNER • VISIONARY
         </motion.p>
 
-        {/* Title image - in front of me.png */}
+        {/* Title image - behind me.png */}
         <div
-          style={{
-            position: 'absolute',
-            top: '20%',
-            left: 0,
-            right: 0,
-            zIndex: 3,
-            display: 'flex',
-            justifyContent: 'center',
-            pointerEvents: 'none',
-          }}
+          className="hero-title-container"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
