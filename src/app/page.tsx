@@ -455,6 +455,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Fashion Collection 2025 */}
+      <section className="story-section" style={{ background: 'var(--color-cream)', padding: '8rem 0', borderTop: '1px solid #000' }}>
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15rem', color: 'var(--color-black)' }}>
+              FASHION COLLECTION · 2025
+            </h3>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div style={{ position: 'relative', width: '100%', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.15)' }}>
+              <Image src="/assets/fashion-collection-2025.jpg" alt="Fashion Collection 2025" width={1600} height={900} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Story 3: Zoo Labs */}
       <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
