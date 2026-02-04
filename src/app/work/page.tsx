@@ -21,13 +21,13 @@ export default function WorkPage() {
   }).sort((a, b) => b.order - a.order)
 
   return (
-    <div style={{ background: 'var(--color-pink)' }}>
+    <div style={{ background: 'var(--color-cream)' }}>
       {/* Hero */}
       <section
         style={{
-          background: 'var(--color-green)',
-          borderRadius: '0 0 40px 40px',
-          padding: '14rem 0 6rem',
+          background: 'var(--color-cream)',
+          padding: '14rem 0 4rem',
+          borderBottom: '1px solid #000',
         }}
       >
         <div className="container">
@@ -36,7 +36,7 @@ export default function WorkPage() {
             animate={{ opacity: 1, y: 0 }}
             className="display-name"
             style={{
-              color: '#fff',
+              color: 'var(--color-black)',
               textAlign: 'center',
               marginBottom: '1rem',
             }}
@@ -48,7 +48,7 @@ export default function WorkPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             style={{
-              color: 'rgba(255,255,255,0.8)',
+              color: 'var(--color-grey)',
               textAlign: 'center',
               fontSize: '2rem',
             }}
@@ -59,7 +59,7 @@ export default function WorkPage() {
       </section>
 
       {/* Filters */}
-      <section style={{ padding: '4rem 0 2rem' }}>
+      <section style={{ padding: '4rem 0 2rem', background: 'var(--color-cream)' }}>
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -111,7 +111,7 @@ export default function WorkPage() {
       </section>
 
       {/* Projects Grid */}
-      <section style={{ padding: '2rem 0 6rem' }}>
+      <section style={{ padding: '4rem 0 6rem', background: 'var(--color-cream)', borderTop: '1px solid #000' }}>
         <div className="container">
           <div
             style={{
@@ -135,7 +135,9 @@ export default function WorkPage() {
                     aspectRatio: '4/3',
                     overflow: 'hidden',
                     marginBottom: '1.5rem',
-                    borderRadius: '16px',
+                    borderRadius: '1.5rem',
+                    border: '1px solid #000',
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
                   }}
                 >
                   <Image
