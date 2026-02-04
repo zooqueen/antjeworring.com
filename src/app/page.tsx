@@ -667,8 +667,8 @@ export default function Home() {
             { src: '/assets/food-new-3.jpg', alt: 'Moms Meatloaf with Mashed Potatoes' },
             { src: '/assets/food-4.png', alt: 'Bulgur Salad' },
           ].map((food, index) => (
-            <div key={food.alt} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: index < 3 ? '1px solid #000' : 'none', borderBottom: '1px solid #000' }}>
-              <ParallaxImage src={food.src} alt={food.alt} />
+            <div key={food.alt} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: index < 3 ? '1px solid #000' : 'none', borderBottom: '1px solid #000', background: '#000' }}>
+              <Image src={food.src} alt={food.alt} fill style={{ objectFit: 'contain' }} />
             </div>
           ))}
         </div>
