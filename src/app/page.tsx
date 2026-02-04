@@ -243,7 +243,7 @@ export default function Home() {
             left: 0,
             right: 0,
             zIndex: 4,
-            fontSize: 'clamp(2rem, 3vw, 2.8rem)',
+            fontSize: 'clamp(1.4rem, 2.1vw, 2rem)',
             color: 'rgba(255,255,255,0.9)',
             letterSpacing: '0.4rem',
             textTransform: 'uppercase',
