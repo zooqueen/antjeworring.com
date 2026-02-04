@@ -257,11 +257,13 @@ a:focus-visible, button:focus-visible {
   .hero-me-image {
     object-fit: contain !important;
     object-position: center bottom !important;
-    max-height: 95vh !important;
-    min-height: 60vh !important;
+    max-height: 70vh !important;
+    min-height: 50vh !important;
   }
   .hero-me-container {
-    min-height: 70vh !important;
+    top: auto !important;
+    bottom: 0 !important;
+    height: 75vh !important;
   }
   .hero-ground-shadow {
     width: 60% !important;
