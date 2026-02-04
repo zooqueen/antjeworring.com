@@ -781,13 +781,21 @@ a:focus-visible, button:focus-visible {
 
 @media (max-width: 768px) {
   .hero-title-container {
-    top: 8% !important;
+    top: 3% !important;
+  }
+  .hero-title-image {
+    transform: scale(1.8) !important;
+    transform-origin: center top !important;
   }
 }
 
 @media (max-width: 480px) {
   .hero-title-container {
-    top: 6% !important;
+    top: 2% !important;
+  }
+  .hero-title-image {
+    transform: scale(2) !important;
+    transform-origin: center top !important;
   }
 }
 

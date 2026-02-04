@@ -259,6 +259,7 @@ export default function Home() {
           className="hero-title-container"
         >
           <motion.div
+            className="hero-title-image"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={meVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ delay: 0.6, duration: 0.8, type: 'spring', stiffness: 100 }}
