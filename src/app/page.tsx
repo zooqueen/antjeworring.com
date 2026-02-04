@@ -520,9 +520,12 @@ export default function Home() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', zIndex: 1 }} />
         <div className="container" style={{ marginBottom: '3rem', position: 'relative', zIndex: 2 }}>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 400, textTransform: 'lowercase', marginBottom: '1rem', color: '#fff', fontFamily: "'Hippie Vintage', cursive", textAlign: 'center' }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 400, textTransform: 'lowercase', marginBottom: '0.5rem', color: '#fff', fontFamily: "'Hippie Vintage', cursive", textAlign: 'center' }}>
               zoo trading cards
             </h2>
+            <p style={{ fontSize: '1.4rem', color: '#fff', opacity: 0.8, textAlign: 'center', marginBottom: '1rem' }}>
+              A fun NFT game from 2023
+            </p>
             <p style={{ fontSize: '1.6rem', color: '#fff', opacity: 0.7, textAlign: 'center' }}>
               Tap to flip • Scroll to explore
             </p>
