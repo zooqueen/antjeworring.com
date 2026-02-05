@@ -1,8 +1,99 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
+
+// Menu Modal Component
+function MenuModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  // Close on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = ''
+    }
+  }, [isOpen, onClose])
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.8)',
+            backdropFilter: 'blur(8px)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem',
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: '100%',
+              maxWidth: '900px',
+              height: '85vh',
+              background: '#fff',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              position: 'relative',
+              boxShadow: '0 25px 80px rgba(0,0,0,0.4)',
+            }}
+          >
+            {/* Close button */}
+            <button
+              onClick={onClose}
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: 'rgba(0,0,0,0.8)',
+                border: 'none',
+                color: '#fff',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+                zIndex: 10,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              ×
+            </button>
+            <iframe
+              src="https://secretmenusf.com/weekly/iframe"
+              width="100%"
+              height="100%"
+              style={{ border: 'none', display: 'block' }}
+              title="SF Secret Menu - Weekly Menu"
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
 import { Services } from '@/components/Services'
 import SeedOfLife from '@/components/SeedOfLife'
 import { AnimalCard } from '@/components/AnimalCard'
@@ -79,6 +170,7 @@ export default function Home() {
   const [showVideo, setShowVideo] = useState(false)
   const [meVisible, setMeVisible] = useState(false)
   const [videoPlaying, setVideoPlaying] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
@@ -655,9 +747,9 @@ export default function Home() {
               <a href="https://sfsecretmenu.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                 ORDER NOW →
               </a>
-              <a href="/menu" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+              <button onClick={() => setMenuOpen(true)} style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', background: 'none', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                 VIEW WEEKLY MENU →
-              </a>
+              </button>
             </div>
           </motion.div>
         </div>
@@ -678,6 +770,9 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Menu Modal */}
+      <MenuModal isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </div>
   )
 }
