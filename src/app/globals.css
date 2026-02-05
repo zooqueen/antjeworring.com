@@ -839,6 +839,13 @@ a:focus-visible, button:focus-visible {
   }
 }
 
+/* CTA Stats Grid Responsive */
+@media (max-width: 768px) {
+  .cta-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
 /* Spinning Logo Animation */
 @keyframes spin-slow {
   from {
