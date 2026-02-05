@@ -651,9 +651,14 @@ export default function Home() {
             <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
               Every dish tells a story of regenerative agriculture, local sourcing, and culinary creativity. We believe that good food should nourish both people and planet.
             </p>
-            <a href="https://sfsecretmenu.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-              ORDER NOW →
-            </a>
+            <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="https://sfsecretmenu.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                ORDER NOW →
+              </a>
+              <a href="/menu" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                VIEW WEEKLY MENU →
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -662,12 +667,12 @@ export default function Home() {
       <section style={{ background: 'var(--color-cream)', width: '100%' }}>
         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
           {[
-            { src: '/assets/food-new-1.jpg', alt: 'Spring Chicken with Red Pepper' },
-            { src: '/assets/food-new-2.jpg', alt: 'Roasted Cauliflower Green Salad' },
-            { src: '/assets/food-new-3.jpg', alt: 'Moms Meatloaf with Mashed Potatoes' },
-            { src: '/assets/food-4.png', alt: 'Bulgur Salad' },
+            { src: '/assets/menu-spring-chicken.png', alt: 'Spring Chicken with Red Pepper' },
+            { src: '/assets/menu-steak-salad.png', alt: 'Roasted Cauliflower Green Salad' },
+            { src: '/assets/menu-meatloaf.png', alt: 'Moms Meatloaf with Mashed Potatoes' },
+            { src: '/assets/menu-lasagne.png', alt: 'Beef Ragu Lasagne' },
           ].map((food, index) => (
-            <div key={food.alt} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: index < 3 ? '1px solid #000' : 'none', borderBottom: '1px solid #000', background: '#000' }}>
+            <div key={food.alt} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: index < 3 ? '1px solid #000' : 'none', borderBottom: '1px solid #000', background: '#f5f5f5' }}>
               <Image src={food.src} alt={food.alt} fill style={{ objectFit: 'contain' }} />
             </div>
           ))}
