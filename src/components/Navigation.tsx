@@ -100,6 +100,7 @@ export function Navigation() {
                 height={80}
                 style={{
                   objectFit: 'contain',
+                  marginLeft: '-4rem',
                 }}
                 priority
               />
