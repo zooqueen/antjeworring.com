@@ -473,6 +473,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Fashion Collection 2025 */}
+      <section style={{ background: 'var(--color-cream)', width: '100%' }}>
+        <div style={{ width: '100%', borderTop: '1px solid #000', borderBottom: '1px solid #000' }}>
+          <Image src="/assets/fashion-collection-2025.jpg" alt="Fashion Collection 2025" width={1600} height={900} style={{ width: '100%', height: 'auto', objectFit: 'cover', display: 'block' }} />
+        </div>
+      </section>
+
       {/* Story 2: Karma Bikinis */}
       <section id="karma" className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
@@ -537,13 +544,6 @@ export default function Home() {
           <LazyYouTubeGrid videoId="0lp1eXOyywc" title="Karma Bikinis At Planet Fashion Swim Week" style={{ borderRight: '1px solid #000', borderBottom: '1px solid #000' }} />
           <LazyYouTubeGrid videoId="UAT2yVOzm8s" title="Collection Showcase" style={{ borderRight: '1px solid #000', borderBottom: '1px solid #000' }} />
           <LazyYouTubeGrid videoId="rMDadDkJTpo" title="Featured Story" style={{ borderBottom: '1px solid #000' }} />
-        </div>
-      </section>
-
-      {/* Fashion Collection 2025 */}
-      <section style={{ background: 'var(--color-cream)', width: '100%' }}>
-        <div style={{ width: '100%', borderTop: '1px solid #000', borderBottom: '1px solid #000' }}>
-          <Image src="/assets/fashion-collection-2025.jpg" alt="Fashion Collection 2025" width={1600} height={900} style={{ width: '100%', height: 'auto', objectFit: 'cover', display: 'block' }} />
         </div>
       </section>
 
