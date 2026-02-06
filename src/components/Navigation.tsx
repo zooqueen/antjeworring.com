@@ -58,15 +58,13 @@ export function Navigation() {
               left: 0,
               right: 0,
               zIndex: 100,
-              padding: '1rem',
+              padding: '0',
             }}
           >
-            {/* Floating pill bar - always pill shaped */}
+            {/* Full-width nav bar */}
             <div
               style={{
-                maxWidth: '900px',
-                margin: '0 auto',
-                borderRadius: '2rem',
+                width: '100%',
                 background: 'rgba(255, 255, 255, 0.95)',
                 backdropFilter: 'blur(10px)',
                 boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
