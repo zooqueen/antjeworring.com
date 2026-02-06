@@ -284,10 +284,10 @@ export default function Home() {
           }}
           style={{
             position: 'absolute',
-            top: 0,
+            top: '5rem',
             left: 0,
             right: 0,
-            bottom: 0,
+            bottom: '-5rem',
             zIndex: 2,
             scale: photoScale,
             transformOrigin: 'center bottom',
@@ -771,119 +771,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Work With Me CTA */}
-      <section style={{ background: 'var(--color-black)', padding: '10rem 0', position: 'relative', overflow: 'hidden' }}>
-        {/* Animated gradient background */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(circle at 30% 50%, rgba(232, 93, 4, 0.15) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(61, 90, 61, 0.15) 0%, transparent 50%)',
-          opacity: 0.8,
-        }} />
-
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto' }}
-          >
-            <h2 style={{
-              fontFamily: "'Hippie Vintage', cursive",
-              fontSize: 'clamp(3rem, 8vw, 6rem)',
-              color: '#fff',
-              marginBottom: '2rem',
-              lineHeight: 1.1,
-            }}>
-              Let's Create Something Extraordinary
-            </h2>
-
-            <p style={{
-              fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)',
-              color: 'rgba(255,255,255,0.8)',
-              lineHeight: 1.7,
-              marginBottom: '3rem',
-              maxWidth: '700px',
-              margin: '0 auto 3rem',
-            }}>
-              From brand strategy to product design, AI integration to creative direction — I help visionary founders and teams build things that matter.
-            </p>
-
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '4rem' }}>
-              <motion.a
-                href="/contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  padding: '1.25rem 3rem',
-                  background: 'var(--color-orange)',
-                  color: '#fff',
-                  fontSize: '1.2rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.15em',
-                  textDecoration: 'none',
-                  borderRadius: '50px',
-                }}
-              >
-                Work With Me →
-              </motion.a>
-
-              <motion.a
-                href="/work"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  padding: '1.25rem 3rem',
-                  background: 'transparent',
-                  color: '#fff',
-                  fontSize: '1.2rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.15em',
-                  textDecoration: 'none',
-                  borderRadius: '50px',
-                  border: '2px solid rgba(255,255,255,0.4)',
-                }}
-              >
-                View Portfolio
-              </motion.a>
-            </div>
-
-            {/* Quick stats */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '2rem',
-              paddingTop: '3rem',
-              borderTop: '1px solid rgba(255,255,255,0.15)',
-            }} className="cta-stats-grid">
-              {[
-                { number: '10+', label: 'Years Experience' },
-                { number: '50+', label: 'Brands Built' },
-                { number: '35+', label: 'Countries Reached' },
-                { number: '∞', label: 'Passion for Impact' },
-              ].map((stat) => (
-                <div key={stat.label} style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: 'var(--color-orange)', marginBottom: '0.5rem' }}>
-                    {stat.number}
-                  </div>
-                  <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Menu Modal */}
       <MenuModal isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
