@@ -72,6 +72,7 @@ export function Navigation() {
               }}
             >
           <nav
+            className="nav-inner"
             style={{
               maxWidth: '1400px',
               margin: '0 auto',
@@ -96,6 +97,7 @@ export function Navigation() {
                 alt="Antje Worring"
                 width={240}
                 height={80}
+                className="nav-logo-image"
                 style={{
                   objectFit: 'contain',
                   marginLeft: '-4rem',
@@ -260,7 +262,7 @@ export function Navigation() {
                 position: 'fixed',
                 inset: 0,
                 background: 'rgba(0, 0, 0, 0.3)',
-                zIndex: 98,
+                zIndex: 101,
               }}
             />
             <motion.div
@@ -273,11 +275,11 @@ export function Navigation() {
                 top: 0,
                 right: 0,
                 bottom: 0,
-                width: '70%',
-                maxWidth: '320px',
+                width: '80%',
+                maxWidth: '360px',
                 background: 'var(--color-orange)',
-                padding: '3rem',
-                zIndex: 99,
+                padding: '2rem 3rem 3rem',
+                zIndex: 102,
                 display: 'flex',
                 flexDirection: 'column',
               }}
