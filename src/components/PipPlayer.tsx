@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // Humano Studios vinyl DJ sets (curated selection)
@@ -46,11 +46,10 @@ function shuffleArray<T>(arr: T[]): T[] {
   return shuffled
 }
 
-// Ad break every 3–4 minutes (randomized)
 const AD_BREAK_MIN = 180
 const AD_BREAK_MAX = 240
-const STATIC_DURATION = 2200 // 2.2s of TV static
-const AD_FALLBACK_TIMEOUT = 90000 // 90s fallback if end event doesn't fire
+const STATIC_DURATION = 2200
+const AD_FALLBACK_TIMEOUT = 90000
 
 function randomBreakInterval() {
   return AD_BREAK_MIN + Math.floor(Math.random() * (AD_BREAK_MAX - AD_BREAK_MIN))
@@ -75,13 +74,21 @@ export function PipPlayer() {
   const [musicIndex, setMusicIndex] = useState(0)
   const [adIndex, setAdIndex] = useState(0)
   const [showAdLayer, setShowAdLayer] = useState(false)
+  const [showVideo, setShowVideo] = useState(false)
   const [apiReady, setApiReady] = useState(false)
+  const [elapsed, setElapsed] = useState(0)
 
-  // Shuffled playlists (stable across renders)
   const [musicList] = useState(() => shuffleArray(musicMixes))
   const [adList] = useState(() => shuffleArray([...tvAds, ...homeVideos]))
 
-  // Refs
+  // Stable random EQ bar config
+  const eqBars = useMemo(() =>
+    Array.from({ length: 28 }, () => ({
+      max: 3 + Math.random() * 18,
+      dur: 0.3 + Math.random() * 0.5,
+      del: Math.random() * 0.6,
+    })), [])
+
   const musicPlayerRef = useRef<any>(null)
   const adPlayerRef = useRef<any>(null)
   const musicTimerRef = useRef(0)
@@ -93,7 +100,6 @@ export function PipPlayer() {
   const playerCreatedRef = useRef(false)
   const adPlayerCreatedRef = useRef(false)
 
-  // Refs that mirror state (for use in timers/callbacks to avoid stale closures)
   const modeRef = useRef<Mode>('loading')
   const isMutedRef = useRef(true)
   const adIndexRef = useRef(0)
@@ -103,15 +109,9 @@ export function PipPlayer() {
 
   // ── Load YouTube IFrame API ──
   useEffect(() => {
-    if (window.YT?.Player) {
-      setApiReady(true)
-      return
-    }
+    if (window.YT?.Player) { setApiReady(true); return }
     const prev = window.onYouTubeIframeAPIReady
-    window.onYouTubeIframeAPIReady = () => {
-      prev?.()
-      setApiReady(true)
-    }
+    window.onYouTubeIframeAPIReady = () => { prev?.(); setApiReady(true) }
     if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
       const s = document.createElement('script')
       s.src = 'https://www.youtube.com/iframe_api'
@@ -119,31 +119,21 @@ export function PipPlayer() {
     }
   }, [])
 
-  // ── Scroll trigger (one-way: once visible, stays visible) ──
+  // ── Scroll trigger ──
   useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 600) setIsVisible(true)
-    }
+    const onScroll = () => { if (window.scrollY > 600) setIsVisible(true) }
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // ── Return-to-music logic (ref to avoid circular deps) ──
+  // ── Return to music ──
   const returnToMusic = useCallback(() => {
-    if (adTimeoutRef.current) {
-      clearTimeout(adTimeoutRef.current)
-      adTimeoutRef.current = null
-    }
-    // Pause ad
+    if (adTimeoutRef.current) { clearTimeout(adTimeoutRef.current); adTimeoutRef.current = null }
     try { adPlayerRef.current?.pauseVideo?.() } catch {}
-
     setMode('static-to-music')
-
     staticTimeoutRef.current = setTimeout(() => {
       setShowAdLayer(false)
       setAdIndex(prev => (prev + 1) % adList.length)
-
-      // Restore pre-ad mute state
       const wasMuted = preMutedRef.current
       setIsMuted(wasMuted)
       try {
@@ -151,129 +141,87 @@ export function PipPlayer() {
         else musicPlayerRef.current?.unMute?.()
         musicPlayerRef.current?.playVideo?.()
       } catch {}
-
       musicTimerRef.current = 0
       breakThresholdRef.current = randomBreakInterval()
       setMode('music')
     }, STATIC_DURATION)
   }, [adList.length])
-
   const returnToMusicRef = useRef(returnToMusic)
   useEffect(() => { returnToMusicRef.current = returnToMusic }, [returnToMusic])
 
   // ── Trigger ad break ──
   const triggerAdBreak = useCallback(() => {
     if (modeRef.current !== 'music') return
-
-    // Remember mute state, mute music
     preMutedRef.current = isMutedRef.current
     try { musicPlayerRef.current?.mute?.() } catch {}
-
+    setShowVideo(false)
     setMode('static-to-ad')
-
     staticTimeoutRef.current = setTimeout(() => {
       setShowAdLayer(true)
       setIsMuted(false)
       setMode('ad')
-
       const ad = adList[adIndexRef.current]
-
-      // Create or reuse ad player
       if (adPlayerCreatedRef.current && adPlayerRef.current) {
-        try {
-          adPlayerRef.current.loadVideoById(ad.id)
-          adPlayerRef.current.unMute()
-        } catch {}
+        try { adPlayerRef.current.loadVideoById(ad.id); adPlayerRef.current.unMute() } catch {}
       } else {
         const el = document.getElementById('pip-ad-player')
         if (!el) return
         adPlayerCreatedRef.current = true
         adPlayerRef.current = new window.YT.Player('pip-ad-player', {
-          width: '100%',
-          height: '100%',
-          videoId: ad.id,
-          playerVars: {
-            autoplay: 1, mute: 0, controls: 0, showinfo: 0,
-            rel: 0, modestbranding: 1, playsinline: 1,
-            iv_load_policy: 3, disablekb: 1,
-          },
-          events: {
-            onStateChange: (e: any) => {
-              if (e.data === window.YT.PlayerState.ENDED && modeRef.current === 'ad') {
-                returnToMusicRef.current()
-              }
-            },
-          },
+          width: '100%', height: '100%', videoId: ad.id,
+          playerVars: { autoplay: 1, mute: 0, controls: 0, showinfo: 0, rel: 0, modestbranding: 1, playsinline: 1, iv_load_policy: 3, disablekb: 1 },
+          events: { onStateChange: (e: any) => { if (e.data === window.YT.PlayerState.ENDED && modeRef.current === 'ad') returnToMusicRef.current() } },
         })
       }
-
-      // Fallback timeout in case end event doesn't fire
-      adTimeoutRef.current = setTimeout(() => {
-        if (modeRef.current === 'ad') returnToMusicRef.current()
-      }, AD_FALLBACK_TIMEOUT)
+      adTimeoutRef.current = setTimeout(() => { if (modeRef.current === 'ad') returnToMusicRef.current() }, AD_FALLBACK_TIMEOUT)
     }, STATIC_DURATION)
   }, [adList])
-
   const triggerAdBreakRef = useRef(triggerAdBreak)
   useEffect(() => { triggerAdBreakRef.current = triggerAdBreak }, [triggerAdBreak])
 
-  // ── Create music player when API + visibility ready ──
+  // ── Create music player ──
   useEffect(() => {
     if (!apiReady || !isVisible || isDismissed || playerCreatedRef.current) return
     if (!window.YT?.Player) return
     const el = document.getElementById('pip-music-player')
     if (!el) return
-
     playerCreatedRef.current = true
     musicPlayerRef.current = new window.YT.Player('pip-music-player', {
-      width: '100%',
-      height: '100%',
-      videoId: musicList[0].id,
-      playerVars: {
-        autoplay: 1, mute: 1, controls: 0, showinfo: 0,
-        rel: 0, modestbranding: 1, playsinline: 1,
-        iv_load_policy: 3, disablekb: 1,
-      },
+      width: '100%', height: '100%', videoId: musicList[0].id,
+      playerVars: { autoplay: 1, mute: 1, controls: 0, showinfo: 0, rel: 0, modestbranding: 1, playsinline: 1, iv_load_policy: 3, disablekb: 1 },
       events: {
         onReady: () => setMode('music'),
         onStateChange: (e: any) => {
           if (e.data === window.YT.PlayerState.ENDED && modeRef.current === 'music') {
-            setMusicIndex(prev => {
-              const next = (prev + 1) % musicList.length
-              try { musicPlayerRef.current?.loadVideoById(musicList[next].id) } catch {}
-              return next
-            })
+            setMusicIndex(prev => { const next = (prev + 1) % musicList.length; try { musicPlayerRef.current?.loadVideoById(musicList[next].id) } catch {}; return next })
           }
         },
       },
     })
   }, [apiReady, isVisible, isDismissed, musicList])
 
-  // ── Music timer → triggers ad break ──
+  // ── Music timer ──
   useEffect(() => {
     if (mode === 'music' && isVisible && !isDismissed && !isMinimized) {
       intervalRef.current = setInterval(() => {
         musicTimerRef.current += 1
+        setElapsed(musicTimerRef.current)
         if (musicTimerRef.current >= breakThresholdRef.current) {
           musicTimerRef.current = 0
           triggerAdBreakRef.current()
         }
       }, 1000)
     }
-    return () => {
-      if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null }
-    }
+    return () => { if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null } }
   }, [mode, isVisible, isDismissed, isMinimized])
 
   // ── Cleanup ──
-  useEffect(() => {
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current)
-      if (adTimeoutRef.current) clearTimeout(adTimeoutRef.current)
-      if (staticTimeoutRef.current) clearTimeout(staticTimeoutRef.current)
-      try { musicPlayerRef.current?.destroy?.() } catch {}
-      try { adPlayerRef.current?.destroy?.() } catch {}
-    }
+  useEffect(() => () => {
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    if (adTimeoutRef.current) clearTimeout(adTimeoutRef.current)
+    if (staticTimeoutRef.current) clearTimeout(staticTimeoutRef.current)
+    try { musicPlayerRef.current?.destroy?.() } catch {}
+    try { adPlayerRef.current?.destroy?.() } catch {}
   }, [])
 
   // ── Controls ──
@@ -281,13 +229,8 @@ export function PipPlayer() {
     setIsMuted(prev => {
       const next = !prev
       try {
-        if (modeRef.current === 'music') {
-          if (next) musicPlayerRef.current?.mute?.()
-          else musicPlayerRef.current?.unMute?.()
-        } else if (modeRef.current === 'ad') {
-          if (next) adPlayerRef.current?.mute?.()
-          else adPlayerRef.current?.unMute?.()
-        }
+        if (modeRef.current === 'music') { if (next) musicPlayerRef.current?.mute?.(); else musicPlayerRef.current?.unMute?.() }
+        else if (modeRef.current === 'ad') { if (next) adPlayerRef.current?.mute?.(); else adPlayerRef.current?.unMute?.() }
       } catch {}
       return next
     })
@@ -295,28 +238,17 @@ export function PipPlayer() {
 
   const nextMusic = useCallback(() => {
     if (modeRef.current !== 'music') return
-    setMusicIndex(prev => {
-      const next = (prev + 1) % musicList.length
-      try { musicPlayerRef.current?.loadVideoById(musicList[next].id) } catch {}
-      return next
-    })
-    musicTimerRef.current = 0
+    setMusicIndex(prev => { const next = (prev + 1) % musicList.length; try { musicPlayerRef.current?.loadVideoById(musicList[next].id) } catch {}; return next })
+    musicTimerRef.current = 0; setElapsed(0)
   }, [musicList])
 
   const prevMusic = useCallback(() => {
     if (modeRef.current !== 'music') return
-    setMusicIndex(prev => {
-      const next = (prev - 1 + musicList.length) % musicList.length
-      try { musicPlayerRef.current?.loadVideoById(musicList[next].id) } catch {}
-      return next
-    })
-    musicTimerRef.current = 0
+    setMusicIndex(prev => { const next = (prev - 1 + musicList.length) % musicList.length; try { musicPlayerRef.current?.loadVideoById(musicList[next].id) } catch {}; return next })
+    musicTimerRef.current = 0; setElapsed(0)
   }, [musicList])
 
-  const skipAd = useCallback(() => {
-    if (modeRef.current !== 'ad') return
-    returnToMusicRef.current()
-  }, [])
+  const skipAd = useCallback(() => { if (modeRef.current !== 'ad') return; returnToMusicRef.current() }, [])
 
   // ── Render ──
   if (isDismissed) return null
@@ -326,19 +258,22 @@ export function PipPlayer() {
   const isStatic = mode === 'static-to-ad' || mode === 'static-to-music'
   const isAdPlaying = mode === 'ad'
   const isMusic = mode === 'music'
-  const pipWidth = size === 'medium' ? 420 : 320
-  const pipHeight = size === 'medium' ? 236 : 180
+  const adOrStatic = isAdPlaying || isStatic
+  const pipWidth = size === 'medium' ? 380 : 300
+  const vidHeight = size === 'medium' ? 214 : 170
   const shouldShow = isVisible && mode !== 'loading'
+  const mins = String(Math.floor(elapsed / 60)).padStart(2, '0')
+  const secs = String(elapsed % 60).padStart(2, '0')
 
   return (
     <>
-      {/* ── Full player (always in DOM to preserve YT iframes) ── */}
+      {/* ── Main PiP ── */}
       <motion.div
         className="pip-player"
         animate={{
           opacity: shouldShow && !isMinimized ? 1 : 0,
-          y: shouldShow && !isMinimized ? 0 : 40,
-          scale: shouldShow && !isMinimized ? 1 : 0.9,
+          y: shouldShow && !isMinimized ? 0 : 30,
+          scale: shouldShow && !isMinimized ? 1 : 0.95,
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
         style={{
@@ -347,29 +282,40 @@ export function PipPlayer() {
           right: '2rem',
           zIndex: 97,
           width: pipWidth,
-          borderRadius: '1.2rem',
           overflow: 'hidden',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1)',
-          background: '#111',
           pointerEvents: shouldShow && !isMinimized ? 'auto' : 'none',
+          borderRadius: (adOrStatic || showVideo) ? '0.8rem' : '4px',
+          boxShadow: (adOrStatic || showVideo)
+            ? '0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1)'
+            : '2px 2px 8px rgba(0,0,0,0.6)',
         }}
       >
-        {/* Video area */}
-        <div style={{ position: 'relative', width: '100%', height: pipHeight, background: '#000', overflow: 'hidden' }}>
-          {/* Music player (z-index 1, always playing) */}
-          <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+        {/* ════════ MUSIC VIDEO (toggleable popup above winamp) ════════ */}
+        <div style={{
+          height: isMusic && showVideo ? vidHeight : 0,
+          overflow: 'hidden',
+          position: 'relative',
+          background: '#000',
+          transition: 'height 0.25s ease',
+        }}>
+          <div className="pip-video-wrapper" style={{ position: 'absolute', inset: 0, overflow: 'hidden', minHeight: vidHeight }}>
             <div id="pip-music-player" style={{ width: '100%', height: '100%' }} />
           </div>
+        </div>
 
-          {/* Ad player (z-index 2, overlays music during ad) */}
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 2,
-            visibility: showAdLayer ? 'visible' : 'hidden',
-          }}>
+        {/* ════════ AD VIDEO (ads + static transitions) ════════ */}
+        <div style={{
+          height: (isAdPlaying || isStatic) ? vidHeight : 0,
+          overflow: 'hidden',
+          position: 'relative',
+          background: '#000',
+          transition: 'height 0.15s ease',
+        }}>
+          <div className="pip-video-wrapper" style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
             <div id="pip-ad-player" style={{ width: '100%', height: '100%' }} />
           </div>
 
-          {/* ── 80s TV Static overlay ── */}
+          {/* 80s TV Static */}
           <AnimatePresence>
             {isStatic && (
               <motion.div
@@ -391,130 +337,107 @@ export function PipPlayer() {
             )}
           </AnimatePresence>
 
-          {/* Mode badge */}
-          {!isStatic && (
+          {/* Ad badge */}
+          {isAdPlaying && (
             <div style={{
-              position: 'absolute',
-              top: '0.6rem',
-              left: '0.6rem',
-              zIndex: 5,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              background: isMusic ? 'rgba(232, 93, 4, 0.9)' : 'rgba(61, 90, 61, 0.9)',
-              color: '#fff',
-              padding: '0.3rem 0.8rem',
-              borderRadius: '2rem',
-              fontSize: '1rem',
-              fontWeight: 600,
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
-              backdropFilter: 'blur(4px)',
-              transition: 'background 0.3s',
+              position: 'absolute', top: '0.5rem', left: '0.5rem', zIndex: 5,
+              background: 'rgba(61, 90, 61, 0.9)', color: '#fff',
+              padding: '0.25rem 0.7rem', borderRadius: '2rem',
+              fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.05em',
+              textTransform: 'uppercase', backdropFilter: 'blur(4px)',
             }}>
-              {isMusic ? '♪ MUSIC' : '▶ MY COMMERCIALS'}
+              ▶ MY COMMERCIALS
             </div>
           )}
-
-          {/* Minimize button */}
-          <button
-            onClick={() => setIsMinimized(true)}
-            style={{
-              position: 'absolute',
-              top: '0.5rem',
-              right: '0.5rem',
-              zIndex: 5,
-              width: '2.4rem',
-              height: '2.4rem',
-              borderRadius: '50%',
-              background: 'rgba(0,0,0,0.7)',
-              border: 'none',
-              color: '#fff',
-              fontSize: '1.2rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            ×
-          </button>
         </div>
 
-        {/* Controls bar */}
-        <div style={{
-          padding: '0.8rem 1rem',
-          background: '#111',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.6rem',
-        }}>
-          {/* Now playing */}
-          <div style={{ overflow: 'hidden' }}>
-            <p style={{
-              fontSize: '1.1rem', color: '#fff', fontWeight: 600,
-              whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-              margin: 0, lineHeight: 1.3,
-            }}>
-              {isAdPlaying ? currentAd?.title : currentMusic?.title}
-            </p>
-            <p style={{
-              fontSize: '0.95rem', color: 'rgba(255,255,255,0.5)',
-              margin: 0, lineHeight: 1.3,
-            }}>
-              {isAdPlaying
-                ? `${currentAd?.desc} · via Adnexus`
-                : `${currentMusic?.artist} · via Humano Studios`
-              }
-            </p>
-          </div>
-
-          {/* Buttons row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-            {/* Prev (music only) */}
-            {isMusic && (
-              <button onClick={prevMusic} style={btnRound} title="Previous mix">⏮</button>
-            )}
-
-            {/* Mute / Unmute */}
-            <button
-              onClick={toggleMute}
-              style={{
-                ...btnRound,
-                background: isMuted ? 'var(--color-orange)' : 'rgba(255,255,255,0.15)',
-                width: '3.6rem',
-                height: '3.6rem',
-                fontSize: '1.6rem',
-                transition: 'all 0.2s ease',
-              }}
-              title={isMuted ? 'Turn on sound' : 'Mute'}
-            >
+        {/* Ad info bar */}
+        {isAdPlaying && (
+          <div style={{ padding: '0.6rem 0.8rem', background: '#111', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ flex: 1, overflow: 'hidden' }}>
+              <p style={{ fontSize: '0.95rem', color: '#fff', fontWeight: 600, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {currentAd?.title}
+              </p>
+              <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
+                {currentAd?.desc} · Adnexus
+              </p>
+            </div>
+            <button onClick={toggleMute} style={{ ...w95Btn, width: 28, height: 24, fontSize: '1rem' }}>
               {isMuted ? '🔇' : '🔊'}
             </button>
+            <button onClick={skipAd} style={{ ...w95Btn, padding: '2px 8px', fontSize: '0.7rem', letterSpacing: '0.05em' }}>
+              SKIP ⏭
+            </button>
+          </div>
+        )}
 
-            {/* Next / Skip Ad */}
-            {isMusic && (
-              <button onClick={nextMusic} style={btnRound} title="Next mix">⏭</button>
-            )}
-            {isAdPlaying && (
-              <button onClick={skipAd} style={btnRound} title="Skip ad">⏭</button>
-            )}
+        {/* ════════ WINAMP MODE (music — audio only) ════════ */}
+        <div className="w95-body" style={{ display: isMusic || mode === 'loading' ? 'block' : 'none' }}>
+          {/* Title bar */}
+          <div className="w95-titlebar">
+            <span className="w95-title-text">ANTJE.FM</span>
+            <div style={{ display: 'flex', gap: '2px' }}>
+              <button className="w95-title-btn" onClick={() => setSize(s => s === 'small' ? 'medium' : 'small')}>
+                {size === 'small' ? '□' : '▫'}
+              </button>
+              <button className="w95-title-btn" onClick={() => setIsMinimized(true)}>─</button>
+              <button className="w95-title-btn" onClick={() => setIsDismissed(true)}>✕</button>
+            </div>
+          </div>
 
-            <div style={{ flex: 1 }} />
+          {/* Display panel */}
+          <div className="w95-display">
+            {/* Scrolling track name */}
+            <div className="w95-marquee">
+              <div className="w95-marquee-inner">
+                {currentMusic?.title}&nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;{currentMusic?.title}&nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+              </div>
+            </div>
 
-            {/* Size toggle */}
+            {/* Artist */}
+            <div className="w95-artist">{currentMusic?.artist}</div>
+
+            {/* Time + meta */}
+            <div className="w95-info-row">
+              <span className="w95-time">{mins}:{secs}</span>
+              <span className="w95-meta">128kbps · 44kHz · stereo</span>
+            </div>
+
+            {/* EQ visualizer */}
+            <div className={`w95-eq ${isMuted ? 'w95-eq-muted' : ''}`}>
+              {eqBars.map((bar, i) => (
+                <div
+                  key={i}
+                  className="w95-eq-bar"
+                  style={{
+                    '--eq-max': `${bar.max}px`,
+                    animationDuration: `${bar.dur}s`,
+                    animationDelay: `${bar.del}s`,
+                  } as React.CSSProperties}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Transport controls */}
+          <div className="w95-controls">
+            <button className="w95-btn" onClick={prevMusic} title="Previous mix">⏮</button>
             <button
-              onClick={() => setSize(s => s === 'small' ? 'medium' : 'small')}
-              style={btnPill}
-              title="Toggle size"
+              className={`w95-btn w95-mute-btn ${isMuted ? 'w95-mute-btn-off' : 'w95-mute-btn-on'}`}
+              onClick={toggleMute}
+              title={isMuted ? 'Turn on sound' : 'Mute'}
             >
-              {size === 'small' ? '⤢' : '⤡'}
+              {isMuted ? '🔇 LISTEN' : '🔊 ON'}
             </button>
-
-            {/* Dismiss */}
-            <button onClick={() => setIsDismissed(true)} style={btnPill} title="Dismiss player">
-              ✕
+            <button className="w95-btn" onClick={nextMusic} title="Next mix">⏭</button>
+            <button
+              className={`w95-btn w95-vid-btn ${showVideo ? 'w95-vid-btn-on' : ''}`}
+              onClick={() => setShowVideo(v => !v)}
+              title={showVideo ? 'Hide video' : 'Show video'}
+            >
+              📺
             </button>
+            <span className="w95-track-num">{musicIndex + 1} / {musicList.length}</span>
           </div>
         </div>
       </motion.div>
@@ -529,27 +452,16 @@ export function PipPlayer() {
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={() => setIsMinimized(false)}
             style={{
-              position: 'fixed',
-              bottom: '2rem',
-              right: '2rem',
-              zIndex: 97,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.6rem',
-              background: isMusic ? 'var(--color-orange)' : 'var(--color-green)',
-              color: '#fff',
-              border: 'none',
-              padding: '0.8rem 1.4rem',
-              borderRadius: '3rem',
-              cursor: 'pointer',
-              fontSize: '1.1rem',
-              fontWeight: 600,
-              letterSpacing: '0.04em',
-              boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
+              position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 97,
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              background: '#2a2a2a', border: '2px outset #555',
+              color: '#00ff41', padding: '0.5rem 1rem', borderRadius: '3px',
+              cursor: 'pointer', fontSize: '0.85rem', fontWeight: 700,
+              fontFamily: "'Courier New', monospace", letterSpacing: '0.08em',
+              boxShadow: '2px 2px 8px rgba(0,0,0,0.5)',
             }}
           >
-            {isMusic ? '♪' : '▶'}{' '}
-            {(isAdPlaying ? currentAd?.title : currentMusic?.title)?.slice(0, 20)}...
+            ♪ ANTJE.FM — {currentMusic?.title?.slice(0, 22)}...
           </motion.button>
         )}
       </AnimatePresence>
@@ -557,27 +469,15 @@ export function PipPlayer() {
   )
 }
 
-// ── Shared button styles ──
-const btnRound: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.1)',
-  border: 'none',
-  color: '#fff',
-  width: '3rem',
-  height: '3rem',
-  borderRadius: '50%',
+const w95Btn: React.CSSProperties = {
+  background: 'linear-gradient(180deg, #555 0%, #3a3a3a 100%)',
+  border: '1px outset #666',
+  color: '#ccc',
   cursor: 'pointer',
-  fontSize: '1.4rem',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-}
-
-const btnPill: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.08)',
-  border: '1px solid rgba(255,255,255,0.15)',
-  color: '#fff',
-  padding: '0.4rem 0.8rem',
-  borderRadius: '2rem',
-  cursor: 'pointer',
-  fontSize: '0.95rem',
+  padding: 0,
+  borderRadius: '2px',
+  fontFamily: "'Courier New', monospace",
 }

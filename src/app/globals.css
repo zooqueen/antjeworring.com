@@ -1003,6 +1003,247 @@ a:focus-visible, button:focus-visible {
   }
 }
 
+/* ── PiP video fill: scale iframe to crop YouTube chrome ── */
+.pip-video-wrapper iframe {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 175% !important;
+  height: 175% !important;
+  transform: translate(-50%, -50%) !important;
+  border: none !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   Winamp 95 / Lofi Audio Player Skin
+   ═══════════════════════════════════════════════════ */
+
+/* Classic Win95 chrome body */
+.w95-body {
+  background: #c0c0c0;
+  border: 2px outset #dfdfdf;
+  border-color: #fff #808080 #808080 #fff;
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #404040;
+}
+
+.w95-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 6px;
+  background: linear-gradient(90deg, #1a1a4e, #2a2a6e, #1a1a4e);
+  border-bottom: 1px solid #111;
+  user-select: none;
+}
+
+.w95-title-text {
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.w95-title-btn {
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #fff #808080 #808080 #fff;
+  color: #000;
+  font-size: 0.55rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+.w95-title-btn:active {
+  border-color: #808080 #fff #fff #808080;
+  background: #b0b0b0;
+}
+
+.w95-display {
+  background: #0a0a12;
+  margin: 4px;
+  padding: 8px 10px 6px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #808080 #fff #fff #808080;
+  box-shadow: inset 1px 1px 0 #000;
+}
+
+/* Scrolling marquee */
+.w95-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 3px;
+}
+.w95-marquee-inner {
+  display: inline-block;
+  color: #00ff41;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  animation: w95-scroll 18s linear infinite;
+}
+@keyframes w95-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.w95-artist {
+  color: #00bb33;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.w95-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.w95-time {
+  color: #00ff41;
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.4);
+}
+
+.w95-meta {
+  color: #009928;
+  font-family: 'Courier New', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+/* EQ Visualizer */
+.w95-eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 24px;
+  padding: 3px 2px 2px;
+  background: #000;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #404040 #dfdfdf #dfdfdf #404040;
+  margin-top: 4px;
+}
+
+.w95-eq-bar {
+  flex: 1;
+  min-width: 2px;
+  background: linear-gradient(to top, #00ff41 0%, #88ff00 50%, #ffff00 100%);
+  animation: w95-eq-bounce 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes w95-eq-bounce {
+  from { height: 2px; }
+  to   { height: var(--eq-max, 14px); }
+}
+
+/* Muted state: bars flatten */
+.w95-eq-muted .w95-eq-bar {
+  animation: none;
+  height: 2px;
+  opacity: 0.3;
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Transport controls */
+.w95-controls {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 6px;
+  background: #c0c0c0;
+}
+
+.w95-btn {
+  height: 26px;
+  min-width: 30px;
+  background: #c0c0c0;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #fff #808080 #808080 #fff;
+  color: #000;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-family: 'Courier New', monospace;
+}
+.w95-btn:hover {
+  background: #d4d4d4;
+}
+.w95-btn:active {
+  border-color: #808080 #fff #fff #808080;
+  background: #b0b0b0;
+}
+
+/* ── Big obvious mute/listen button ── */
+.w95-mute-btn {
+  height: 28px;
+  min-width: 80px;
+  padding: 0 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  gap: 4px;
+}
+
+.w95-mute-btn-off {
+  background: #c0c0c0;
+  color: #000;
+  animation: w95-mute-pulse 2s ease-in-out infinite;
+}
+
+.w95-mute-btn-on {
+  background: #008000;
+  color: #fff;
+  border-color: #00aa00 #004400 #004400 #00aa00;
+}
+
+@keyframes w95-mute-pulse {
+  0%, 100% { background: #c0c0c0; }
+  50%      { background: #e0e0a0; }
+}
+
+/* Video toggle button */
+.w95-vid-btn {
+  font-size: 0.9rem;
+  min-width: 32px;
+}
+.w95-vid-btn-on {
+  border-color: #808080 #fff #fff #808080;
+  background: #a0a0a0;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.w95-track-num {
+  margin-left: auto;
+  color: #808080;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
 /* ── 80s TV Static / Signal Break Effect ── */
 .tv-static-overlay {
   background: #000;
