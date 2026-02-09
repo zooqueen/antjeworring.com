@@ -1002,3 +1002,140 @@ a:focus-visible, button:focus-visible {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ── 80s TV Static / Signal Break Effect ── */
+.tv-static-overlay {
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Initial white flash on appear */
+.tv-static-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  animation: tv-flash 0.3s ease-out forwards;
+  z-index: 4;
+}
+
+@keyframes tv-flash {
+  0%   { opacity: 1; }
+  20%  { opacity: 0.8; }
+  35%  { opacity: 0; }
+  50%  { opacity: 0.4; }
+  65%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Noise layer using SVG turbulence */
+.tv-static-noise {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  filter: contrast(350%) brightness(180%);
+  animation: static-shift 0.12s steps(6) infinite;
+  opacity: 0.75;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+@keyframes static-shift {
+  0%   { transform: translate(0, 0) scale(1.6); }
+  17%  { transform: translate(-8%, 6%) scale(1.6); }
+  33%  { transform: translate(6%, -10%) scale(1.6); }
+  50%  { transform: translate(-6%, -4%) scale(1.6); }
+  67%  { transform: translate(10%, 8%) scale(1.6); }
+  83%  { transform: translate(-4%, -8%) scale(1.6); }
+  100% { transform: translate(8%, 4%) scale(1.6); }
+}
+
+/* CRT scanlines */
+.tv-static-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.4) 2px,
+    rgba(0, 0, 0, 0.4) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: scanline-roll 0.4s linear infinite;
+}
+
+@keyframes scanline-roll {
+  from { background-position: 0 0; }
+  to   { background-position: 0 4px; }
+}
+
+/* Horizontal glitch bar sweeping down */
+.tv-static-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 20px 4px rgba(255, 255, 255, 0.15);
+  z-index: 3;
+  animation: glitch-bar 1s ease-in-out infinite;
+}
+
+@keyframes glitch-bar {
+  0%, 100% { top: -5%; opacity: 0; }
+  5%       { opacity: 1; }
+  60%      { top: 105%; opacity: 1; }
+  65%      { opacity: 0; }
+}
+
+/* "SIGNAL INTERRUPT" / "RESUMING" text */
+.tv-static-text {
+  position: relative;
+  z-index: 5;
+  color: #fff;
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 2px 0 #ff0000, -2px 0 #00ffff;
+  animation: glitch-text 0.25s steps(3) infinite;
+}
+
+@keyframes glitch-text {
+  0%   { transform: translate(0, 0) skew(0deg); clip-path: inset(0 0 0 0); }
+  25%  { transform: translate(-3px, 1px) skew(-2deg); clip-path: inset(20% 0 40% 0); }
+  50%  { transform: translate(3px, -1px) skew(1deg); clip-path: inset(60% 0 10% 0); }
+  75%  { transform: translate(-1px, 2px) skew(0deg); clip-path: inset(10% 0 70% 0); }
+  100% { transform: translate(2px, -2px) skew(-1deg); clip-path: inset(40% 0 20% 0); }
+}
+
+/* PiP Player Responsive */
+@media (max-width: 768px) {
+  .pip-player {
+    bottom: 1rem !important;
+    right: 1rem !important;
+    left: 1rem !important;
+    width: auto !important;
+  }
+  .pip-minimized {
+    bottom: 1rem !important;
+    right: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .pip-player {
+    bottom: 0.5rem !important;
+    right: 0.5rem !important;
+    left: 0.5rem !important;
+    border-radius: 1rem !important;
+  }
+}

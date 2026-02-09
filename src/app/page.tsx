@@ -697,31 +697,79 @@ export default function Home() {
           </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3rem', borderTop: '1px solid #000', paddingTop: '4rem' }} className="ventures-grid">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--color-black)' }}>Hanzo AI</h4>
-              <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Techstars-Backed • Creative Agency & AI Tools</p>
-              <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                Helped scale and operate its creative agency, designing and building cutting-edge AI tools for the future of work.
-              </p>
-              <a href="https://hanzo.ai" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT HANZO →</a>
+            {/* Hanzo AI Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{ border: '1px solid #000', borderRadius: '1.5rem', overflow: 'hidden', background: '#000' }}
+            >
+              <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden' }}>
+                <Image src="/assets/hanzo-ai-hero.png" alt="Hanzo AI Platform" fill style={{ objectFit: 'cover' }} />
+              </div>
+              <div style={{ padding: '2.5rem', background: 'var(--color-cream)' }}>
+                <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.8rem', color: 'var(--color-black)' }}>Hanzo AI</h4>
+                <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Techstars-Backed • AI Engineering Platform</p>
+                <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
+                  Agentic AI developer tools and DEV CLI that ships code autonomously. Multi-agent orchestration across 500+ models — the future of software engineering.
+                </p>
+                <a href="https://hanzo.ai" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT HANZO →</a>
+              </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-              <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--color-black)' }}>Lux Network</h4>
-              <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Co-Founder & Chief Design Officer</p>
-              <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                Private quantum-safe cryptography. Translating frontier research on fully homomorphic encryption for normal people.
-              </p>
-              <a href="https://lux.network" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT Lux →</a>
+            {/* Lux Network Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              style={{ border: '1px solid #000', borderRadius: '1.5rem', overflow: 'hidden' }}
+            >
+              <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', padding: '1.5rem' }}>
+                <div style={{ position: 'relative', width: '45%', height: '100%' }}>
+                  <Image src="/assets/lux-network-cards.png" alt="Lux Network Card" fill style={{ objectFit: 'contain' }} />
+                </div>
+                <div style={{ position: 'relative', width: '55%', height: '100%' }}>
+                  <Image src="/assets/lux-network-explorer.png" alt="Lux Network Explorer" fill style={{ objectFit: 'contain' }} />
+                </div>
+              </div>
+              <div style={{ padding: '2.5rem', background: 'var(--color-cream)' }}>
+                <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.8rem', color: 'var(--color-black)' }}>Lux Network</h4>
+                <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Co-Founder & Chief Design Officer</p>
+                <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
+                  Private quantum-safe cryptography. Run a validator node and earn on every transaction. Fully homomorphic encryption for the rest of us.
+                </p>
+                <a href="https://lux.network" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT LUX →</a>
+              </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-              <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--color-black)' }}>Lux Credit</h4>
-              <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Co-Founder • Shariah-Compliant Finance</p>
-              <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                The world's first Shariah law compliant credit card — empowering 800 million unbanked Muslims globally.
-              </p>
-              <a href="https://lux.credit" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT Lux Credit →</a>
+            {/* Lux Credit Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              style={{ border: '1px solid #000', borderRadius: '1.5rem', overflow: 'hidden' }}
+            >
+              <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                >
+                  <source src="/assets/lux-credit-card.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div style={{ padding: '2.5rem', background: 'var(--color-cream)' }}>
+                <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.8rem', color: 'var(--color-black)' }}>Lux Credit</h4>
+                <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Co-Founder • Shariah-Compliant Finance</p>
+                <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
+                  The world's first Shariah-compliant credit card — empowering 800 million unbanked Muslims globally. Premium titanium card with concierge service.
+                </p>
+                <a href="https://lux.credit" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT LUX CREDIT →</a>
+              </div>
             </motion.div>
           </div>
         </div>
