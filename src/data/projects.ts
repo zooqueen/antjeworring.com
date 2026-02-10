@@ -10,6 +10,11 @@ export interface Project {
   year: string
   date?: string
   image: string
+  imageStyle?: {
+    objectFit?: 'cover' | 'contain'
+    objectPosition?: string
+    background?: string
+  }
   description?: string
   tags: string[]
   links?: {
@@ -264,17 +269,6 @@ export const allProjects: Project[] = [
     order: 14,
   },
   {
-    id: 'lux-poker-tournament',
-    title: 'Lux Crypto Poker Tournament',
-    category: 'Graphic Design × Illustration',
-    year: '2023',
-    date: '2023-08',
-    image: '/assets/project4.png', // Using existing asset
-    description: 'Brand identity and promotional materials for Lux crypto poker tournament.',
-    tags: ['graphic-design', 'illustration', 'crypto', 'lux', 'web3'],
-    order: 15,
-  },
-  {
     id: 'zoo-labs-foundation',
     title: 'Zoo Labs Foundation',
     category: 'Web3 × Impact',
@@ -294,7 +288,7 @@ export const allProjects: Project[] = [
     category: 'Gaming × NFT',
     year: '2024',
     date: '2024-01',
-    image: '/assets/project9.png',
+    image: '/assets/nft-cricket-game.jpg',
     description: 'Character design and game assets for blockchain-based cricket game.',
     tags: ['gaming', 'nft', 'character-design', 'web3', 'cricket'],
     order: 17,
@@ -305,7 +299,7 @@ export const allProjects: Project[] = [
     category: 'NFT × Gaming',
     year: '2024',
     date: '2024-03',
-    image: '/assets/project10.png',
+    image: '/assets/slog-nft-gaming.jpg',
     description: 'NFT gaming project featuring unique character designs and gameplay mechanics.',
     tags: ['nft', 'gaming', 'crypto', 'web3', 'character-design'],
     order: 18,
@@ -316,7 +310,8 @@ export const allProjects: Project[] = [
     category: 'Metaverse × Conservation',
     year: '2024',
     date: '2024-06',
-    image: '/assets/project1.jpg', // Using existing asset
+    image: '/assets/wildlifewander.png',
+    imageStyle: { objectPosition: 'left center' },
     description: 'Immersive metaverse experience connecting people with wildlife conservation.',
     tags: ['metaverse', 'conservation', 'web3', 'vr', 'zoo'],
     featured: true,
