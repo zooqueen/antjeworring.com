@@ -356,7 +356,7 @@ export function PipPlayer() {
               fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.05em',
               textTransform: 'uppercase', backdropFilter: 'blur(4px)',
             }}>
-              ▶ MY COMMERCIALS
+              ▶ MY AGENCY
             </div>
           )}
         </div>
