@@ -559,14 +559,14 @@ export default function Home() {
               interval={2000}
             />
           </div>
-          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/cointelegraph.png" alt="Cointelegraph" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/cointelegraph.png" alt="Cointelegraph" width={400} height={160} style={{ objectFit: 'contain', width: '80%', height: 'auto' }} /></div>
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/decrypt.png" alt="Decrypt" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
 
           {/* Row 3: 4 logos */}
-          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/elle.svg" alt="Elle" width={60} height={40} style={{ objectFit: 'contain' }} /></div>
+          <a href="https://finance.yahoo.com/news/logan-paul-still-hasnt-refunded-222540179.html" target="_blank" rel="noopener noreferrer" className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/yahoo-finance.png" alt="Yahoo Finance" width={200} height={80} style={{ objectFit: 'contain', width: '60%', height: 'auto' }} /></a>
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/tmz.png" alt="TMZ" width={80} height={40} style={{ objectFit: 'contain' }} /></div>
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/tech-times.webp" alt="Tech Times" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
-          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/marin-ij.png" alt="Marin IJ" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+          <a href="https://www.marinij.com/2016/04/08/fashion-lifestyle-site-epic-sky-promotes-teen-girls-epic-self/" target="_blank" rel="noopener noreferrer" className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/marin-ij.png" alt="Marin IJ" width={100} height={40} style={{ objectFit: 'contain' }} /></a>
         </div>
       </section>
 
