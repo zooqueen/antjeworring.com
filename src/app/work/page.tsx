@@ -138,13 +138,17 @@ export default function WorkPage() {
                     borderRadius: '1.5rem',
                     border: '1px solid #000',
                     boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
+                    background: project.imageStyle?.background || 'transparent',
                   }}
                 >
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    style={{ objectFit: 'cover' }}
+                    style={{
+                      objectFit: project.imageStyle?.objectFit || 'cover',
+                      objectPosition: project.imageStyle?.objectPosition || 'center',
+                    }}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   {project.featured && (

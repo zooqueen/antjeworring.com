@@ -78,16 +78,26 @@ export function PipPlayer() {
   const [apiReady, setApiReady] = useState(false)
   const [elapsed, setElapsed] = useState(0)
 
-  const [musicList] = useState(() => shuffleArray(musicMixes))
-  const [adList] = useState(() => shuffleArray([...tvAds, ...homeVideos]))
+  const [musicList, setMusicList] = useState(musicMixes)
+  const [adList, setAdList] = useState([...tvAds, ...homeVideos])
 
-  // Stable random EQ bar config
-  const eqBars = useMemo(() =>
-    Array.from({ length: 28 }, () => ({
+  // Shuffle after hydration to avoid server/client mismatch
+  useEffect(() => {
+    setMusicList(shuffleArray(musicMixes))
+    setAdList(shuffleArray([...tvAds, ...homeVideos]))
+  }, [])
+
+  // Stable random EQ bar config (deferred to avoid hydration mismatch)
+  const [eqBars, setEqBars] = useState(() =>
+    Array.from({ length: 28 }, () => ({ max: 10, dur: 0.4, del: 0.3 }))
+  )
+  useEffect(() => {
+    setEqBars(Array.from({ length: 28 }, () => ({
       max: 3 + Math.random() * 18,
       dur: 0.3 + Math.random() * 0.5,
       del: Math.random() * 0.6,
-    })), [])
+    })))
+  }, [])
 
   const musicPlayerRef = useRef<any>(null)
   const adPlayerRef = useRef<any>(null)
