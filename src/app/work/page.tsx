@@ -47,7 +47,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           overflow: 'hidden',
           marginBottom: '1.5rem',
           borderRadius: '1.5rem',
-          border: '1px solid #000',
+          border: 'none',
           boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
           background: project.imageStyle?.background || 'transparent',
           cursor: firstLink || project.hoverVideoId ? 'pointer' : 'default',
@@ -195,66 +195,27 @@ export default function WorkPage() {
       {/* Hero */}
       <section
         style={{
-          background: 'var(--color-cream)',
-          padding: '14rem 0 4rem',
-          borderBottom: '1px solid #000',
+          position: 'relative',
+          height: '49vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderBottom: 'none',
+          overflow: 'hidden',
         }}
       >
-        <div className="container">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="display-name"
-            style={{
-              color: 'var(--color-black)',
-              textAlign: 'center',
-              marginBottom: '1rem',
-            }}
-          >
-            work
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            style={{
-              color: 'var(--color-grey)',
-              textAlign: 'center',
-              fontSize: '2rem',
-            }}
-          >
-            ( A decade of fashion, art & technology )
-          </motion.p>
-        </div>
+        <Image
+          src="/assets/snakewave.jpg"
+          alt=""
+          fill
+          style={{ objectFit: 'cover', objectPosition: 'center 58%' }}
+          priority
+        />
       </section>
 
       {/* Filters */}
       <section style={{ padding: '4rem 0 2rem', background: 'var(--color-cream)' }}>
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '1rem',
-              justifyContent: 'center',
-              marginBottom: '2rem',
-            }}
-          >
-            {years.map((year) => (
-              <button
-                key={year}
-                onClick={() => setActiveYear(year)}
-                className={`pill-button ${activeYear === year ? 'primary' : 'outline'}`}
-                style={{ textTransform: 'lowercase', fontSize: '1.4rem', padding: '0.8rem 2rem' }}
-              >
-                {year}
-              </button>
-            ))}
-          </motion.div>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -281,7 +242,7 @@ export default function WorkPage() {
       </section>
 
       {/* Projects Grid */}
-      <section style={{ padding: '4rem 0 6rem', background: 'var(--color-cream)', borderTop: '1px solid #000' }}>
+      <section style={{ padding: '4rem 0 6rem', background: 'var(--color-cream)' }}>
         <div className="container">
           <div
             style={{
