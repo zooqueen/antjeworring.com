@@ -547,6 +547,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SHACK15 Pitch Competition - Full Width */}
+      <section style={{ background: 'var(--color-cream)', width: '100%' }}>
+        <a href="https://www.linkedin.com/posts/elizabethswaney_on-july-19-we-hosted-our-17th-money-is-funny-activity-7092288258222538752-JUIM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB7o_XIBxukDOm7dSr3ETRbGht_r29KAZfo" target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: '100%', borderTop: '1px solid #000', borderBottom: '1px solid #000' }}>
+          <Image src="/assets/shack15-pitch-competition.jpg" alt="SHACK15 Pitch Competition" width={1600} height={900} style={{ width: '100%', height: 'auto', objectFit: 'cover', display: 'block' }} />
+        </a>
+      </section>
+
       {/* Story 3: Zoo Labs */}
       <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
