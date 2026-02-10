@@ -4,9 +4,14 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
 
-// Menu Modal Component
-function MenuModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  // Close on escape key
+// Subscribe Modal Component - Subscribe first, then view menu
+function SubscribeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [step, setStep] = useState<'subscribe' | 'menu'>('subscribe')
+  const [inputType, setInputType] = useState<'email' | 'phone'>('email')
+  const [value, setValue] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -14,12 +19,39 @@ function MenuModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
     if (isOpen) {
       document.addEventListener('keydown', handleEscape)
       document.body.style.overflow = 'hidden'
+    } else {
+      setStep('subscribe')
+      setValue('')
+      setError('')
     }
     return () => {
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = ''
     }
   }, [isOpen, onClose])
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!value.trim()) {
+      setError(inputType === 'email' ? 'Please enter your email' : 'Please enter your phone number')
+      return
+    }
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(inputType === 'email' ? { email: value } : { phone: value }),
+      })
+      if (!res.ok) throw new Error('Failed to subscribe')
+      setStep('menu')
+    } catch {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <AnimatePresence>
@@ -49,13 +81,14 @@ function MenuModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
             onClick={(e) => e.stopPropagation()}
             style={{
               width: '100%',
-              maxWidth: '900px',
-              height: '85vh',
+              maxWidth: step === 'menu' ? '900px' : '500px',
+              height: step === 'menu' ? '85vh' : 'auto',
               background: '#fff',
               borderRadius: '24px',
               overflow: 'hidden',
               position: 'relative',
               boxShadow: '0 25px 80px rgba(0,0,0,0.4)',
+              transition: 'max-width 0.3s ease, height 0.3s ease',
             }}
           >
             {/* Close button */}
@@ -81,13 +114,106 @@ function MenuModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
             >
               ×
             </button>
-            <iframe
-              src="https://secretmenusf.com/weekly/iframe"
-              width="100%"
-              height="100%"
-              style={{ border: 'none', display: 'block' }}
-              title="SF Secret Menu - Weekly Menu"
-            />
+
+            {step === 'subscribe' ? (
+              <div style={{ padding: '4rem 3rem', textAlign: 'center' }}>
+                <h3 style={{ fontSize: '2.4rem', fontWeight: 700, marginBottom: '1rem', color: '#000', textTransform: 'uppercase', letterSpacing: '0.05rem' }}>
+                  SF Secret Menu
+                </h3>
+                <p style={{ fontSize: '1.5rem', color: '#666', marginBottom: '3rem', lineHeight: 1.6 }}>
+                  Subscribe to learn about our next popup
+                </p>
+
+                {/* Toggle email/phone */}
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2rem' }}>
+                  <button
+                    onClick={() => { setInputType('email'); setValue(''); setError('') }}
+                    style={{
+                      padding: '0.6rem 1.5rem',
+                      borderRadius: '100px',
+                      border: '1px solid #000',
+                      background: inputType === 'email' ? '#000' : 'transparent',
+                      color: inputType === 'email' ? '#fff' : '#000',
+                      fontSize: '1.3rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    Email
+                  </button>
+                  <button
+                    onClick={() => { setInputType('phone'); setValue(''); setError('') }}
+                    style={{
+                      padding: '0.6rem 1.5rem',
+                      borderRadius: '100px',
+                      border: '1px solid #000',
+                      background: inputType === 'phone' ? '#000' : 'transparent',
+                      color: inputType === 'phone' ? '#fff' : '#000',
+                      fontSize: '1.3rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    Phone
+                  </button>
+                </div>
+
+                <form onSubmit={handleSubscribe}>
+                  <input
+                    type={inputType === 'email' ? 'email' : 'tel'}
+                    placeholder={inputType === 'email' ? 'your@email.com' : '+1 (555) 000-0000'}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '1.2rem 1.5rem',
+                      fontSize: '1.6rem',
+                      border: '1px solid #ccc',
+                      borderRadius: '12px',
+                      outline: 'none',
+                      marginBottom: '1rem',
+                      textAlign: 'center',
+                    }}
+                  />
+                  {error && (
+                    <p style={{ color: '#e85d04', fontSize: '1.3rem', marginBottom: '1rem' }}>{error}</p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    style={{
+                      width: '100%',
+                      padding: '1.2rem',
+                      fontSize: '1.6rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08rem',
+                      background: 'var(--color-orange)',
+                      color: '#000',
+                      border: 'none',
+                      borderRadius: '12px',
+                      cursor: loading ? 'wait' : 'pointer',
+                      opacity: loading ? 0.7 : 1,
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    {loading ? 'Subscribing...' : 'SUBSCRIBE NOW'}
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid #eee', textAlign: 'center' }}>
+                  <p style={{ fontSize: '1.4rem', color: '#666' }}>You&apos;re subscribed! Here&apos;s the menu:</p>
+                </div>
+                <iframe
+                  src="https://secretmenusf.com/weekly/iframe"
+                  width="100%"
+                  style={{ border: 'none', display: 'block', flex: 1 }}
+                  title="SF Secret Menu - Weekly Menu"
+                />
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}
@@ -798,14 +924,32 @@ export default function Home() {
             <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
               Every dish tells a story of regenerative agriculture, local sourcing, and culinary creativity. We believe that good food should nourish both people and planet.
             </p>
-            <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="https://sfsecretmenu.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                ORDER NOW →
-              </a>
-              <button onClick={() => setMenuOpen(true)} style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', background: 'none', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                VIEW WEEKLY MENU →
-              </button>
-            </div>
+            <button
+              onClick={() => setMenuOpen(true)}
+              style={{
+                fontSize: '1.6rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08rem',
+                color: '#000',
+                background: 'var(--color-orange)',
+                border: 'none',
+                borderRadius: '3rem',
+                padding: '1.2rem 3rem',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)'
+                e.currentTarget.style.boxShadow = '0 10px 30px rgba(218, 165, 32, 0.4)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
+            >
+              SUBSCRIBE NOW
+            </button>
           </motion.div>
         </div>
       </section>
@@ -827,8 +971,8 @@ export default function Home() {
       </section>
 
 
-      {/* Menu Modal */}
-      <MenuModal isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      {/* Subscribe Modal */}
+      <SubscribeModal isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </div>
   )
 }
