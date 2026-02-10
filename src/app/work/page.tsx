@@ -2,8 +2,161 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useState } from 'react'
-import { allProjects, getAllYears } from '@/data/projects'
+import { useState, useRef, useEffect } from 'react'
+import { allProjects, getAllYears, type Project } from '@/data/projects'
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const [isHovered, setIsHovered] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = cardRef.current
+    if (!el || !project.hoverVideoId) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVideoReady(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '400px' }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [project.hoverVideoId])
+
+  const firstLink = project.links?.[0]?.url && project.links[0].url !== '#' ? project.links[0].url : null
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.05 }}
+    >
+      <div
+        ref={cardRef}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => firstLink && window.open(firstLink, '_blank', 'noopener,noreferrer')}
+        style={{
+          display: 'block',
+          position: 'relative',
+          aspectRatio: '4/3',
+          overflow: 'hidden',
+          marginBottom: '1.5rem',
+          borderRadius: '1.5rem',
+          border: '1px solid #000',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
+          background: project.imageStyle?.background || 'transparent',
+          cursor: firstLink || project.hoverVideoId ? 'pointer' : 'default',
+        }}
+      >
+        {project.videoEmbed ? (
+          <iframe
+            src={`${project.videoEmbed}?autoplay=1&mute=1&loop=1&playlist=${project.videoEmbed.split('/').pop()}&controls=0&showinfo=0&rel=0&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3`}
+            title={project.title}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: '180%',
+              height: '180%',
+              transform: 'translate(-50%, -50%)',
+              border: 'none',
+            }}
+          />
+        ) : (
+          <>
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              style={{
+                objectFit: project.imageStyle?.objectFit || 'cover',
+                objectPosition: project.imageStyle?.objectPosition || 'center',
+                transform: project.imageStyle?.scale ? `scale(${project.imageStyle.scale})` : undefined,
+              }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+            {project.hoverVideoId && videoReady && (
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${project.hoverVideoId}?autoplay=1&mute=1&loop=1&playlist=${project.hoverVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3&playsinline=1`}
+                title={project.title}
+                allow="autoplay; encrypted-media"
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  width: '180%',
+                  height: '180%',
+                  transform: 'translate(-50%, -50%)',
+                  border: 'none',
+                  opacity: isHovered ? 1 : 0,
+                  transition: 'opacity 0.3s ease',
+                  pointerEvents: 'none',
+                }}
+              />
+            )}
+          </>
+        )}
+        {project.featured && (
+          <span
+            style={{
+              position: 'absolute',
+              top: '1rem',
+              right: '1rem',
+              background: 'var(--color-orange)',
+              color: '#fff',
+              padding: '0.5rem 1rem',
+              borderRadius: '100px',
+              fontSize: '1.2rem',
+              fontWeight: 600,
+              zIndex: 2,
+            }}
+          >
+            featured
+          </span>
+        )}
+      </div>
+      <p
+        style={{
+          fontSize: '1.3rem',
+          color: 'var(--color-grey)',
+          marginBottom: '0.5rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05rem',
+        }}
+      >
+        {project.category} · {project.year}
+      </p>
+      <h3
+        style={{
+          fontSize: '2rem',
+          fontWeight: 700,
+          color: 'var(--color-black)',
+          marginBottom: '0.5rem',
+        }}
+      >
+        {project.title}
+      </h3>
+      {project.description && (
+        <p
+          style={{
+            fontSize: '1.4rem',
+            color: 'var(--color-grey)',
+            lineHeight: '1.5',
+          }}
+        >
+          {project.description}
+        </p>
+      )}
+    </motion.article>
+  )
+}
 
 export default function WorkPage() {
   const [activeYear, setActiveYear] = useState('all')
@@ -122,86 +275,7 @@ export default function WorkPage() {
             className="work-grid"
           >
             {filteredProjects.map((project, index) => (
-              <motion.article
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.05 }}
-              >
-                <div
-                  style={{
-                    position: 'relative',
-                    aspectRatio: '4/3',
-                    overflow: 'hidden',
-                    marginBottom: '1.5rem',
-                    borderRadius: '1.5rem',
-                    border: '1px solid #000',
-                    boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
-                    background: project.imageStyle?.background || 'transparent',
-                  }}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    style={{
-                      objectFit: project.imageStyle?.objectFit || 'cover',
-                      objectPosition: project.imageStyle?.objectPosition || 'center',
-                    }}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  {project.featured && (
-                    <span
-                      style={{
-                        position: 'absolute',
-                        top: '1rem',
-                        right: '1rem',
-                        background: 'var(--color-orange)',
-                        color: '#fff',
-                        padding: '0.5rem 1rem',
-                        borderRadius: '100px',
-                        fontSize: '1.2rem',
-                        fontWeight: 600,
-                      }}
-                    >
-                      featured
-                    </span>
-                  )}
-                </div>
-                <p
-                  style={{
-                    fontSize: '1.3rem',
-                    color: 'var(--color-grey)',
-                    marginBottom: '0.5rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05rem',
-                  }}
-                >
-                  {project.category} · {project.year}
-                </p>
-                <h3
-                  style={{
-                    fontSize: '2rem',
-                    fontWeight: 700,
-                    color: 'var(--color-black)',
-                    marginBottom: '0.5rem',
-                  }}
-                >
-                  {project.title}
-                </h3>
-                {project.description && (
-                  <p
-                    style={{
-                      fontSize: '1.4rem',
-                      color: 'var(--color-grey)',
-                      lineHeight: '1.5',
-                    }}
-                  >
-                    {project.description}
-                  </p>
-                )}
-              </motion.article>
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
 

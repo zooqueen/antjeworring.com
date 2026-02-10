@@ -10,10 +10,13 @@ export interface Project {
   year: string
   date?: string
   image: string
+  videoEmbed?: string
+  hoverVideoId?: string
   imageStyle?: {
     objectFit?: 'cover' | 'contain'
     objectPosition?: string
     background?: string
+    scale?: number
   }
   description?: string
   tags: string[]
@@ -54,6 +57,7 @@ export const allProjects: Project[] = [
       },
       {
         publication: 'Marin Independent Journal',
+        url: 'https://www.marinij.com/2016/04/08/fashion-lifestyle-site-epic-sky-promotes-teen-girls-epic-self/',
       },
       {
         publication: 'Pacific Sun',
@@ -106,9 +110,16 @@ export const allProjects: Project[] = [
     category: 'Fashion × Tween Brand',
     year: '2017',
     date: '2017-09',
-    image: '/assets/project9.png',
-    description: 'Teen Designer in Residence for Epic Sky tween brand. Founding team composed of ex-executives from Gap and Everlane.',
+    image: '/assets/epic-sky.png',
+    description: 'Early founder and designer who built a youth-driven swimwear brand centered on confidence and creativity.',
     tags: ['fashion', 'tween-fashion', 'epic-sky', 'design'],
+    links: [
+      {
+        type: 'article',
+        url: 'https://www.marinij.com/2016/04/08/fashion-lifestyle-site-epic-sky-promotes-teen-girls-epic-self/',
+        title: 'Marin Independent Journal - Epic Sky',
+      },
+    ],
     featured: true,
     order: 4,
   },
@@ -121,12 +132,13 @@ export const allProjects: Project[] = [
     year: '2020',
     date: '2020-06',
     image: '/assets/project10.png',
+    videoEmbed: 'https://www.youtube-nocookie.com/embed/rMDadDkJTpo',
     description: 'Escape from COVID in your backyard - creative campaign during pandemic.',
     tags: ['campaign', 'video', 'covid', 'karma-bikinis', 'marketing'],
     links: [
       {
         type: 'video',
-        url: '#', // Add actual URL
+        url: 'https://youtu.be/rMDadDkJTpo?list=TLGGitEt5dQtzQMxMDAyMjAyNg',
         title: 'Less Boring Summer Campaign Video',
       },
     ],
@@ -139,6 +151,7 @@ export const allProjects: Project[] = [
     year: '2020',
     date: '2020-08',
     image: '/assets/project2_2.png',
+    videoEmbed: 'https://www.youtube-nocookie.com/embed/R7lViwC91KM',
     description: 'Tropical-inspired fashion campaign celebrating island culture.',
     tags: ['campaign', 'photography', 'karma-bikinis', 'cultural'],
     links: [
@@ -148,7 +161,7 @@ export const allProjects: Project[] = [
         title: 'Polynesian Princess Campaign',
       },
     ],
-    order: 6,
+    order: 7,
   },
   {
     id: 'summer-of-love',
@@ -157,6 +170,7 @@ export const allProjects: Project[] = [
     year: '2020',
     date: '2020-09',
     image: '/assets/project1.jpg',
+    videoEmbed: 'https://www.youtube-nocookie.com/embed/UADnBO7Bzq4',
     description: 'Feel-good summer campaign celebrating connection and creativity.',
     tags: ['campaign', 'video', 'karma-bikinis', 'summer'],
     links: [
@@ -166,7 +180,7 @@ export const allProjects: Project[] = [
         title: 'Summer of Love Campaign Video',
       },
     ],
-    order: 7,
+    order: 6,
   },
 
   // 2021-2022: Web3 & Blockchain Era
@@ -176,7 +190,9 @@ export const allProjects: Project[] = [
     category: 'Fashion Collaboration',
     year: '2022',
     date: '2022-03',
-    image: '/assets/project8.jpg',
+    image: '/assets/dayna-x-karma.png',
+    hoverVideoId: 'UAT2yVOzm8s',
+    imageStyle: { objectPosition: 'center top', scale: 1.3 },
     description: 'Special collaboration collection featuring unique design elements.',
     tags: ['collaboration', 'fashion', 'karma-bikinis'],
     links: [
@@ -194,7 +210,8 @@ export const allProjects: Project[] = [
     category: 'Speaking × Web3',
     year: '2022',
     date: '2022-05',
-    image: '/assets/project3.png',
+    image: '/assets/startup-grind.jpeg',
+    imageStyle: { objectFit: 'contain', background: '#3d5a3d' },
     description: 'Panel discussion as COO of Lux Partners discussing blockchain and entrepreneurship.',
     tags: ['speaking', 'web3', 'lux', 'blockchain', 'startup'],
     featured: true,
@@ -218,13 +235,13 @@ export const allProjects: Project[] = [
     category: 'Speaking × AI Ethics',
     year: '2022',
     date: '2022-10',
-    image: '/assets/project4.png',
+    image: '/assets/ai-bias-talk.jpg',
     description: 'Discussion on AI bias, ethics, and responsible development.',
     tags: ['speaking', 'ai', 'ethics', 'technology'],
     links: [
       {
         type: 'video',
-        url: '#', // Add actual URL
+        url: 'https://youtu.be/6EtEjToWWlc',
         title: 'Video of me talking about AI Bias',
       },
     ],
@@ -238,7 +255,7 @@ export const allProjects: Project[] = [
     category: 'Packaging Design × Branding',
     year: '2022',
     date: '2022-12',
-    image: '/assets/project5.png',
+    image: '/assets/product-packaging.jpg',
     description: 'Comprehensive product packaging designs for various brands.',
     tags: ['packaging', 'design', 'branding', 'product-design'],
     order: 12,
@@ -262,7 +279,8 @@ export const allProjects: Project[] = [
     category: 'UI/UX × FinTech',
     year: '2023',
     date: '2023-06',
-    image: '/assets/project7.png',
+    image: '/assets/lux-banking-app.jpeg',
+    imageStyle: { objectPosition: 'right center', scale: 1.2 },
     description: 'Modern banking app design for Lux financial platform.',
     tags: ['ui-ux', 'fintech', 'lux', 'banking', 'crypto'],
     featured: true,
@@ -274,7 +292,7 @@ export const allProjects: Project[] = [
     category: 'Web3 × Impact',
     year: '2023',
     date: '2023-10',
-    image: '/assets/project2.png', // Using existing asset
+    image: '/assets/zoo-labs-foundation.jpg',
     description: 'Director role at Zoo Labs Foundation - Conservation through creativity and Web3 technology.',
     tags: ['web3', 'conservation', 'foundation', 'zoo', 'deai', 'desci'],
     featured: true,
@@ -323,7 +341,7 @@ export const allProjects: Project[] = [
     category: 'NFT × Art',
     year: '2024',
     date: '2024-09',
-    image: '/assets/project3.png', // Using existing asset
+    image: '/assets/digital-habitat-series.jpg',
     description: 'NFT art collection featuring digital habitats and endangered species.',
     tags: ['nft', 'art', 'conservation', 'digital-art', 'zoo'],
     order: 20,
@@ -413,67 +431,13 @@ export const allProjects: Project[] = [
     id: 'modern-routine-2025',
     title: 'Modern Routine Fashion',
     category: 'Fashion Collection',
-    year: '2024',
-    date: '2024-10',
-    image: '/assets/dribbble-modern-routine.jpg',
+    year: '2025',
+    date: '2025-01',
+    image: '/assets/fashion-collection-2025.jpg',
+    imageStyle: { objectFit: 'contain', background: '#ffffff' },
     description: 'Contemporary fashion collection exploring daily rituals and modern lifestyle.',
     tags: ['fashion', 'collection', 'lifestyle', 'contemporary'],
     order: 28,
-  },
-  {
-    id: 'aykes-design',
-    title: 'Aykes Brand Design',
-    category: 'Branding × Design',
-    year: '2024',
-    date: '2024-09',
-    image: '/assets/dribbble-aykes.jpg',
-    description: 'Brand identity and design work for Aykes.',
-    tags: ['branding', 'design', 'identity'],
-    order: 29,
-  },
-  {
-    id: 'sticker-fashion',
-    title: 'Sticker Fashion Collection',
-    category: 'Fashion × Design',
-    year: '2024',
-    date: '2024-08',
-    image: '/assets/dribbble-sticker-fashion.jpg',
-    description: 'Playful fashion designs featuring sticker aesthetics.',
-    tags: ['fashion', 'design', 'creative'],
-    order: 30,
-  },
-  {
-    id: 'looks-xii',
-    title: 'Looks XII Collection',
-    category: 'Fashion Photography',
-    year: '2024',
-    date: '2024-07',
-    image: '/assets/dribbble-looks-xii.jpg',
-    description: 'Fashion lookbook photography series.',
-    tags: ['fashion', 'photography', 'lookbook'],
-    order: 31,
-  },
-  {
-    id: 'runway-looks',
-    title: 'Runway Looks',
-    category: 'Fashion × Runway',
-    year: '2024',
-    date: '2024-06',
-    image: '/assets/dribbble-runway-looks.jpg',
-    description: 'Runway fashion looks and styling.',
-    tags: ['fashion', 'runway', 'styling'],
-    order: 32,
-  },
-  {
-    id: 'website-landing-design',
-    title: 'Website Landing Page',
-    category: 'Web Design × UI/UX',
-    year: '2024',
-    date: '2024-05',
-    image: '/assets/dribbble-website-landing.jpg',
-    description: 'Modern website landing page design.',
-    tags: ['web-design', 'ui-ux', 'landing-page'],
-    order: 33,
   },
   {
     id: 'lux-poker-tournament-dribbble',
@@ -497,39 +461,6 @@ export const allProjects: Project[] = [
     description: 'Promotional design for gaming projects.',
     tags: ['gaming', 'marketing', 'design', 'promo'],
     order: 35,
-  },
-  {
-    id: 'cricket-team-illustration',
-    title: 'Cricket Team Hand Drawn',
-    category: 'Illustration × Sports',
-    year: '2024',
-    date: '2024-01',
-    image: '/assets/dribbble-cricket-team.jpg',
-    description: 'Hand-drawn illustrations for cricket team branding.',
-    tags: ['illustration', 'sports', 'cricket', 'hand-drawn'],
-    order: 36,
-  },
-  {
-    id: 'nft-project-design',
-    title: 'NFT Project',
-    category: 'NFT × Digital Art',
-    year: '2023',
-    date: '2023-09',
-    image: '/assets/dribbble-nft-project.jpg',
-    description: 'Digital art and design for NFT collection.',
-    tags: ['nft', 'digital-art', 'web3', 'crypto'],
-    order: 37,
-  },
-  {
-    id: 'cricket-batter-illustration',
-    title: 'Cricket Batter',
-    category: 'Illustration × Sports',
-    year: '2024',
-    date: '2024-01',
-    image: '/assets/dribbble-cricket-batter.png',
-    description: 'Dynamic illustration of cricket batter.',
-    tags: ['illustration', 'sports', 'cricket', 'character'],
-    order: 38,
   },
   {
     id: 'ad-creative-design',
