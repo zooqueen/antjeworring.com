@@ -286,7 +286,7 @@ export const allProjects: Project[] = [
     year: '2025',
     date: '2025-03',
     image: '/assets/slog-nft-gaming.jpg',
-    imageStyle: { objectFit: 'contain', background: 'linear-gradient(135deg, #e8453c, #f5a623)' },
+    imageStyle: { objectFit: 'contain', background: 'linear-gradient(135deg, #e85d04, #f5a623)' },
     description: 'NFT gaming project featuring unique character designs and gameplay mechanics.',
     tags: ['nft', 'gaming', 'crypto', 'web3', 'character-design'],
     order: 18,
