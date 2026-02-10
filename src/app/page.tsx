@@ -615,7 +615,7 @@ export default function Home() {
                 <Image src="/assets/karma-hero.jpg" alt="Karma Bikinis" fill style={{ objectFit: 'cover' }} />
               </div>
               <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.1)', width: '52%', flexShrink: 0 }}>
-                <Image src="/assets/karma-bikinis-2.jpg" alt="Antje at Miami Swim Week" fill style={{ objectFit: 'cover' }} />
+                <Image src="/assets/karma2-new.jpg" alt="Antje at Miami Swim Week" fill style={{ objectFit: 'cover', transform: 'scale(1.3)' }} />
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
