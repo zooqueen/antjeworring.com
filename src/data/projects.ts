@@ -12,6 +12,7 @@ export interface Project {
   image: string
   videoEmbed?: string
   hoverVideoId?: string
+  localVideo?: string
   imageStyle?: {
     objectFit?: 'cover' | 'contain'
     objectPosition?: string
@@ -34,75 +35,6 @@ export interface Project {
 }
 
 export const allProjects: Project[] = [
-  // 2015-2016: Karma Bikinis Launch
-  {
-    id: 'karma-bikinis-launch',
-    title: 'Karma Bikinis - First Collection',
-    category: 'Fashion × Entrepreneurship',
-    year: '2015',
-    date: '2015-06',
-    image: '/assets/project5.png',
-    description: 'Founded Karma Bikinis at age 14. First fundraising campaign and initial collection launch.',
-    tags: ['fashion', 'entrepreneurship', 'swimwear', 'startup'],
-    links: [
-      {
-        type: 'campaign',
-        url: '#', // Add actual URL
-        title: 'First Fundraising Campaign',
-      },
-    ],
-    press: [
-      {
-        publication: 'San Francisco Chronicle',
-      },
-      {
-        publication: 'Marin Independent Journal',
-        url: 'https://www.marinij.com/2016/04/08/fashion-lifestyle-site-epic-sky-promotes-teen-girls-epic-self/',
-      },
-      {
-        publication: 'Pacific Sun',
-      },
-    ],
-    featured: true,
-    order: 1,
-  },
-  {
-    id: 'karma-bikinis-miami-swim-week',
-    title: 'Miami Swim Week Debut',
-    category: 'Fashion Show × Event',
-    year: '2016',
-    date: '2016-07',
-    image: '/assets/project6.png',
-    description: 'First appearance at Miami Swim Week as a teenage designer.',
-    tags: ['fashion', 'miami-swim-week', 'runway', 'karma-bikinis'],
-    links: [
-      {
-        type: 'interview',
-        url: '#', // Add actual URL
-        title: 'Miami Swim Week Interview Video',
-      },
-      {
-        type: 'video',
-        url: '#', // Add actual URL
-        title: 'FLL Fashion Show',
-      },
-    ],
-    featured: true,
-    order: 2,
-  },
-  {
-    id: 'karma-crowdfunding',
-    title: 'Karma Crowdfunding Campaign',
-    category: 'Fundraising × Marketing',
-    year: '2017',
-    date: '2017-03',
-    image: '/assets/project7.png',
-    description: 'Successfully raised $80k through crowdfunding campaign for Karma Bikinis expansion.',
-    tags: ['fundraising', 'crowdfunding', 'startup', 'karma-bikinis'],
-    featured: true,
-    order: 3,
-  },
-
   // 2017-2018: Epic Sky
   {
     id: 'epic-sky-teen-designer',
@@ -219,15 +151,51 @@ export const allProjects: Project[] = [
   },
   {
     id: 'ssw-blockchain-nfts',
-    title: 'SSW 2022 - Blockchain & NFTs Panel',
+    title: 'SSW Panel - Blockchain & NFTs',
     category: 'Speaking × Web3',
     year: '2022',
     date: '2022-07',
-    image: '/assets/project2.png',
-    description: 'Panelist discussing blockchain technology and NFTs at Swim Week 2022.',
+    image: '/assets/ssw-2022-panel.jpeg',
+    description: 'Panelist discussing blockchain technology and NFTs at SSW 2022.',
     tags: ['speaking', 'web3', 'nfts', 'blockchain', 'miami-swim-week'],
+    links: [
+      {
+        type: 'article',
+        url: 'https://www.instagram.com/p/CbEOjGxO9LV/',
+        title: 'SSW 2022 Panel on Instagram',
+      },
+    ],
     featured: true,
     order: 10,
+  },
+  {
+    id: 'shack15-pitch-competition',
+    title: 'SHACK15 Pitch Competition',
+    category: 'Speaking × Blockchain',
+    year: '2023',
+    date: '2023-07',
+    image: '/assets/shack15-pitch-competition.jpg',
+    description: 'Tech pitch competition at SHACK15 in San Francisco.',
+    tags: ['speaking', 'blockchain', 'pitch', 'san-francisco', 'startup'],
+    links: [
+      {
+        type: 'article',
+        url: 'https://www.linkedin.com/posts/elizabethswaney_on-july-19-we-hosted-our-17th-money-is-funny-activity-7092288258222538752-JUIM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB7o_XIBxukDOm7dSr3ETRbGht_r29KAZfo',
+        title: 'SHACK15 Pitch Competition on LinkedIn',
+      },
+    ],
+    order: 15,
+  },
+  {
+    id: 'snark-tank-money-is-funny',
+    title: 'Money is Funny / Snark Tank',
+    category: 'Speaking × Blockchain',
+    year: '2023',
+    date: '2023-07',
+    image: '/assets/snark-tank-shack15.jpg',
+    description: 'Tech pitch roast comedy show at SHACK15 in San Francisco.',
+    tags: ['speaking', 'blockchain', 'comedy', 'pitch', 'san-francisco'],
+    order: 15,
   },
   {
     id: 'ai-bias-talk',
@@ -318,6 +286,7 @@ export const allProjects: Project[] = [
     year: '2024',
     date: '2024-03',
     image: '/assets/slog-nft-gaming.jpg',
+    imageStyle: { objectFit: 'contain', background: 'linear-gradient(135deg, #e8453c, #f5a623)' },
     description: 'NFT gaming project featuring unique character designs and gameplay mechanics.',
     tags: ['nft', 'gaming', 'crypto', 'web3', 'character-design'],
     order: 18,
@@ -390,6 +359,7 @@ export const allProjects: Project[] = [
     year: '2024',
     date: '2024-06',
     image: '/assets/dribbble-credit-card.png',
+    localVideo: '/assets/lux-credit-card.mp4',
     description: 'Modern credit card design for Lux financial products.',
     tags: ['product-design', 'fintech', 'lux', 'branding'],
     order: 24,

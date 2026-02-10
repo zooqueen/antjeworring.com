@@ -53,7 +53,24 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           cursor: firstLink || project.hoverVideoId ? 'pointer' : 'default',
         }}
       >
-        {project.videoEmbed ? (
+        {project.localVideo ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          >
+            <source src={project.localVideo} type="video/mp4" />
+          </video>
+        ) : project.videoEmbed ? (
           <iframe
             src={`${project.videoEmbed}?autoplay=1&mute=1&loop=1&playlist=${project.videoEmbed.split('/').pop()}&controls=0&showinfo=0&rel=0&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3`}
             title={project.title}

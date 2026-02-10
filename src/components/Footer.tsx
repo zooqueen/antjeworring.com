@@ -2,11 +2,41 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [showCalEmbed, setShowCalEmbed] = useState(false)
+
+  // Ensure footer video plays and loops when visible
+  useEffect(() => {
+    const video = videoRef.current
+    const footer = footerRef.current
+    if (!video || !footer) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {})
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    // Also handle video ending (fallback if loop attr fails)
+    const handleEnded = () => {
+      video.currentTime = 0
+      video.play().catch(() => {})
+    }
+    video.addEventListener('ended', handleEnded)
+
+    observer.observe(footer)
+    return () => {
+      observer.disconnect()
+      video.removeEventListener('ended', handleEnded)
+    }
+  }, [])
 
   const openCalEmbed = () => {
     setShowCalEmbed(true)
@@ -84,6 +114,7 @@ export function Footer() {
       >
         {/* Background Video */}
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
