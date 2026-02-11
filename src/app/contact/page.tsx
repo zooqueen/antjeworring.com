@@ -1,8 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export default function ContactPage() {
+  const [showCalEmbed, setShowCalEmbed] = useState(false)
   return (
     <div style={{ background: 'var(--color-pink)' }}>
       {/* Hero */}
@@ -181,8 +183,95 @@ export default function ContactPage() {
               </div>
             </motion.div>
           </div>
+
+          {/* Book a Call */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ textAlign: 'center', marginTop: '4rem' }}
+          >
+            <button
+              onClick={() => { setShowCalEmbed(true); document.body.style.overflow = 'hidden' }}
+              style={{
+                fontSize: '1.6rem',
+                fontWeight: 600,
+                color: '#000',
+                background: 'var(--color-orange)',
+                border: 'none',
+                borderRadius: '3rem',
+                padding: '1.2rem 3rem',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)'
+                e.currentTarget.style.boxShadow = '0 10px 30px rgba(218, 165, 32, 0.4)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
+            >
+              Book a Call
+            </button>
+          </motion.div>
         </div>
       </section>
+
+      {/* Cal.com Fullscreen Embed */}
+      {showCalEmbed && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+            background: 'rgba(0,0,0,0.9)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowCalEmbed(false)
+              document.body.style.overflow = ''
+            }
+          }}
+        >
+          <button
+            onClick={() => { setShowCalEmbed(false); document.body.style.overflow = '' }}
+            style={{
+              position: 'absolute',
+              top: '2rem',
+              right: '2rem',
+              background: 'transparent',
+              border: 'none',
+              color: '#fff',
+              fontSize: '3rem',
+              cursor: 'pointer',
+              zIndex: 10000,
+              lineHeight: 1,
+            }}
+            aria-label="Close booking"
+          >
+            ×
+          </button>
+          <iframe
+            src="https://cal.com/antje-worring/15min?embed=true&theme=dark"
+            style={{
+              width: '100%',
+              maxWidth: '600px',
+              height: '90vh',
+              border: 'none',
+              borderRadius: '12px',
+            }}
+            title="Book a call with Antje"
+          />
+        </div>
+      )}
     </div>
   )
 }
