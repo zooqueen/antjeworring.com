@@ -722,7 +722,7 @@ export default function Home() {
                 marginTop: '1rem',
                 textShadow: '0 2px 10px rgba(0,0,0,0.5)',
               }}>
-                That&apos;s the work I&apos;m here to do.
+                I&apos;m here to have a solution oriented mindset, please join me to make the world a better place.
               </p>
             </div>
           </div>
