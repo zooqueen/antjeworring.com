@@ -692,25 +692,19 @@ export default function Home() {
               textAlign: 'center',
               color: '#fff',
             }}>
-              <p style={{
-                fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
-                lineHeight: 1.8,
+              <p className="shack15-overlay-text" style={{
                 marginBottom: '1rem',
                 fontStyle: 'italic',
                 textShadow: '0 2px 10px rgba(0,0,0,0.5)',
               }}>
                 In a world where we live half our lives between the digital and the physical, this is my digital self.
               </p>
-              <p style={{
-                fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
-                lineHeight: 1.8,
+              <p className="shack15-overlay-text" style={{
                 textShadow: '0 2px 10px rgba(0,0,0,0.5)',
               }}>
                 My name is Antje — half German, half Filipina, born in Miami, a lifelong traveler, now based in San Francisco. My mission is simple: to make the world better by creating solutions to real-world problems that affect real people every day.
               </p>
-              <p style={{
-                fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
-                lineHeight: 1.8,
+              <p className="shack15-overlay-text" style={{
                 marginTop: '1rem',
                 textShadow: '0 2px 10px rgba(0,0,0,0.5)',
               }}>
