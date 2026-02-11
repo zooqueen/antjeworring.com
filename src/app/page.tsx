@@ -673,11 +673,60 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SHACK15 Pitch Competition - Full Width */}
+      {/* SHACK15 Pitch Competition - Full Width with Text Overlay */}
       <section style={{ background: 'var(--color-cream)', width: '100%' }}>
-        <a href="https://www.linkedin.com/posts/elizabethswaney_on-july-19-we-hosted-our-17th-money-is-funny-activity-7092288258222538752-JUIM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB7o_XIBxukDOm7dSr3ETRbGht_r29KAZfo" target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: '100%', borderTop: '1px solid #000', borderBottom: '1px solid #000' }}>
+        <div style={{ position: 'relative', width: '100%', borderTop: '1px solid #000', borderBottom: '1px solid #000' }}>
           <Image src="/assets/shack15-pitch-competition.jpg" alt="SHACK15 Pitch Competition" width={1600} height={900} style={{ width: '100%', height: 'auto', objectFit: 'cover', display: 'block' }} />
-        </a>
+          {/* Text Overlay */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(0, 0, 0, 0.45)',
+            padding: '2rem',
+          }}>
+            <div style={{
+              maxWidth: '700px',
+              textAlign: 'center',
+              color: '#fff',
+            }}>
+              <p style={{
+                fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
+                lineHeight: 1.8,
+                marginBottom: '1rem',
+                fontStyle: 'italic',
+                textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+              }}>
+                In a world where we live half our lives between the digital and physical, this is my digital self.
+              </p>
+              <p style={{
+                fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
+                lineHeight: 1.8,
+                textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+              }}>
+                I&apos;m Antje — half German, half Filipina, born in Miami, a lifelong traveler, now based in San Francisco. My mission is simple: make the world better by building solutions to real problems that affect real people every day.
+              </p>
+              <p style={{
+                fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
+                lineHeight: 1.8,
+                marginTop: '1rem',
+                textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+              }}>
+                I believe the tools we create shape what&apos;s possible — for individuals and for communities. Builders, designers, and leaders carry a responsibility to design systems that clarify knowledge, strengthen relationships, improve efficiency, and support long-term sustainability.
+              </p>
+              <p style={{
+                fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
+                lineHeight: 1.8,
+                marginTop: '1rem',
+                textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+              }}>
+                That&apos;s the work I&apos;m here to do.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Story 3: Zoo Labs */}
