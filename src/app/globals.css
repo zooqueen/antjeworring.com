@@ -868,6 +868,26 @@ a:focus-visible, button:focus-visible {
   }
 }
 
+/* Shack15 Overlay Text */
+.shack15-overlay-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 769px) {
+  .shack15-overlay-text {
+    font-size: 1.4rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .shack15-overlay-text {
+    font-size: 1.6rem;
+  }
+}
+
 /* Footer Responsive */
 @media (max-width: 768px) {
   footer h2 {
