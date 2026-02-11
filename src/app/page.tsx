@@ -469,7 +469,7 @@ export default function Home() {
             textShadow: '0 2px 10px rgba(0,0,0,0.5)',
           }}
         >
-          FOUNDER • DESIGNER • VISIONARY
+          DESIGNER • FOUNDER • VISIONARY
         </motion.p>
 
         {/* Title image - behind me.png */}
@@ -699,22 +699,14 @@ export default function Home() {
                 fontStyle: 'italic',
                 textShadow: '0 2px 10px rgba(0,0,0,0.5)',
               }}>
-                In a world where we live half our lives between the digital and physical, this is my digital self.
+                In a world where we live half our lives between the digital and the physical, this is my digital self.
               </p>
               <p style={{
                 fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
                 lineHeight: 1.8,
                 textShadow: '0 2px 10px rgba(0,0,0,0.5)',
               }}>
-                I&apos;m Antje — half German, half Filipina, born in Miami, a lifelong traveler, now based in San Francisco. My mission is simple: make the world better by building solutions to real problems that affect real people every day.
-              </p>
-              <p style={{
-                fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
-                lineHeight: 1.8,
-                marginTop: '1rem',
-                textShadow: '0 2px 10px rgba(0,0,0,0.5)',
-              }}>
-                I believe the tools we create shape what&apos;s possible — for individuals and for communities. Builders, designers, and leaders carry a responsibility to design systems that clarify knowledge, strengthen relationships, improve efficiency, and support long-term sustainability.
+                My name is Antje — half German, half Filipina, born in Miami, a lifelong traveler, now based in San Francisco. My mission is simple: to make the world better by creating solutions to real-world problems that affect real people every day.
               </p>
               <p style={{
                 fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
@@ -722,7 +714,7 @@ export default function Home() {
                 marginTop: '1rem',
                 textShadow: '0 2px 10px rgba(0,0,0,0.5)',
               }}>
-                I&apos;m here to have a solution oriented mindset, please join me to make the world a better place.
+                I believe the tools we build shape what individuals and communities are able to achieve. Builders, designers, and future leaders carry the responsibility to create systems that clarify knowledge, strengthen relationships, increase efficiency, and support the long-term sustainability of our shared resources.
               </p>
             </div>
           </div>
