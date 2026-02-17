@@ -16,11 +16,20 @@ export const metadata: Metadata = {
     url: 'https://antjeworring.com',
     siteName: 'Antje Worring',
     type: 'website',
+    images: [
+      {
+        url: 'https://antjeworr.ing/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Antje Worring',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@zoo_labs',
     creator: '@zoo_labs',
+    images: ['https://antjeworr.ing/og-image.jpg'],
   },
 }
 
