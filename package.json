@@ -11,7 +11,8 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "test": "playwright test",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "capture:og": "node scripts/capture-og.js"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
