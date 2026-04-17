@@ -2,12 +2,15 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { usePathname } from 'next/navigation'
 import { useRef, useState, useEffect } from 'react'
 
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [showCalEmbed, setShowCalEmbed] = useState(false)
+  const pathname = usePathname()
+  const isContactPage = pathname === '/contact'
 
   // Ensure footer video plays and loops when visible
   useEffect(() => {
@@ -145,92 +148,99 @@ export function Footer() {
           }}
         />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          {/* Contact Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{
-              textAlign: 'center',
-              marginBottom: '6rem',
-            }}
-          >
-            <h2
-              style={{
-                fontSize: '8rem',
-                fontWeight: 700,
-                color: '#fff',
-                marginBottom: '1rem',
-                textTransform: 'lowercase',
-              }}
-            >
-              contact
-            </h2>
-            <p style={{ fontSize: '2rem', color: 'rgba(255,255,255,0.8)' }}>
-              Let&apos;s work together
-            </p>
-          </motion.div>
+          {!isContactPage && (
+            <>
+              {/* Contact Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                style={{
+                  textAlign: 'center',
+                  marginBottom: '6rem',
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: '8rem',
+                    fontWeight: 700,
+                    color: '#fff',
+                    marginBottom: '1rem',
+                    textTransform: 'lowercase',
+                  }}
+                >
+                  contact
+                </h2>
+                <p style={{ fontSize: '2rem', color: 'rgba(255,255,255,0.8)' }}>
+                  Let&apos;s work together
+                </p>
+              </motion.div>
 
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            style={{
-              marginBottom: '6rem',
-              textAlign: 'center',
-            }}
-          >
-            <p style={{ fontSize: '1.6rem', marginBottom: '0.5rem', color: 'rgba(255,255,255,0.9)' }}>
-              hello@antjeworring.com
-            </p>
-            <p style={{ fontSize: '1.6rem', marginBottom: '0.5rem', color: 'rgba(255,255,255,0.9)' }}>
-              San Francisco, CA
-            </p>
-            <p style={{ fontSize: '1.6rem', marginBottom: '2rem', color: 'rgba(255,255,255,0.9)' }}>
-              IG: @antje_worring
-            </p>
-            <button
-              onClick={openCalEmbed}
-              style={{
-                fontSize: '1.6rem',
-                fontWeight: 600,
-                color: '#000',
-                background: 'var(--color-orange)',
-                border: 'none',
-                borderRadius: '3rem',
-                padding: '1.2rem 3rem',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05)'
-                e.currentTarget.style.boxShadow = '0 10px 30px rgba(218, 165, 32, 0.4)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
-            >
-              Book a Call
-            </button>
-          </motion.div>
+              {/* Contact Info */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                style={{
+                  marginBottom: '6rem',
+                  textAlign: 'center',
+                }}
+              >
+                <a
+                  href="mailto:hello@antjeworring.com"
+                  style={{ fontSize: '1.6rem', marginBottom: '0.5rem', color: 'rgba(255,255,255,0.9)', display: 'block', textDecoration: 'none' }}
+                >
+                  hello@antjeworring.com
+                </a>
+                <p style={{ fontSize: '1.6rem', marginBottom: '0.5rem', color: 'rgba(255,255,255,0.9)' }}>
+                  San Francisco, CA
+                </p>
+                <p style={{ fontSize: '1.6rem', marginBottom: '2rem', color: 'rgba(255,255,255,0.9)' }}>
+                  IG: @antje_worring
+                </p>
+                <button
+                  onClick={openCalEmbed}
+                  style={{
+                    fontSize: '1.6rem',
+                    fontWeight: 600,
+                    color: '#000',
+                    background: 'var(--color-orange)',
+                    border: 'none',
+                    borderRadius: '3rem',
+                    padding: '1.2rem 3rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.05)'
+                    e.currentTarget.style.boxShadow = '0 10px 30px rgba(218, 165, 32, 0.4)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)'
+                    e.currentTarget.style.boxShadow = 'none'
+                  }}
+                >
+                  Book a Call
+                </button>
+              </motion.div>
+            </>
+          )}
 
           {/* Footer Navigation - mirrors header */}
           <div
             style={{
               paddingTop: '3rem',
-              borderTop: '1px solid rgba(255,255,255,0.2)',
+              borderTop: isContactPage ? 'none' : '1px solid rgba(255,255,255,0.2)',
             }}
             className="footer-bottom"
           >
             {/* Nav Links */}
             <div className="footer-nav" style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
               <Link href="/about" style={{ fontSize: '1.1rem', fontWeight: 400, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.8)', textDecoration: 'none', padding: '0.6rem 1rem' }}>ABOUT</Link>
-              <Link href="/contact" style={{ fontSize: '1.1rem', fontWeight: 400, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.8)', textDecoration: 'none', padding: '0.6rem 1rem' }}>CONTACT</Link>
-              <Link href="/press" style={{ fontSize: '1.1rem', fontWeight: 400, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.8)', textDecoration: 'none', padding: '0.6rem 1rem' }}>PRESS</Link>
               <Link href="/work" style={{ fontSize: '1.1rem', fontWeight: 400, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.8)', textDecoration: 'none', padding: '0.6rem 1rem' }}>WORK</Link>
+              <Link href="/research" style={{ fontSize: '1.1rem', fontWeight: 400, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.8)', textDecoration: 'none', padding: '0.6rem 1rem' }}>RESEARCH</Link>
+              <Link href="/contact" style={{ fontSize: '1.1rem', fontWeight: 400, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.8)', textDecoration: 'none', padding: '0.6rem 1rem' }}>CONTACT</Link>
             </div>
 
             {/* Social Icons */}
@@ -254,7 +264,7 @@ export function Footer() {
 
             {/* Copyright */}
             <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.5)', textAlign: 'center' }}>
-              © ANTJE WORRING 2015–2025 • ALL RIGHTS RESERVED
+              © ANTJE WORRING 2015–2026 • ALL RIGHTS RESERVED
             </p>
           </div>
         </div>

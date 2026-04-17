@@ -7,6 +7,30 @@ import Image from 'next/image'
 // Service cards data
 const serviceCards = [
   {
+    category: "AI Engineering",
+    title: "RAG System Implementation",
+    description: "Custom AI knowledge bases that actually understand your business.",
+    image: "/assets/services/RAG system implementation.png"
+  },
+  {
+    category: "AI Engineering",
+    title: "LLM Fine-Tuning",
+    description: "Train AI models on your data for your specific use case.",
+    image: "/assets/services/LLM Fine Tuning.jpeg"
+  },
+  {
+    category: "AI Engineering",
+    title: "AI Pipeline Development",
+    description: "Production-ready AI systems from data ingestion to deployment.",
+    image: "/assets/services/ai pipeline development.jpeg"
+  },
+  {
+    category: "AI Engineering",
+    title: "AI-Enhanced Creative",
+    description: "Creative work powered by AI. Better results, faster turnaround.",
+    image: "/assets/services/ai enhanced creative .jpg"
+  },
+  {
     category: "Creative Design",
     title: "Ad Creative",
     description: "Ads that actually convert. Digital campaigns across all platforms.",
@@ -59,30 +83,6 @@ const serviceCards = [
     title: "3D & AR Design",
     description: "Product visualization, virtual spaces, and augmented reality experiences.",
     image: "/assets/services/3D and AR Design .jpeg"
-  },
-  {
-    category: "AI Engineering",
-    title: "RAG System Implementation",
-    description: "Custom AI knowledge bases that actually understand your business.",
-    image: "/assets/services/RAG system implementation.png"
-  },
-  {
-    category: "AI Engineering",
-    title: "LLM Fine-Tuning",
-    description: "Train AI models on your data for your specific use case.",
-    image: "/assets/services/LLM Fine Tuning.jpeg"
-  },
-  {
-    category: "AI Engineering",
-    title: "AI Pipeline Development",
-    description: "Production-ready AI systems from data ingestion to deployment.",
-    image: "/assets/services/ai pipeline development.jpeg"
-  },
-  {
-    category: "AI Engineering",
-    title: "AI-Enhanced Creative",
-    description: "Creative work powered by AI. Better results, faster turnaround.",
-    image: "/assets/services/ai enhanced creative .jpg"
   }
 ]
 
@@ -290,6 +290,7 @@ export function Services() {
                 flexShrink: 0,
                 width: 'clamp(300px, 40vw, 380px)',
                 scrollSnapAlign: 'start',
+                display: 'flex',
               }}
             >
               <div
@@ -305,6 +306,9 @@ export function Services() {
                   border: '1px solid rgba(0,0,0,0.1)',
                   overflow: 'hidden',
                   cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '100%',
                 }}
               >
                 {/* Image */}
@@ -327,7 +331,7 @@ export function Services() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '2rem' }}>
+                <div style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                   <p style={{
                     color: 'var(--color-orange)',
                     fontSize: '1.2rem',
@@ -344,6 +348,11 @@ export function Services() {
                     marginBottom: '1rem',
                     lineHeight: 1.2,
                     fontFamily: "'Blauer Neue', sans-serif",
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    minHeight: 'calc(2.2rem * 1.2 * 2)',
                   }}>
                     {service.title}
                   </h3>
@@ -356,6 +365,7 @@ export function Services() {
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
                     overflow: 'hidden',
+                    minHeight: 'calc(1.4rem * 1.5 * 2)',
                   }}>
                     {service.description}
                   </p>

@@ -180,7 +180,7 @@ export default function WorkPage() {
   const [activeCategory, setActiveCategory] = useState('all')
 
   const years = ['all', ...getAllYears()]
-  const categories = ['all', 'fashion', 'web3', 'nft', 'design', 'conservation']
+  const categories = ['all', 'research', 'papers', 'proofs', 'standards', 'fashion', 'web3', 'nft', 'design', 'conservation']
 
   const filteredProjects = allProjects.filter(project => {
     const yearMatch = activeYear === 'all' || project.year === activeYear
@@ -211,6 +211,19 @@ export default function WorkPage() {
           style={{ objectFit: 'cover', objectPosition: 'center 58%' }}
           priority
         />
+        <h1
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            fontSize: '8rem',
+            fontWeight: 700,
+            color: '#fff',
+            textTransform: 'lowercase',
+            textShadow: '0 2px 20px rgba(0,0,0,0.4)',
+          }}
+        >
+          work
+        </h1>
       </section>
 
       {/* Filters */}

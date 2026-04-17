@@ -4,10 +4,18 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const paragraphStyle = {
-  fontSize: '1.8rem',
-  lineHeight: '1.8',
+  fontSize: 'clamp(1.5rem, 0.9vw + 1.15rem, 1.75rem)',
+  lineHeight: 1.75,
   color: 'var(--color-black)',
-  marginBottom: '2rem',
+  marginBottom: '1.8rem',
+}
+
+const leadParagraphStyle = {
+  fontSize: 'clamp(1.7rem, 1.1vw + 1.25rem, 2.05rem)',
+  lineHeight: 1.6,
+  color: 'var(--color-black)',
+  marginBottom: '2.2rem',
+  fontWeight: 500,
 }
 
 export default function AboutPage() {
@@ -16,7 +24,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section
         style={{
-          background: 'var(--color-green)',
+          background: 'var(--color-black)',
           borderRadius: '0 0 40px 40px',
           padding: '14rem 0 6rem',
         }}
@@ -43,9 +51,11 @@ export default function AboutPage() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '6rem',
+              gridTemplateColumns: 'minmax(260px, 380px) minmax(0, 1fr)',
+              gap: 'clamp(3rem, 5vw, 5rem)',
               alignItems: 'start',
+              maxWidth: '1200px',
+              margin: '0 auto',
             }}
             className="about-grid"
           >
@@ -54,12 +64,13 @@ export default function AboutPage() {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              className="about-image"
               style={{
                 position: 'relative',
                 aspectRatio: '3/4',
                 borderRadius: '20px',
                 overflow: 'hidden',
-                maxWidth: '60%',
+                width: '100%',
               }}
             >
               <Image
@@ -67,9 +78,9 @@ export default function AboutPage() {
                 alt="Antje Worring"
                 fill
                 style={{ objectFit: 'cover' }}
-                sizes="50vw"
-                priority
+                sizes="(max-width: 1024px) 100vw, 380px"
                 unoptimized
+                priority
               />
             </motion.div>
 
@@ -78,13 +89,18 @@ export default function AboutPage() {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              style={{ maxWidth: '640px' }}
             >
-              <p style={paragraphStyle}>
-                I&apos;m Antje Worring, a multi-disciplinary designer working at the intersection of AI, design engineering, and public-good infrastructure.
+              <p style={leadParagraphStyle}>
+                I&apos;m Antje Worring — an AI scientist, researcher, and design engineer working at the intersection of frontier AI, public-good infrastructure, and human capability. I serve as Chief Scientist at <a href="https://zoolabs.io" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-black)', textDecoration: 'underline' }}>Zoo Labs Foundation</a>, a 501(c)(3) where I lead research and development of the Zoo and Zen model families.
               </p>
 
               <p style={paragraphStyle}>
-                My work focuses on building human-centered AI systems, responsible interfaces, and the underlying design frameworks that help complex technologies move safely from research into the real world. I specialize in the early stages of ambitious projects — where decisions about architecture, usability, and values matter most.
+                My research focuses on high-dimensional embedding spaces, decentralized semantic optimization, and efficient open-weight models. I co-authored <a href="https://zips.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-black)', textDecoration: 'underline' }}>ZIP-002: Zen-Reranker</a> — the first embedding model with native 7680-dimensional output, achieving 68.4 MTEB and 31.87× BitDelta compression. Broader Zoo Labs research spans Proof of AI (PoAI) consensus, Agent NFTs, and training-free GRPO.
+              </p>
+
+              <p style={paragraphStyle}>
+                Alongside research, I build. My work focuses on human-centered AI systems, responsible interfaces, and the underlying design frameworks that help complex technologies move safely from research into the real world. I specialize in the early stages of ambitious projects — where decisions about architecture, usability, and values matter most.
               </p>
 
               <p style={paragraphStyle}>
@@ -106,51 +122,54 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{ maxWidth: '720px', margin: '6rem auto 0' }}
+            style={{ maxWidth: '1200px', margin: '6rem auto 0' }}
           >
-            <h2
-              style={{
-                fontSize: '2.4rem',
-                fontWeight: 700,
-                color: 'var(--color-black)',
-                marginBottom: '2rem',
-                fontFamily: "'Blauer Neue', sans-serif",
-              }}
-            >
-              How I think
-            </h2>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {[
-                'Design is infrastructure, not decoration',
-                'Safety and usability are inseparable',
-                'Systems should fail gracefully',
-                'Technology should expand agency, not complexity',
-              ].map((item) => (
-                <li
-                  key={item}
-                  style={{
-                    fontSize: '1.8rem',
-                    lineHeight: '1.8',
-                    color: 'var(--color-black)',
-                    paddingLeft: '1.5rem',
-                    position: 'relative',
-                    marginBottom: '0.8rem',
-                  }}
-                >
-                  <span style={{ position: 'absolute', left: 0 }}>—</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div style={{ maxWidth: '640px' }}>
+              <h2
+                style={{
+                  fontSize: 'clamp(2rem, 1.5vw + 1.4rem, 2.6rem)',
+                  fontWeight: 700,
+                  color: 'var(--color-black)',
+                  marginBottom: '2rem',
+                  fontFamily: "'Blauer Neue', sans-serif",
+                }}
+              >
+                How I think
+              </h2>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {[
+                  'Design is infrastructure, not decoration',
+                  'Safety and usability are inseparable',
+                  'Systems should fail gracefully',
+                  'Technology should expand agency, not complexity',
+                ].map((item) => (
+                  <li
+                    key={item}
+                    style={{
+                      fontSize: 'clamp(1.5rem, 0.9vw + 1.15rem, 1.75rem)',
+                      lineHeight: 1.75,
+                      color: 'var(--color-black)',
+                      paddingLeft: '1.5rem',
+                      position: 'relative',
+                      marginBottom: '0.8rem',
+                    }}
+                  >
+                    <span style={{ position: 'absolute', left: 0 }}>—</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
 
-            <p style={{ ...paragraphStyle, marginTop: '3rem' }}>
-              I&apos;m most interested in work that sits between disciplines — where design informs engineering, ethics inform product decisions, and long-term consequences are taken seriously.
-            </p>
+              <p style={{ ...paragraphStyle, marginTop: '3rem' }}>
+                I&apos;m most interested in work that sits between disciplines — where design informs engineering, ethics inform product decisions, and long-term consequences are taken seriously.
+              </p>
 
-            <p style={{ ...paragraphStyle, marginBottom: 0 }}>
-              If you&apos;re building something thoughtful, difficult, or quietly ambitious, I&apos;m always open to conversation.
-            </p>
+              <p style={{ ...paragraphStyle, marginBottom: 0 }}>
+                If you&apos;re building something thoughtful, difficult, or quietly ambitious, I&apos;m always open to conversation.
+              </p>
+            </div>
           </motion.div>
+
         </div>
       </section>
     </div>

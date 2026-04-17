@@ -86,13 +86,6 @@ export const allProjects: Project[] = [
     videoEmbed: 'https://www.youtube-nocookie.com/embed/R7lViwC91KM',
     description: 'Tropical-inspired fashion campaign celebrating island culture.',
     tags: ['campaign', 'photography', 'karma-bikinis', 'cultural'],
-    links: [
-      {
-        type: 'campaign',
-        url: '#', // Add actual URL
-        title: 'Polynesian Princess Campaign',
-      },
-    ],
     order: 7,
   },
   {
@@ -105,13 +98,6 @@ export const allProjects: Project[] = [
     videoEmbed: 'https://www.youtube-nocookie.com/embed/UADnBO7Bzq4',
     description: 'Feel-good summer campaign celebrating connection and creativity.',
     tags: ['campaign', 'video', 'karma-bikinis', 'summer'],
-    links: [
-      {
-        type: 'video',
-        url: '#', // Add actual URL
-        title: 'Summer of Love Campaign Video',
-      },
-    ],
     order: 6,
   },
 
@@ -127,13 +113,6 @@ export const allProjects: Project[] = [
     imageStyle: { objectPosition: 'center top', scale: 1.3 },
     description: 'Special collaboration collection featuring unique design elements.',
     tags: ['collaboration', 'fashion', 'karma-bikinis'],
-    links: [
-      {
-        type: 'video',
-        url: '#', // Add actual URL
-        title: 'Dayna x Karma 2022 Video',
-      },
-    ],
     order: 8,
   },
   {
@@ -143,7 +122,7 @@ export const allProjects: Project[] = [
     year: '2022',
     date: '2022-05',
     image: '/assets/startup-grind.jpeg',
-    imageStyle: { objectFit: 'contain', background: '#3d5a3d' },
+    imageStyle: { objectFit: 'contain', background: '#000' },
     description: 'Panel discussion as COO of Lux Partners discussing blockchain and entrepreneurship.',
     tags: ['speaking', 'web3', 'lux', 'blockchain', 'startup'],
     featured: true,
@@ -214,30 +193,6 @@ export const allProjects: Project[] = [
       },
     ],
     order: 11,
-  },
-
-  // 2022-2023: Product Design & Packaging
-  {
-    id: 'product-packaging-design',
-    title: 'Product Packaging Series',
-    category: 'Packaging Design × Branding',
-    year: '2026',
-    date: '2026-12',
-    image: '/assets/product-packaging.jpg',
-    description: 'Comprehensive product packaging designs for various brands.',
-    tags: ['packaging', 'design', 'branding', 'product-design'],
-    order: 12,
-  },
-  {
-    id: 'mens-designs',
-    title: 'Mens Design Collection',
-    category: 'Fashion × Menswear',
-    year: '2026',
-    date: '2026-02',
-    image: '/assets/mensfashion.jpg',
-    description: 'Expansion into mens fashion and outerwear design.',
-    tags: ['fashion', 'menswear', 'design', 'swimwear'],
-    order: 13,
   },
 
   // 2023: Lux & Crypto Projects
@@ -487,6 +442,96 @@ export const allProjects: Project[] = [
     tags: ['nft', 'ui-ux', 'web3', 'marketplace', 'crypto'],
     featured: true,
     order: 43,
+  },
+
+  // AI Research — Standards, Papers, Proofs
+  {
+    id: 'zip-002-zen-reranker',
+    title: 'ZIP-002: Zen-Reranker',
+    category: 'Research × Standards',
+    year: '2025',
+    date: '2025-01',
+    image: '/assets/hanzo-ai-hero.png',
+    imageStyle: { objectFit: 'cover', objectPosition: 'center' },
+    description: 'Co-author. First embedding model with native 7680-dim output — 68.4 MTEB, 31.87× BitDelta compression.',
+    tags: ['research', 'standards', 'papers', 'ai', 'zoo', 'zen', 'embeddings', 'zip'],
+    links: [
+      { type: 'article', url: 'https://zips.zoo.ngo/', title: 'Read ZIP-002' },
+    ],
+    featured: true,
+    order: 50,
+  },
+  {
+    id: 'high-dim-embeddings-paper',
+    title: 'High-Dimensional Embedding Spaces',
+    category: 'Research × Paper',
+    year: '2025',
+    date: '2025-01',
+    image: '/assets/zoo-labs-foundation.jpg',
+    description: 'Theoretical foundation for Decentralized Semantic Optimization. Why 7680-dim beats lower-dim under heterogeneous compute.',
+    tags: ['research', 'papers', 'ai', 'zoo', 'zen', 'embeddings', 'dso'],
+    links: [
+      { type: 'article', url: 'https://papers.zoo.ngo/', title: 'Read paper' },
+    ],
+    order: 51,
+  },
+  {
+    id: 'proof-of-ai-consensus',
+    title: 'Proof of AI (PoAI) Consensus',
+    category: 'Research × Proof',
+    year: '2024',
+    date: '2024-02',
+    image: '/assets/zoo-labs-event.jpg',
+    description: 'Consensus mechanism where useful AI inference secures the network. Hanzo Industries · Lux Partners · Zoo Labs Foundation.',
+    tags: ['research', 'proofs', 'papers', 'ai', 'hanzo', 'zoo', 'consensus', 'blockchain'],
+    links: [
+      { type: 'article', url: 'https://proofs.zoo.ngo/', title: 'Read proof' },
+    ],
+    featured: true,
+    order: 52,
+  },
+  {
+    id: 'agent-nfts-paper',
+    title: 'Agent NFTs — ERC-721 Extension',
+    category: 'Research × Paper',
+    year: '2023',
+    date: '2023-03',
+    image: '/assets/hanzo-ai-face.png',
+    imageStyle: { objectFit: 'cover' },
+    description: 'Extending ERC-721 so NFTs carry autonomous agent behavior — memory, tools, on-chain actions.',
+    tags: ['research', 'papers', 'ai', 'hanzo', 'lux', 'zoo', 'nft', 'agents', 'blockchain'],
+    links: [
+      { type: 'article', url: 'https://papers.zoo.ngo/', title: 'Read paper' },
+    ],
+    order: 53,
+  },
+  {
+    id: 'zoo-gym-training',
+    title: 'Zoo Gym — Training Infrastructure',
+    category: 'Research × Open Source',
+    year: '2025',
+    date: '2025-01',
+    image: '/assets/zoo-labs-hands.jpg',
+    description: 'Open-source training stack behind Zoo & Zen model families. BitDelta compression, training-free GRPO, reproducible pipelines.',
+    tags: ['research', 'open-source', 'ai', 'zoo', 'zen', 'training', 'oss'],
+    links: [
+      { type: 'website', url: 'https://github.com/zooai/gym', title: 'GitHub' },
+    ],
+    order: 54,
+  },
+  {
+    id: 'training-free-grpo',
+    title: 'Training-Free GRPO',
+    category: 'Research × Method',
+    year: '2025',
+    date: '2025-02',
+    image: '/assets/zoo-labs-foundation.jpg',
+    description: 'Preference optimization without RL training loops. Applied across Zoo and Zen model families for alignment under compute constraints.',
+    tags: ['research', 'papers', 'ai', 'zoo', 'zen', 'alignment', 'method'],
+    links: [
+      { type: 'article', url: 'https://papers.zoo.ngo/', title: 'Read paper' },
+    ],
+    order: 55,
   },
 ]
 
