@@ -273,13 +273,21 @@ export function Services() {
             overflowX: 'auto',
             scrollSnapType: 'x mandatory',
             scrollBehavior: 'smooth',
-            paddingLeft: 'max(4rem, calc((100vw - 1400px) / 2 + 4rem))',
             paddingRight: '4rem',
             scrollPaddingLeft: 'max(4rem, calc((100vw - 1400px) / 2 + 4rem))',
             paddingBottom: '2rem',
             paddingTop: '1rem',
           }}
         >
+          {/* Leading spacer to align first card with .container left edge */}
+          <div
+            aria-hidden
+            className="services-carousel-spacer"
+            style={{
+              flexShrink: 0,
+              width: 'max(2rem, calc((100vw - 1400px) / 2 + 2rem))',
+            }}
+          />
           {serviceCards.map((service, index) => (
             <motion.div
               key={index}
