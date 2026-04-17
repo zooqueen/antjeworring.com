@@ -273,8 +273,9 @@ export function Services() {
             overflowX: 'auto',
             scrollSnapType: 'x mandatory',
             scrollBehavior: 'smooth',
-            paddingLeft: 'max(2rem, calc((100vw - 1400px) / 2 + 4rem))',
-            paddingRight: '2rem',
+            paddingLeft: 'max(4rem, calc((100vw - 1400px) / 2 + 4rem))',
+            paddingRight: '4rem',
+            scrollPaddingLeft: 'max(4rem, calc((100vw - 1400px) / 2 + 4rem))',
             paddingBottom: '2rem',
             paddingTop: '1rem',
           }}
