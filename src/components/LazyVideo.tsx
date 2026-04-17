@@ -30,7 +30,7 @@ export function LazyYouTubeGrid({ videoId, title, style }: LazyYouTubeGridProps)
     return () => observer.disconnect()
   }, [])
 
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 
   return (
     <div

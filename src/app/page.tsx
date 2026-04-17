@@ -2,7 +2,9 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRef, useState, useEffect } from 'react'
+import { ScrollScrubVideo } from '@/components/ScrollScrubVideo'
 
 // Subscribe Modal Component - Subscribe first, then view menu
 function SubscribeModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -261,7 +263,7 @@ function MagazineSlideshow({ images, interval = 1000 }: { images: string[], inte
             src={src}
             alt="Magazine Cover"
             fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'cover', transform: 'scale(1.3)' }}
             sizes="400px"
             quality={100}
             unoptimized
@@ -520,17 +522,19 @@ export default function Home() {
       <section style={{ background: 'var(--color-pink)', width: '100%' }}>
         <div className="press-grid-desktop" style={{
           width: '100%',
+          maxWidth: '100%',
           display: 'grid',
-          gridTemplateColumns: 'repeat(6, 1fr)',
+          gridTemplateColumns: 'repeat(6, minmax(0, 1fr))',
+          gridAutoRows: 'calc(100vw / 6)',
           borderTop: '1px solid #000',
         }}>
           {/* Row 1: 4 logos */}
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/british-vogue.png" alt="British Vogue" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
-          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/people.png" alt="People" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell press-mobile-hide" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/people.png" alt="People" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/sf-chronicle.jpg" alt="SF Chronicle" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/washington-post.webp" alt="Washington Post" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
           {/* Magazine 1 - spans 2 rows, 2 cols (4x size) */}
-          <div style={{
+          <div className="press-magazine-right" style={{
             gridColumn: '5 / 7',
             gridRow: '1 / 3',
             position: 'relative',
@@ -546,7 +550,7 @@ export default function Home() {
 
           {/* Row 2: Magazine left starts + 2 logos */}
           {/* Magazine 2 - spans 2 rows, 2 cols (4x size) */}
-          <div style={{
+          <div className="press-magazine-left" style={{
             gridColumn: '1 / 3',
             gridRow: '2 / 4',
             position: 'relative',
@@ -564,10 +568,139 @@ export default function Home() {
 
           {/* Row 3: 4 logos */}
           <a href="https://finance.yahoo.com/news/logan-paul-still-hasnt-refunded-222540179.html" target="_blank" rel="noopener noreferrer" className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/yahoo-finance.png" alt="Yahoo Finance" width={200} height={80} style={{ objectFit: 'contain', width: '60%', height: 'auto' }} /></a>
-          <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/tmz.png" alt="TMZ" width={80} height={40} style={{ objectFit: 'contain' }} /></div>
+          <div className="press-cell press-mobile-hide" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/tmz.png" alt="TMZ" width={80} height={40} style={{ objectFit: 'contain' }} /></div>
           <div className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/tech-times.webp" alt="Tech Times" width={100} height={40} style={{ objectFit: 'contain' }} /></div>
           <a href="https://www.marinij.com/2016/04/08/fashion-lifestyle-site-epic-sky-promotes-teen-girls-epic-self/" target="_blank" rel="noopener noreferrer" className="press-cell" style={{ aspectRatio: '1/1', borderRight: '1px solid #000', borderBottom: '1px solid #000' }}><Image src="/assets/logos/marin-ij.png" alt="Marin IJ" width={100} height={40} style={{ objectFit: 'contain' }} /></a>
         </div>
+      </section>
+
+      {/* Model Families Section */}
+      <section style={{ background: 'var(--color-pink)', padding: '8rem 0 4rem', borderTop: '1px solid #000' }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ maxWidth: '720px', marginBottom: '4rem' }}
+          >
+            <h2 style={{ fontSize: 'clamp(2.4rem, 3.5vw, 3.6rem)', fontWeight: 700, color: 'var(--color-black)', marginBottom: '2rem', fontFamily: "'Blauer Neue', sans-serif" }}>
+              Start with Foundational Models
+            </h2>
+            <p style={{ fontSize: 'clamp(1.6rem, 1.5vw + 1rem, 2rem)', lineHeight: 1.7, color: 'var(--color-black)' }}>
+              Three research ecosystems, one mission: open-weight AI that&apos;s safe, efficient, and accountable to the public.
+            </p>
+          </motion.div>
+          <div
+            className="ventures-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '3rem',
+              maxWidth: '1200px',
+            }}
+          >
+            {[
+              {
+                name: 'Zen',
+                tagline: 'Open-weight frontier models',
+                summary: 'The Zen family includes Zen-Reranker-8B (native 7680-dim embeddings, 68.4 MTEB) and related retrieval/reranking models optimized for high-dimensional semantic search.',
+                links: [
+                  { label: 'Hugging Face', href: 'https://huggingface.co/zoo' },
+                  { label: 'Zen-Reranker on HF', href: 'https://huggingface.co/zoo/zen-reranker-8b' },
+                  { label: 'zooai/gym', href: 'https://github.com/zooai/gym' },
+                ],
+              },
+              {
+                name: 'Zoo',
+                tagline: 'Decentralized AI protocol',
+                summary: 'Zoo Network, Zoo DAO, and the research infrastructure behind Zoo Labs Foundation (501c3). Decentralized semantic optimization, Proof of AI, and on-chain research funding.',
+                links: [
+                  { label: 'zoolabs.io', href: 'https://zoolabs.io' },
+                  { label: 'zooai on GitHub', href: 'https://github.com/zooai' },
+                  { label: 'Zoo Labs Papers', href: 'https://github.com/zooai/papers' },
+                ],
+              },
+              {
+                name: 'Hanzo',
+                tagline: 'AI-native infrastructure',
+                summary: 'Hanzo Network L1, inference engine, and agentic developer tooling. The substrate for running Agent NFTs and Proof of AI consensus in production.',
+                links: [
+                  { label: 'hanzo.ai', href: 'https://hanzo.ai' },
+                  { label: 'hanzoai on GitHub', href: 'https://github.com/hanzoai' },
+                  { label: 'Hanzo Papers', href: 'https://github.com/hanzoai/papers' },
+                ],
+              },
+            ].map((family, i) => (
+              <motion.div
+                key={family.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                style={{ border: '1px solid #000', borderRadius: '1.5rem', overflow: 'hidden', background: 'var(--color-cream)' }}
+              >
+                <div style={{ padding: '2.5rem' }}>
+                  <p style={{ fontSize: '1.1rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08rem', color: 'var(--color-orange)', marginBottom: '1rem' }}>
+                    {family.tagline}
+                  </p>
+                  <h3 style={{ fontSize: '4rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--color-black)', fontFamily: "'Blauer Neue', sans-serif" }}>
+                    {family.name}
+                  </h3>
+                  <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
+                    {family.summary}
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                    {family.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)', textDecoration: 'none' }}
+                      >
+                        {link.label} →
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ display: 'flex', justifyContent: 'center', marginTop: '4rem' }}
+          >
+            <Link
+              href="/research"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.8rem',
+                background: 'var(--color-black)',
+                color: '#fff',
+                fontSize: '1.5rem',
+                fontWeight: 600,
+                padding: '1.4rem 2.6rem',
+                borderRadius: '3rem',
+                textDecoration: 'none',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05rem',
+                transition: 'transform 0.2s ease',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.04)' }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)' }}
+            >
+              Explore research →
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Scroll-scrubbed video */}
+      <section style={{ background: 'var(--color-pink)', width: '100%', lineHeight: 0 }}>
+        <ScrollScrubVideo src="/videos/imhotforai.mp4" />
       </section>
 
       {/* Our Services Section */}
@@ -648,8 +781,24 @@ export default function Home() {
       <section style={{ background: 'var(--color-cream)', padding: '6rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="story-grid">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ position: 'relative' }}>
               <LazyYouTube videoId="isKrNe8LIho" title="Karma Bikinis Kickstarter" />
+              <div style={{
+                position: 'absolute',
+                top: '1rem',
+                left: '1rem',
+                background: 'rgba(0, 0, 0, 0.7)',
+                color: '#fff',
+                padding: '0.8rem 1.2rem',
+                borderRadius: '0.4rem',
+                fontSize: 'clamp(1.2rem, 1.4vw, 1.4rem)',
+                fontStyle: 'italic',
+                fontFamily: "'Blauer Neue', sans-serif",
+                pointerEvents: 'none',
+                zIndex: 2,
+              }}>
+                My 16 year old self, pitching on Kickstarter.
+              </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)', fontFamily: "'Blauer Neue', sans-serif" }}>
@@ -724,18 +873,25 @@ export default function Home() {
                 ZOO LABS
               </h3>
               <p style={{ fontSize: 'clamp(1.4rem, 2vw, 1.6rem)', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                A 501(c)(3) non-profit dedicated to saving people and endangered animals. We build frontier AI while pioneering AI safety for kids, making technology that protects the most vulnerable.
+                A 501(c)(3) non-profit dedicated to saving people and endangered animals. I serve as Chief Scientist, leading research and development of the Zoo and Zen model families — open-weight AI with a safety-first mandate.
               </p>
               <p style={{ fontSize: 'clamp(1.4rem, 2vw, 1.6rem)', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
                 Through Zoo Network and Zoo DAO, we fund other NGO DAOs doing good around the world. Open source, public goods, and purpose-driven innovation for people and planet.
               </p>
-              <a href="https://zoolabs.io" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                VISIT ZOO LABS →
-              </a>
-              <br />
-              <a href="https://zips.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem' }}>
-                VOTE ON ZOO DAO →
-              </a>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem 2rem' }}>
+                <a href="https://zoolabs.io" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none' }}>
+                  VISIT ZOO LABS →
+                </a>
+                <a href="https://zips.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none' }}>
+                  ZIPs →
+                </a>
+                <a href="https://papers.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none' }}>
+                  PAPERS →
+                </a>
+                <a href="https://proofs.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none' }}>
+                  PROOFS →
+                </a>
+              </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ position: 'relative' }}>
               <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', borderRadius: '1.5rem', boxShadow: '0 10px 40px rgba(0,0,0,0.15)', maxWidth: '50%', marginLeft: 'auto' }}>
@@ -818,6 +974,99 @@ export default function Home() {
               <AnimalCard {...card} />
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* Research & Open Source */}
+      <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '5rem' }}>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
+              RESEARCH & OPEN SOURCE
+            </h3>
+            <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', maxWidth: '700px', marginBottom: '2rem' }}>
+              As Chief Scientist at Zoo Labs Foundation, I lead research and development of the Zoo and Zen model families — open weights, open code, open research. Co-author of ZIP-002: Zen-Reranker, the first embedding model with native 7680-dimensional output.
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem 2rem' }}>
+              <a href="https://zips.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none' }}>
+                ZIPs →
+              </a>
+              <a href="https://papers.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none' }}>
+                PAPERS →
+              </a>
+              <a href="https://proofs.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none' }}>
+                PROOFS →
+              </a>
+              <a href="https://huggingface.co/zoo" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none' }}>
+                HUGGING FACE →
+              </a>
+              <a href="https://github.com/zooai" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.3rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05rem', color: 'var(--color-black)', textDecoration: 'none' }}>
+                GITHUB →
+              </a>
+            </div>
+          </motion.div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3rem', borderTop: '1px solid #000', paddingTop: '4rem' }} className="ventures-grid">
+            {/* Zen-Reranker Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{ border: '1px solid #000', borderRadius: '1.5rem', overflow: 'hidden', background: 'var(--color-cream)' }}
+            >
+              <div style={{ padding: '2.5rem' }}>
+                <p style={{ fontSize: '1.1rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08rem', color: 'var(--color-orange)', marginBottom: '1rem' }}>ZIP-002 · 2025</p>
+                <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.8rem', color: 'var(--color-black)' }}>Zen-Reranker-8B</h4>
+                <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Co-author · Chief Scientist, Zoo Labs</p>
+                <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
+                  First embedding model with native 7680-dimensional output. 68.4 MTEB, 94.7% Recall@5, 31.87× BitDelta compression — built for decentralized semantic optimization.
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem 1.5rem' }}>
+                  <a href="https://zips.zoo.ngo/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)', textDecoration: 'none' }}>READ ZIP →</a>
+                  <a href="https://huggingface.co/zoo/zen-reranker-8b" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)', textDecoration: 'none' }}>HF MODEL →</a>
+                  <a href="https://github.com/zooai/zen-reranker" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)', textDecoration: 'none' }}>GITHUB →</a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Zoo Gym Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              style={{ border: '1px solid #000', borderRadius: '1.5rem', overflow: 'hidden', background: 'var(--color-cream)' }}
+            >
+              <div style={{ padding: '2.5rem' }}>
+                <p style={{ fontSize: '1.1rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08rem', color: 'var(--color-orange)', marginBottom: '1rem' }}>OPEN SOURCE</p>
+                <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.8rem', color: 'var(--color-black)' }}>Zoo Gym</h4>
+                <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Training infra for Zoo & Zen models</p>
+                <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
+                  The training stack behind the Zoo and Zen model families. BitDelta compression, training-free GRPO, and reproducible open-weight pipelines.
+                </p>
+                <a href="https://github.com/zooai/gym" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)', textDecoration: 'none' }}>GITHUB →</a>
+              </div>
+            </motion.div>
+
+            {/* Hanzo Node Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              style={{ border: '1px solid #000', borderRadius: '1.5rem', overflow: 'hidden', background: 'var(--color-cream)' }}
+            >
+              <div style={{ padding: '2.5rem' }}>
+                <p style={{ fontSize: '1.1rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08rem', color: 'var(--color-orange)', marginBottom: '1rem' }}>INFRASTRUCTURE</p>
+                <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.8rem', color: 'var(--color-black)' }}>Hanzo Node</h4>
+                <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Reference node · Hanzo Network</p>
+                <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
+                  Reference implementation for the Hanzo Network — the L1 substrate for Proof of AI (PoAI) consensus and Agent NFTs running autonomous AI on-chain.
+                </p>
+                <a href="https://github.com/hanzoai/node" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)', textDecoration: 'none' }}>GITHUB →</a>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

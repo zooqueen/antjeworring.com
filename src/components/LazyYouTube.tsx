@@ -32,7 +32,7 @@ export function LazyYouTube({ videoId, title, aspectRatio = '56.25%', style }: L
     return () => observer.disconnect()
   }, [])
 
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 
   return (
     <div

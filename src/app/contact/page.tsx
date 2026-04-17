@@ -10,7 +10,7 @@ export default function ContactPage() {
       {/* Hero */}
       <section
         style={{
-          background: 'var(--color-green)',
+          background: 'var(--color-black)',
           borderRadius: '0 0 40px 40px',
           padding: '14rem 0 6rem',
         }}
@@ -74,16 +74,19 @@ export default function ContactPage() {
               </h2>
 
               <div style={{ marginBottom: '3rem' }}>
-                <p
+                <a
+                  href="mailto:hello@antjeworring.com"
                   style={{
                     fontSize: '1.8rem',
                     lineHeight: '1.8',
                     color: 'var(--color-black)',
                     marginBottom: '1rem',
+                    display: 'block',
+                    textDecoration: 'none',
                   }}
                 >
                   hello@antjeworring.com
-                </p>
+                </a>
                 <p
                   style={{
                     fontSize: '1.8rem',
@@ -116,7 +119,7 @@ export default function ContactPage() {
                   github
                 </a>
                 <a
-                  href="https://twitter.com/zoo_labs"
+                  href="https://twitter.com/antje_worring"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pill-button outline"

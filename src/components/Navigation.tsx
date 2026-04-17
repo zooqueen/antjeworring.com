@@ -8,13 +8,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
   { href: '/about', label: 'ABOUT' },
-  { href: '/contact', label: 'CONTACT' },
-  { href: '/press', label: 'PRESS' },
   { href: '/work', label: 'WORK' },
+  { href: '/research', label: 'RESEARCH' },
+  { href: '/contact', label: 'CONTACT' },
 ]
 
 // Pages where nav should always be visible
-const alwaysShowNavPages = ['/about', '/contact', '/press', '/work']
+const alwaysShowNavPages = ['/about', '/contact', '/press', '/work', '/research']
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)

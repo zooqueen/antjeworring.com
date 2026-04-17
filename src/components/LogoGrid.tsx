@@ -35,6 +35,7 @@ function LogoCell({ item, index, total }: { item: LogoItem; index: number; total
 
   const cols = 4
   const isLastInRow = (index + 1) % cols === 0
+  const isLastItem = index === total - 1
   const rowsNeeded = Math.ceil(total / cols)
   const currentRow = Math.floor(index / cols)
   const isLastRow = currentRow === rowsNeeded - 1
@@ -104,7 +105,7 @@ function LogoCell({ item, index, total }: { item: LogoItem; index: number; total
         alignItems: 'center',
         justifyContent: 'center',
         padding: '3.5rem 2.5rem',
-        borderRight: !isLastInRow ? '1px solid #e0e0e0' : 'none',
+        borderRight: !isLastInRow && !isLastItem ? '1px solid #e0e0e0' : 'none',
         borderBottom: !isLastRow ? '1px solid #e0e0e0' : 'none',
         background: '#fff',
         minHeight: '120px',

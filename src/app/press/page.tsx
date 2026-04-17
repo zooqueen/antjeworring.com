@@ -8,6 +8,18 @@ export const metadata = {
 export default function PressPage() {
   return (
     <main style={{ paddingTop: '12rem' }}>
+      <h1
+        style={{
+          fontSize: '6rem',
+          fontWeight: 700,
+          textAlign: 'center',
+          marginBottom: '1rem',
+          textTransform: 'lowercase',
+          color: 'var(--color-black)',
+        }}
+      >
+        press
+      </h1>
       <LogoGrid />
     </main>
   )
