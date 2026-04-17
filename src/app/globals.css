@@ -746,11 +746,18 @@ a:focus-visible, button:focus-visible {
   .carousel-nav-desktop {
     display: none !important;
   }
+  .services-carousel {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    scroll-padding-left: 2rem !important;
+  }
 }
 
 @media (max-width: 480px) {
   .services-carousel {
     padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    scroll-padding-left: 1.5rem !important;
     gap: 1.5rem !important;
   }
 }
