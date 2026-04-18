@@ -2,7 +2,7 @@
   "name": "antjeworring.com",
   "version": "2.0.0",
   "private": true,
-  "description": "Personal portfolio of Antje Worring - Multi-disciplinary artist, designer, and metaverse architect",
+  "description": "Personal portfolio of Antje Worring - Multi-disciplinary Artist & AI Researcher",
   "author": "Antje Worring <antje@zoolabs.io>",
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
