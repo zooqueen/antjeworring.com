@@ -1101,7 +1101,69 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Story 5: Current Ventures */}
+      {/* Story 6: SF Secret Menu */}
+      <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+              <SeedOfLife size={80} color="#daa520" />
+            </div>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
+              SF SECRET MENU
+            </h3>
+            <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
+              Organic farm-to-table ghost kitchen bringing sustainable, chef-crafted meals to San Francisco. From our healing farm directly to your table — closing the loop between the food we grow and the communities we serve.
+            </p>
+            <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
+              Every dish tells a story of regenerative agriculture, local sourcing, and culinary creativity. We believe that good food should nourish both people and planet.
+            </p>
+            <button
+              onClick={() => setMenuOpen(true)}
+              style={{
+                fontSize: '1.6rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08rem',
+                color: '#000',
+                background: 'var(--color-orange)',
+                border: 'none',
+                borderRadius: '3rem',
+                padding: '1.2rem 3rem',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)'
+                e.currentTarget.style.boxShadow = '0 10px 30px rgba(218, 165, 32, 0.4)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
+            >
+              SUBSCRIBE NOW
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Food Gallery with Parallax */}
+      <section style={{ background: 'var(--color-cream)', width: '100%' }}>
+        <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
+          {[
+            { src: '/assets/menu-spring-chicken.png', alt: 'Spring Chicken with Red Pepper' },
+            { src: '/assets/menu-steak-salad.png', alt: 'Roasted Cauliflower Green Salad' },
+            { src: '/assets/menu-meatloaf.png', alt: 'Moms Meatloaf with Mashed Potatoes' },
+            { src: '/assets/menu-lasagne.png', alt: 'Beef Ragu Lasagne' },
+          ].map((food, index) => (
+            <div key={food.alt} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: index < 3 ? '1px solid #000' : 'none', borderBottom: '1px solid #000', background: '#f5f5f5' }}>
+              <Image src={food.src} alt={food.alt} fill style={{ objectFit: 'contain' }} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Building the Future - Current Ventures (right above footer) */}
       <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '5rem' }}>
@@ -1109,7 +1171,7 @@ export default function Home() {
               BUILDING THE FUTURE
             </h3>
             <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', maxWidth: '700px' }}>
-              Today, I'm focused on the intersection of design, technology, and impact. Working across multiple ventures that share a common thread — using creativity and innovation to solve meaningful problems.
+              Today, I&apos;m focused on the intersection of design, technology, and impact. Working across multiple ventures that share a common thread — using creativity and innovation to solve meaningful problems.
             </p>
           </motion.div>
 
@@ -1183,7 +1245,7 @@ export default function Home() {
                 <h4 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.8rem', color: 'var(--color-black)' }}>Lux Credit</h4>
                 <p style={{ fontSize: '1.2rem', color: 'var(--color-grey)', marginBottom: '1.5rem' }}>Co-Founder • Shariah-Compliant Finance</p>
                 <p style={{ fontSize: '1.5rem', lineHeight: 1.7, color: 'var(--color-black)', marginBottom: '2rem' }}>
-                  The world's first Shariah-compliant credit card — empowering 800 million unbanked Muslims globally. Premium titanium card with concierge service.
+                  The world&apos;s first Shariah-compliant credit card — empowering 800 million unbanked Muslims globally. Premium titanium card with concierge service.
                 </p>
                 <a href="https://lux.credit" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.2rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--color-black)' }}>VISIT LUX CREDIT →</a>
               </div>
@@ -1191,69 +1253,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Story 6: SF Secret Menu */}
-      <section className="story-section" style={{ background: 'var(--color-cream)', padding: '12rem 0', borderTop: '1px solid #000' }}>
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
-              <SeedOfLife size={80} color="#daa520" />
-            </div>
-            <h3 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08rem', marginBottom: '2.5rem', color: 'var(--color-black)' }}>
-              SF SECRET MENU
-            </h3>
-            <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '2rem' }}>
-              Organic farm-to-table ghost kitchen bringing sustainable, chef-crafted meals to San Francisco. From our healing farm directly to your table — closing the loop between the food we grow and the communities we serve.
-            </p>
-            <p style={{ fontSize: '1.6rem', lineHeight: 1.8, color: 'var(--color-black)', marginBottom: '3rem' }}>
-              Every dish tells a story of regenerative agriculture, local sourcing, and culinary creativity. We believe that good food should nourish both people and planet.
-            </p>
-            <button
-              onClick={() => setMenuOpen(true)}
-              style={{
-                fontSize: '1.6rem',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.08rem',
-                color: '#000',
-                background: 'var(--color-orange)',
-                border: 'none',
-                borderRadius: '3rem',
-                padding: '1.2rem 3rem',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05)'
-                e.currentTarget.style.boxShadow = '0 10px 30px rgba(218, 165, 32, 0.4)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
-            >
-              SUBSCRIBE NOW
-            </button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Food Gallery with Parallax */}
-      <section style={{ background: 'var(--color-cream)', width: '100%' }}>
-        <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid #000' }}>
-          {[
-            { src: '/assets/menu-spring-chicken.png', alt: 'Spring Chicken with Red Pepper' },
-            { src: '/assets/menu-steak-salad.png', alt: 'Roasted Cauliflower Green Salad' },
-            { src: '/assets/menu-meatloaf.png', alt: 'Moms Meatloaf with Mashed Potatoes' },
-            { src: '/assets/menu-lasagne.png', alt: 'Beef Ragu Lasagne' },
-          ].map((food, index) => (
-            <div key={food.alt} style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', borderRight: index < 3 ? '1px solid #000' : 'none', borderBottom: '1px solid #000', background: '#f5f5f5' }}>
-              <Image src={food.src} alt={food.alt} fill style={{ objectFit: 'contain' }} />
-            </div>
-          ))}
-        </div>
-      </section>
-
 
       {/* Subscribe Modal */}
       <SubscribeModal isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
