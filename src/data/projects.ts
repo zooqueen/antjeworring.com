@@ -462,20 +462,6 @@ export const allProjects: Project[] = [
     order: 50,
   },
   {
-    id: 'high-dim-embeddings-paper',
-    title: 'High-Dimensional Embedding Spaces',
-    category: 'Research × Paper',
-    year: '2025',
-    date: '2025-01',
-    image: '/assets/zoo-labs-foundation.jpg',
-    description: 'Theoretical foundation for Decentralized Semantic Optimization. Why 7680-dim beats lower-dim under heterogeneous compute.',
-    tags: ['research', 'papers', 'ai', 'zoo', 'zen', 'embeddings', 'dso'],
-    links: [
-      { type: 'article', url: 'https://papers.zoo.ngo/', title: 'Read paper' },
-    ],
-    order: 51,
-  },
-  {
     id: 'proof-of-ai-consensus',
     title: 'Proof of AI (PoAI) Consensus',
     category: 'Research × Proof',
@@ -518,20 +504,6 @@ export const allProjects: Project[] = [
       { type: 'website', url: 'https://github.com/zooai/gym', title: 'GitHub' },
     ],
     order: 54,
-  },
-  {
-    id: 'training-free-grpo',
-    title: 'Training-Free GRPO',
-    category: 'Research × Method',
-    year: '2025',
-    date: '2025-02',
-    image: '/assets/zoo-labs-foundation.jpg',
-    description: 'Preference optimization without RL training loops. Applied across Zoo and Zen model families for alignment under compute constraints.',
-    tags: ['research', 'papers', 'ai', 'zoo', 'zen', 'alignment', 'method'],
-    links: [
-      { type: 'article', url: 'https://papers.zoo.ngo/', title: 'Read paper' },
-    ],
-    order: 55,
   },
 ]
 
