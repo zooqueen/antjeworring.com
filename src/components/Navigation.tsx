@@ -8,20 +8,23 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
   { href: '/about', label: 'ABOUT' },
+  { href: '/blog', label: 'BLOG' },
   { href: '/contact', label: 'CONTACT' },
   { href: '/press', label: 'PRESS' },
   { href: '/work', label: 'WORK' },
 ]
 
 // Pages where nav should always be visible
-const alwaysShowNavPages = ['/about', '/contact', '/press', '/work']
+const alwaysShowNavPages = ['/about', '/blog', '/contact', '/press', '/work']
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
 
   // Check if current page should always show nav
-  const shouldAlwaysShow = alwaysShowNavPages.includes(pathname)
+  const shouldAlwaysShow = alwaysShowNavPages.some(
+    (p) => pathname === p || pathname.startsWith(`${p}/`)
+  )
   const [showNav, setShowNav] = useState(shouldAlwaysShow)
 
   useEffect(() => {
