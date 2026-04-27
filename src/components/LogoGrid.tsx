@@ -29,15 +29,9 @@ const publications: LogoItem[] = [
   { name: 'tmz', displayName: 'TMZ', style: 'bold', ext: 'png' },
 ]
 
-function LogoCell({ item, index, total }: { item: LogoItem; index: number; total: number }) {
+function LogoCell({ item, index }: { item: LogoItem; index: number }) {
   const [imgError, setImgError] = useState(false)
   const logoPath = `/assets/logos/${item.name}.${item.ext || 'png'}`
-
-  const cols = 4
-  const isLastInRow = (index + 1) % cols === 0
-  const rowsNeeded = Math.ceil(total / cols)
-  const currentRow = Math.floor(index / cols)
-  const isLastRow = currentRow === rowsNeeded - 1
 
   const getTextStyle = () => {
     const baseStyle: React.CSSProperties = {
@@ -99,13 +93,11 @@ function LogoCell({ item, index, total }: { item: LogoItem; index: number; total
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="logo-grid-cell"
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '3.5rem 2.5rem',
-        borderRight: !isLastInRow ? '1px solid #e0e0e0' : 'none',
-        borderBottom: !isLastRow ? '1px solid #e0e0e0' : 'none',
         background: '#fff',
         minHeight: '120px',
         transition: 'background 0.3s ease',
@@ -152,7 +144,7 @@ export function LogoGrid() {
       padding: '6rem 0 10rem',
       background: '#fff',
     }}>
-      <div style={{
+      <div className="logo-grid-container" style={{
         maxWidth: '1200px',
         margin: '0 auto',
         padding: '0 4rem',
@@ -191,8 +183,9 @@ export function LogoGrid() {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '1px',
+            background: '#e0e0e0',
             border: '1px solid #e0e0e0',
-            background: '#fff',
           }}
         >
           {publications.map((item, index) => (
@@ -200,7 +193,6 @@ export function LogoGrid() {
               key={item.name}
               item={item}
               index={index}
-              total={publications.length}
             />
           ))}
         </div>
