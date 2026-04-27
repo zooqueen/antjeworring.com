@@ -280,7 +280,7 @@ a:focus-visible, button:focus-visible {
   .hero-me-image {
     object-fit: contain !important;
     object-position: center bottom !important;
-    transform: scale(1.8) !important;
+    transform: scale(1.4) !important;
     transform-origin: center bottom !important;
   }
   .hero-me-container {
@@ -291,7 +291,6 @@ a:focus-visible, button:focus-visible {
   .hero-ground-shadow {
     width: 80% !important;
     bottom: 2% !important;
-    transform: scale(1.5) !important;
   }
 }
 
@@ -300,7 +299,7 @@ a:focus-visible, button:focus-visible {
   .hero-me-image {
     object-fit: contain !important;
     object-position: center bottom !important;
-    transform: scale(2) !important;
+    transform: scale(1.5) !important;
     transform-origin: center bottom !important;
   }
   .hero-me-container {
@@ -311,7 +310,6 @@ a:focus-visible, button:focus-visible {
   .hero-ground-shadow {
     width: 90% !important;
     bottom: 2% !important;
-    transform: scale(1.8) !important;
   }
 }
 
@@ -956,6 +954,10 @@ a:focus-visible, button:focus-visible {
 }
 
 /* Logo Grid Responsive */
+.logo-grid-cell {
+  padding: 3.5rem 2.5rem;
+}
+
 @media (max-width: 1024px) {
   .logo-grid {
     grid-template-columns: repeat(3, 1fr) !important;
@@ -965,10 +967,22 @@ a:focus-visible, button:focus-visible {
   .logo-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+  .logo-grid-container {
+    padding: 0 2rem !important;
+  }
+  .logo-grid-cell {
+    padding: 2.5rem 1.5rem;
+  }
 }
 @media (max-width: 480px) {
   .logo-grid {
     grid-template-columns: 1fr !important;
+  }
+  .logo-grid-container {
+    padding: 0 1rem !important;
+  }
+  .logo-grid-cell {
+    padding: 2rem 1rem;
   }
 }
 
@@ -1042,41 +1056,46 @@ a:focus-visible, button:focus-visible {
    Winamp 95 / Lofi Audio Player Skin
    ═══════════════════════════════════════════════════ */
 
-/* Classic Win95 chrome body */
-.w95-body {
-  background: #c0c0c0;
-  border: 2px outset #dfdfdf;
-  border-color: #fff #808080 #808080 #fff;
-  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #404040;
+/* ══════ Winamp 2.x Dark Chrome ══════ */
+.wa-body {
+  background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 50%, #232323 100%);
+  border: 1px solid #111;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.4),
+    0 4px 16px rgba(0,0,0,0.5);
 }
 
-.w95-titlebar {
+.wa-titlebar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3px 6px;
-  background: linear-gradient(90deg, #1a1a4e, #2a2a6e, #1a1a4e);
-  border-bottom: 1px solid #111;
+  padding: 2px 4px;
+  background: linear-gradient(90deg, #4a2800 0%, #8b4513 30%, #cd7f32 50%, #8b4513 70%, #4a2800 100%);
+  border-bottom: 1px solid #000;
   user-select: none;
 }
 
-.w95-title-text {
+.wa-title-text {
   color: #fff;
   font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.w95-title-btn {
-  width: 16px;
-  height: 14px;
-  background: #c0c0c0;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #fff #808080 #808080 #fff;
-  color: #000;
-  font-size: 0.55rem;
+.wa-title-btn {
+  width: 14px;
+  height: 12px;
+  background: linear-gradient(180deg, #555 0%, #333 100%);
+  border: 1px solid;
+  border-color: #666 #222 #222 #666;
+  color: #ccc;
+  font-size: 0.5rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1084,188 +1103,195 @@ a:focus-visible, button:focus-visible {
   padding: 0;
   line-height: 1;
 }
-.w95-title-btn:active {
-  border-color: #808080 #fff #fff #808080;
-  background: #b0b0b0;
-}
+.wa-title-btn:hover { background: linear-gradient(180deg, #666 0%, #444 100%); color: #fff; }
+.wa-title-btn:active { border-color: #222 #666 #666 #222; background: #2a2a2a; }
 
-.w95-display {
-  background: #0a0a12;
-  margin: 4px;
-  padding: 8px 10px 6px;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #808080 #fff #fff #808080;
-  box-shadow: inset 1px 1px 0 #000;
+.wa-display {
+  background: #0a0a0a;
+  margin: 3px;
+  padding: 6px 8px 5px;
+  border: 1px solid;
+  border-color: #111 #444 #444 #111;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.8), inset 0 0 2px rgba(0,255,65,0.03);
 }
 
 /* Scrolling marquee */
-.w95-marquee {
+.wa-marquee {
   overflow: hidden;
   white-space: nowrap;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
-.w95-marquee-inner {
+.wa-marquee-inner {
   display: inline-block;
   color: #00ff41;
   font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  animation: w95-scroll 18s linear infinite;
+  text-shadow: 0 0 4px rgba(0,255,65,0.3);
+  animation: wa-scroll 18s linear infinite;
 }
-@keyframes w95-scroll {
+@keyframes wa-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-.w95-artist {
-  color: #00bb33;
+.wa-artist {
+  color: #00aa33;
   font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   opacity: 0.7;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.w95-info-row {
+.wa-info-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-.w95-time {
+.wa-time {
   color: #00ff41;
   font-family: 'Courier New', monospace;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 6px rgba(0, 255, 65, 0.4);
+  text-shadow: 0 0 8px rgba(0,255,65,0.4), 0 0 2px rgba(0,255,65,0.2);
 }
 
-.w95-meta {
-  color: #009928;
+.wa-meta {
+  color: #007722;
   font-family: 'Courier New', monospace;
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   letter-spacing: 0.05em;
   opacity: 0.6;
 }
 
 /* EQ Visualizer */
-.w95-eq {
+.wa-eq {
   display: flex;
   align-items: flex-end;
   gap: 1px;
-  height: 24px;
-  padding: 3px 2px 2px;
+  height: 22px;
+  padding: 2px 2px 1px;
   background: #000;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #404040 #dfdfdf #dfdfdf #404040;
-  margin-top: 4px;
+  border: 1px solid;
+  border-color: #111 #333 #333 #111;
+  margin-top: 3px;
 }
 
-.w95-eq-bar {
+.wa-eq-bar {
   flex: 1;
   min-width: 2px;
-  background: linear-gradient(to top, #00ff41 0%, #88ff00 50%, #ffff00 100%);
-  animation: w95-eq-bounce 0.4s ease-in-out infinite alternate;
+  background: linear-gradient(to top, #00cc33 0%, #66ff00 40%, #ffcc00 70%, #ff4400 100%);
+  animation: wa-eq-bounce 0.4s ease-in-out infinite alternate;
 }
 
-@keyframes w95-eq-bounce {
+@keyframes wa-eq-bounce {
   from { height: 2px; }
   to   { height: var(--eq-max, 14px); }
 }
 
-/* Muted state: bars flatten */
-.w95-eq-muted .w95-eq-bar {
+.wa-eq-muted .wa-eq-bar {
   animation: none;
   height: 2px;
-  opacity: 0.3;
+  opacity: 0.25;
   transition: height 0.3s ease, opacity 0.3s ease;
 }
 
 /* Transport controls */
-.w95-controls {
+.wa-controls {
   display: flex;
   align-items: center;
-  gap: 3px;
-  padding: 4px 6px;
-  background: #c0c0c0;
+  gap: 2px;
+  padding: 3px 4px;
 }
 
-.w95-btn {
-  height: 26px;
-  min-width: 30px;
-  background: #c0c0c0;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #fff #808080 #808080 #fff;
-  color: #000;
-  font-size: 0.85rem;
+.wa-btn {
+  height: 24px;
+  min-width: 28px;
+  background: linear-gradient(180deg, #444 0%, #2a2a2a 100%);
+  border: 1px solid;
+  border-color: #555 #1a1a1a #1a1a1a #555;
+  color: #ccc;
+  font-size: 0.8rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 4px;
+  padding: 0 3px;
   font-family: 'Courier New', monospace;
 }
-.w95-btn:hover {
-  background: #d4d4d4;
-}
-.w95-btn:active {
-  border-color: #808080 #fff #fff #808080;
-  background: #b0b0b0;
-}
+.wa-btn:hover { background: linear-gradient(180deg, #555 0%, #333 100%); color: #fff; }
+.wa-btn:active { border-color: #1a1a1a #555 #555 #1a1a1a; background: #222; }
 
-/* ── Big obvious mute/listen button ── */
-.w95-mute-btn {
-  height: 28px;
-  min-width: 80px;
-  padding: 0 8px;
-  font-size: 0.75rem;
+/* Listen/mute button */
+.wa-mute-btn {
+  height: 26px;
+  min-width: 76px;
+  padding: 0 6px;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  gap: 4px;
+  gap: 3px;
 }
 
-.w95-mute-btn-off {
-  background: #c0c0c0;
-  color: #000;
-  animation: w95-mute-pulse 2s ease-in-out infinite;
+.wa-mute-off {
+  animation: wa-mute-pulse 2s ease-in-out infinite;
 }
 
-.w95-mute-btn-on {
-  background: #008000;
-  color: #fff;
-  border-color: #00aa00 #004400 #004400 #00aa00;
+.wa-mute-on {
+  background: linear-gradient(180deg, #006600 0%, #004400 100%) !important;
+  color: #00ff41 !important;
+  border-color: #008800 #002200 #002200 #008800 !important;
+  text-shadow: 0 0 4px rgba(0,255,65,0.4);
 }
 
-@keyframes w95-mute-pulse {
-  0%, 100% { background: #c0c0c0; }
-  50%      { background: #e0e0a0; }
+@keyframes wa-mute-pulse {
+  0%, 100% { background: linear-gradient(180deg, #444 0%, #2a2a2a 100%); }
+  50%      { background: linear-gradient(180deg, #554422 0%, #332211 100%); }
 }
 
 /* Video toggle button */
-.w95-vid-btn {
-  font-size: 0.9rem;
-  min-width: 32px;
-}
-.w95-vid-btn-on {
-  border-color: #808080 #fff #fff #808080;
-  background: #a0a0a0;
-  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
+.wa-vid-btn { font-size: 0.85rem; min-width: 30px; }
+.wa-vid-on {
+  border-color: #1a1a1a #555 #555 #1a1a1a;
+  background: #1a1a1a;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+  color: #00ff41;
 }
 
-.w95-track-num {
+.wa-track-num {
   margin-left: auto;
-  color: #808080;
+  color: #555;
   font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+}
+
+/* CRT scanline overlay for video window */
+.wa-crt-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0,0,0,0.15) 2px,
+    rgba(0,0,0,0.15) 4px
+  );
+  z-index: 3;
+}
+
+/* Floating video window */
+.pip-video-window {
+  border-radius: 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
 }
 
 /* ── 80s TV Static / Signal Break Effect ── */
@@ -1390,6 +1416,11 @@ a:focus-visible, button:focus-visible {
     left: 1rem !important;
     width: auto !important;
   }
+  .pip-video-window {
+    right: 1rem !important;
+    left: 1rem !important;
+    width: auto !important;
+  }
   .pip-minimized {
     bottom: 1rem !important;
     right: 1rem !important;
@@ -1401,6 +1432,10 @@ a:focus-visible, button:focus-visible {
     bottom: 0.5rem !important;
     right: 0.5rem !important;
     left: 0.5rem !important;
-    border-radius: 1rem !important;
+  }
+  .pip-video-window {
+    right: 0.5rem !important;
+    left: 0.5rem !important;
+    width: auto !important;
   }
 }

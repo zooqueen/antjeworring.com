@@ -277,7 +277,103 @@ export function PipPlayer() {
 
   return (
     <>
-      {/* ── Main PiP ── */}
+      {/* ── Floating Video Window (separate from main player) ── */}
+      <AnimatePresence>
+        {shouldShow && !isMinimized && (isMusic && showVideo || adOrStatic) && (
+          <motion.div
+            className="pip-video-window"
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            style={{
+              position: 'fixed',
+              bottom: `calc(2rem + ${isAdPlaying ? 190 : 170}px + 0.5rem)`,
+              right: '2rem',
+              zIndex: 97,
+              width: pipWidth,
+              overflow: 'hidden',
+            }}
+          >
+            {/* Video window titlebar */}
+            <div className="wa-titlebar">
+              <span className="wa-title-text">
+                {isAdPlaying ? `AD: ${currentAd?.title}` : 'ANTJE.FM — VIDEO'}
+              </span>
+              <div style={{ display: 'flex', gap: '1px' }}>
+                {isAdPlaying && (
+                  <button className="wa-title-btn" onClick={skipAd} title="Skip ad">⏭</button>
+                )}
+                {isMusic && (
+                  <button className="wa-title-btn" onClick={() => setShowVideo(false)} title="Close video">✕</button>
+                )}
+              </div>
+            </div>
+
+            {/* Music video content */}
+            <div style={{
+              height: vidHeight,
+              position: 'relative',
+              background: '#000',
+              borderWidth: '0 2px 2px',
+              borderStyle: 'solid',
+              borderColor: '#1a1a1a #0a0a0a #0a0a0a #1a1a1a',
+            }}>
+              <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+                <div id="pip-music-player" style={{ width: '100%', height: '100%' }} />
+              </div>
+
+              {/* Ad player overlay */}
+              {(isAdPlaying || isStatic) && (
+                <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', zIndex: 2 }}>
+                  <div id="pip-ad-player" style={{ width: '100%', height: '100%' }} />
+                </div>
+              )}
+
+              {/* 80s TV Static */}
+              <AnimatePresence>
+                {isStatic && (
+                  <motion.div
+                    className="tv-static-overlay"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.08 }}
+                    style={{ position: 'absolute', inset: 0, zIndex: 10 }}
+                  >
+                    <div className="tv-static-flash" />
+                    <div className="tv-static-noise" />
+                    <div className="tv-static-scanlines" />
+                    <div className="tv-static-bar" />
+                    <div className="tv-static-text">
+                      {mode === 'static-to-ad' ? 'SIGNAL INTERRUPT' : 'RESUMING'}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Ad badge */}
+              {isAdPlaying && (
+                <div style={{
+                  position: 'absolute', top: '0.5rem', left: '0.5rem', zIndex: 5,
+                  background: 'rgba(0,0,0,0.7)', color: '#00ff41',
+                  padding: '0.2rem 0.6rem', borderRadius: '0',
+                  fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em',
+                  textTransform: 'uppercase', fontFamily: "'Courier New', monospace",
+                  border: '1px solid #333',
+                }}>
+                  ▶ ADNEXUS
+                </div>
+              )}
+
+              {/* CRT scanline overlay for authentic look */}
+              <div className="wa-crt-overlay" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Main Winamp Player ── */}
       <motion.div
         className="pip-player"
         animate={{
@@ -294,131 +390,46 @@ export function PipPlayer() {
           width: pipWidth,
           overflow: 'hidden',
           pointerEvents: shouldShow && !isMinimized ? 'auto' : 'none',
-          borderRadius: (adOrStatic || showVideo) ? '0.8rem' : '4px',
-          boxShadow: (adOrStatic || showVideo)
-            ? '0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1)'
-            : '2px 2px 8px rgba(0,0,0,0.6)',
         }}
       >
-        {/* ════════ MUSIC VIDEO (toggleable popup above winamp) ════════ */}
-        <div style={{
-          height: isMusic && showVideo ? vidHeight : 0,
-          overflow: 'hidden',
-          position: 'relative',
-          background: '#000',
-          transition: 'height 0.25s ease',
-        }}>
-          <div className="pip-video-wrapper" style={{ position: 'absolute', inset: 0, overflow: 'hidden', minHeight: vidHeight }}>
-            <div id="pip-music-player" style={{ width: '100%', height: '100%' }} />
-          </div>
-        </div>
-
-        {/* ════════ AD VIDEO (ads + static transitions) ════════ */}
-        <div style={{
-          height: (isAdPlaying || isStatic) ? vidHeight : 0,
-          overflow: 'hidden',
-          position: 'relative',
-          background: '#000',
-          transition: 'height 0.15s ease',
-        }}>
-          <div className="pip-video-wrapper" style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
-            <div id="pip-ad-player" style={{ width: '100%', height: '100%' }} />
-          </div>
-
-          {/* 80s TV Static */}
-          <AnimatePresence>
-            {isStatic && (
-              <motion.div
-                className="tv-static-overlay"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.08 }}
-                style={{ position: 'absolute', inset: 0, zIndex: 10 }}
-              >
-                <div className="tv-static-flash" />
-                <div className="tv-static-noise" />
-                <div className="tv-static-scanlines" />
-                <div className="tv-static-bar" />
-                <div className="tv-static-text">
-                  {mode === 'static-to-ad' ? 'SIGNAL INTERRUPT' : 'RESUMING'}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Ad badge */}
-          {isAdPlaying && (
-            <div style={{
-              position: 'absolute', top: '0.5rem', left: '0.5rem', zIndex: 5,
-              background: 'rgba(61, 90, 61, 0.9)', color: '#fff',
-              padding: '0.25rem 0.7rem', borderRadius: '2rem',
-              fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.05em',
-              textTransform: 'uppercase', backdropFilter: 'blur(4px)',
-            }}>
-              ▶ MY AGENCY
-            </div>
-          )}
-        </div>
-
-        {/* Ad info bar */}
-        {isAdPlaying && (
-          <div style={{ padding: '0.6rem 0.8rem', background: '#111', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <div style={{ flex: 1, overflow: 'hidden' }}>
-              <p style={{ fontSize: '0.95rem', color: '#fff', fontWeight: 600, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {currentAd?.title}
-              </p>
-              <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
-                {currentAd?.desc} · Adnexus
-              </p>
-            </div>
-            <button onClick={toggleMute} style={{ ...w95Btn, width: 28, height: 24, fontSize: '1rem' }}>
-              {isMuted ? '🔇' : '🔊'}
-            </button>
-            <button onClick={skipAd} style={{ ...w95Btn, padding: '2px 8px', fontSize: '0.7rem', letterSpacing: '0.05em' }}>
-              SKIP ⏭
-            </button>
-          </div>
-        )}
-
-        {/* ════════ WINAMP MODE (music — audio only) ════════ */}
-        <div className="w95-body" style={{ display: isMusic || mode === 'loading' ? 'block' : 'none' }}>
+        {/* ════════ WINAMP CHROME BODY ════════ */}
+        <div className="wa-body" style={{ display: isMusic || mode === 'loading' ? 'block' : 'none' }}>
           {/* Title bar */}
-          <div className="w95-titlebar">
-            <span className="w95-title-text">ANTJE.FM</span>
-            <div style={{ display: 'flex', gap: '2px' }}>
-              <button className="w95-title-btn" onClick={() => setSize(s => s === 'small' ? 'medium' : 'small')}>
+          <div className="wa-titlebar">
+            <span className="wa-title-text">ANTJE.FM</span>
+            <div style={{ display: 'flex', gap: '1px' }}>
+              <button className="wa-title-btn" onClick={() => setSize(s => s === 'small' ? 'medium' : 'small')}>
                 {size === 'small' ? '□' : '▫'}
               </button>
-              <button className="w95-title-btn" onClick={() => setIsMinimized(true)}>─</button>
-              <button className="w95-title-btn" onClick={() => setIsDismissed(true)}>✕</button>
+              <button className="wa-title-btn" onClick={() => setIsMinimized(true)}>─</button>
+              <button className="wa-title-btn" onClick={() => setIsDismissed(true)}>✕</button>
             </div>
           </div>
 
           {/* Display panel */}
-          <div className="w95-display">
+          <div className="wa-display">
             {/* Scrolling track name */}
-            <div className="w95-marquee">
-              <div className="w95-marquee-inner">
+            <div className="wa-marquee">
+              <div className="wa-marquee-inner">
                 {currentMusic?.title}&nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;{currentMusic?.title}&nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
               </div>
             </div>
 
             {/* Artist */}
-            <div className="w95-artist">{currentMusic?.artist}</div>
+            <div className="wa-artist">{currentMusic?.artist}</div>
 
             {/* Time + meta */}
-            <div className="w95-info-row">
-              <span className="w95-time">{mins}:{secs}</span>
-              <span className="w95-meta">128kbps · 44kHz · stereo</span>
+            <div className="wa-info-row">
+              <span className="wa-time">{mins}:{secs}</span>
+              <span className="wa-meta">128kbps · 44kHz · stereo</span>
             </div>
 
             {/* EQ visualizer */}
-            <div className={`w95-eq ${isMuted ? 'w95-eq-muted' : ''}`}>
+            <div className={`wa-eq ${isMuted ? 'wa-eq-muted' : ''}`}>
               {eqBars.map((bar, i) => (
                 <div
                   key={i}
-                  className="w95-eq-bar"
+                  className="wa-eq-bar"
                   style={{
                     '--eq-max': `${bar.max}px`,
                     animationDuration: `${bar.dur}s`,
@@ -430,26 +441,48 @@ export function PipPlayer() {
           </div>
 
           {/* Transport controls */}
-          <div className="w95-controls">
-            <button className="w95-btn" onClick={prevMusic} title="Previous mix">⏮</button>
+          <div className="wa-controls">
+            <button className="wa-btn" onClick={prevMusic} title="Previous mix">⏮</button>
             <button
-              className={`w95-btn w95-mute-btn ${isMuted ? 'w95-mute-btn-off' : 'w95-mute-btn-on'}`}
+              className={`wa-btn wa-mute-btn ${isMuted ? 'wa-mute-off' : 'wa-mute-on'}`}
               onClick={toggleMute}
               title={isMuted ? 'Turn on sound' : 'Mute'}
             >
               {isMuted ? '🔇 LISTEN' : '🔊 ON'}
             </button>
-            <button className="w95-btn" onClick={nextMusic} title="Next mix">⏭</button>
+            <button className="wa-btn" onClick={nextMusic} title="Next mix">⏭</button>
             <button
-              className={`w95-btn w95-vid-btn ${showVideo ? 'w95-vid-btn-on' : ''}`}
+              className={`wa-btn wa-vid-btn ${showVideo ? 'wa-vid-on' : ''}`}
               onClick={() => setShowVideo(v => !v)}
               title={showVideo ? 'Hide video' : 'Show video'}
             >
               📺
             </button>
-            <span className="w95-track-num">{musicIndex + 1} / {musicList.length}</span>
+            <span className="wa-track-num">{musicIndex + 1}/{musicList.length}</span>
           </div>
         </div>
+
+        {/* Ad info bar (shows during ad playback) */}
+        {isAdPlaying && (
+          <div className="wa-body" style={{ display: 'block' }}>
+            <div className="wa-titlebar">
+              <span className="wa-title-text">ADNEXUS TV</span>
+              <div style={{ display: 'flex', gap: '1px' }}>
+                <button className="wa-title-btn" onClick={skipAd}>⏭</button>
+              </div>
+            </div>
+            <div style={{ padding: '4px 6px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <div style={{ flex: 1, overflow: 'hidden' }}>
+                <p className="wa-marquee-inner" style={{ animation: 'none', fontSize: '0.8rem', margin: 0 }}>
+                  {currentAd?.title} — {currentAd?.desc}
+                </p>
+              </div>
+              <button className="wa-btn" onClick={toggleMute} style={{ minWidth: 26, height: 22, fontSize: '0.85rem' }}>
+                {isMuted ? '🔇' : '🔊'}
+              </button>
+            </div>
+          </div>
+        )}
       </motion.div>
 
       {/* ── Minimized pill ── */}
@@ -464,11 +497,11 @@ export function PipPlayer() {
             style={{
               position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 97,
               display: 'flex', alignItems: 'center', gap: '0.5rem',
-              background: '#2a2a2a', border: '2px outset #555',
-              color: '#00ff41', padding: '0.5rem 1rem', borderRadius: '3px',
-              cursor: 'pointer', fontSize: '0.85rem', fontWeight: 700,
+              background: '#1e1e1e', border: '1px solid #444',
+              color: '#00ff41', padding: '0.5rem 1rem', borderRadius: '0',
+              cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700,
               fontFamily: "'Courier New', monospace", letterSpacing: '0.08em',
-              boxShadow: '2px 2px 8px rgba(0,0,0,0.5)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)',
             }}
           >
             ♪ ANTJE.FM — {currentMusic?.title?.slice(0, 22)}...
@@ -479,15 +512,3 @@ export function PipPlayer() {
   )
 }
 
-const w95Btn: React.CSSProperties = {
-  background: 'linear-gradient(180deg, #555 0%, #3a3a3a 100%)',
-  border: '1px outset #666',
-  color: '#ccc',
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: 0,
-  borderRadius: '2px',
-  fontFamily: "'Courier New', monospace",
-}

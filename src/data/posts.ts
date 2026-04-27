@@ -511,7 +511,7 @@ Five years is a long time. Today, the arc closes.
 - [Zoo 2021 Original Whitepaper](https://github.com/zooai/papers/blob/main/zoo-2021-original-whitepaper/zoo-2021-original-whitepaper.pdf) — where I named NFT Liquidity Protocol
 - [Liquidity Protocol spec](https://github.com/liquidity-io/spec) — what it became
 - Zoo DEX: zoo.network/dex
-- Liquidity Protocol: 
+- Liquidity Protocol: <tenant>
 - Earlier post: [The 2021 NFT Liquidity Protocol Origin](/blog/zoo-2021-the-nft-liquidity-protocol-origin)
 - Earlier post: [Zoo 4.0 Sovereign L1 Launch](/blog/zoo-4-0-sovereign-l1-launch)
 `,
