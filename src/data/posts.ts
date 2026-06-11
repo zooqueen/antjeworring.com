@@ -37,7 +37,7 @@ This post is the personal account of how that abstraction was arrived at, what i
 
 ## What was conventional in October 2021
 
-Six months before the whitepaper, Beeple sold an NFT at Christie's for $69M. CryptoPunks were trading at six-figure prices on OpenSea. The conventional NFT model was — to use the word that everyone in the space was using — *collectible*. NFTs were discrete tokens with metadata, traded one-by-one through fixed-price listings on third-party marketplaces. Liquidity meant *the marketplace had buyers*. There was no protocol-level conception of liquidity for NFTs.
+Six months before the whitepaper, Beeple sold an NFT at Christie's for $69M. CryptoPunks were trading at six-figure prices on OpenSea. The conventional NFT model was — to use the word that everyone in the space was using — *collectible*. NFTs were discrete tokens with metadata, traded one-by-one through fixed-price listings on third-party marketplaces. [Asset turnover] meant *the marketplace had buyers*. There was no protocol-level conception of liquidity for NFTs.
 
 The conventional fungible-token DEX model was AMM curves. Uniswap v2 had been live since May 2020. PancakeSwap was the BSC equivalent. The mental model was that liquidity is a property of a *pool* — a contract that holds two tokens and quotes prices via the constant-product formula.
 
@@ -57,7 +57,7 @@ Three reasons the naming was important, in retrospect.
 
 **One:** Collectibility is a category that limits scale. There are only so many people who want a JPEG of a punk. Position-on-a-curve is unbounded — you can have arbitrarily many participants holding small positions, the way you can have arbitrarily many people holding small Uniswap LP positions. The 2021 framing opened the addressable participant base from "art collectors" to "anyone who wants exposure to an outcome."
 
-**Two:** Liquidity-as-protocol means the protocol is portable across venues, chains, and use cases. Liquidity-as-marketplace ties the asset to a specific listing platform. The 2021 framing implied (without yet specifying) cross-chain interoperability for NFT-shaped assets.
+**Two:** [Concept]-as-protocol means the protocol is portable across venues, chains, and use cases. [Concept]-as-marketplace ties the asset to a specific listing platform. The 2021 framing implied (without yet specifying) cross-chain interoperability for NFT-shaped assets.
 
 **Three:** The framing made conservation finance a tractable problem on-chain. Most prior attempts at impact bonds had failed because the secondary market for the bond was illiquid — funders couldn't exit if life circumstances changed. A protocol-level liquidity guarantee meant a funder could always exit, even at a loss, because the protocol always held a position for them. That's what makes the patient capital pattern work.
 
