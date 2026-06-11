@@ -19,13 +19,13 @@ export interface Post {
 export const allPosts: Post[] = [
   {
     slug: 'zoo-2021-the-nft-liquidity-protocol-origin',
-    title: 'The 2021 NFT Liquidity Protocol — How I Named the Idea',
+    title: 'The 2021 NFT [redacted] — How I Named the Idea',
     date: '2021-10-31',
     description:
-      'On October 31, 2021, I published the Zoo whitepaper and introduced "NFT Liquidity Protocol" — the abstraction that, five years later, became the cross-chain rail powering four sovereign DEXes.',
+      'On October 31, 2021, I published the Zoo whitepaper and introduced "NFT [redacted]" — the abstraction that, five years later, became the cross-chain rail powering four sovereign DEXes.',
     tags: ['zoo', 'liquidity', 'nft', '2021', 'whitepaper', 'origin'],
     body: `
-On October 31, 2021, I published the original Zoo whitepaper as Chief Scientist of what would become Zoo Labs Foundation. The document is at zoo.ngo and lives in the project repo today as \`zoo-2021-original-whitepaper.pdf\`. In §4 — the differentiators section — I introduced the term **NFT Liquidity Protocol**.
+On October 31, 2021, I published the original Zoo whitepaper as Chief Scientist of what would become Zoo Labs Foundation. The document is at zoo.ngo and lives in the project repo today as \`zoo-2021-original-whitepaper.pdf\`. In §4 — the differentiators section — I introduced the term **NFT [redacted]**.
 
 The opening lines:
 
@@ -49,7 +49,7 @@ The Zoo whitepaper proposed something different. An animal NFT was a position in
 
 This was an answer to a specific question: how do you build an asset that funds conservation over decades while still being tradeable today? The answer was that the asset is not a static collectible; it is a position in a curve. The curve is the protocol.
 
-I called this an **NFT Liquidity Protocol** because the framing made the protocol — not the marketplace — responsible for liquidity. The animal NFT was always tradeable, always pricable, always in some state of the curve, because the protocol guaranteed it.
+I called this an **NFT [redacted]** because the framing made the protocol — not the marketplace — responsible for liquidity. The animal NFT was always tradeable, always pricable, always in some state of the curve, because the protocol guaranteed it.
 
 ## Why the term mattered
 
@@ -65,9 +65,9 @@ Three reasons the naming was important, in retrospect.
 
 I did not anticipate FHE.
 
-The 2021 paper is silent on privacy. We talked about transparency — every dollar to conservation, on-chain, auditable. That was right, but it wasn't complete. By 2025-2026, the use cases that emerged for NFT Liquidity Protocol — corporate carbon offsets, large family-office allocations, donor-advised giving — required selective disclosure. A Fortune 500 buying carbon credits doesn't want competitors to see their decarbonization timeline.
+The 2021 paper is silent on privacy. We talked about transparency — every dollar to conservation, on-chain, auditable. That was right, but it wasn't complete. By 2025-2026, the use cases that emerged for NFT [redacted] — corporate carbon offsets, large family-office allocations, donor-advised giving — required selective disclosure. A Fortune 500 buying carbon credits doesn't want competitors to see their decarbonization timeline.
 
-LRC-3, the FHE-encrypted pair extension to today's Liquidity Protocol, is what closes that gap. The 2021 framing was right about the protocol-level guarantee but missed the dimension of selective privacy. Hindsight benefit: protocols need to handle public, private, and selectively-disclosed positions in a single framework. We added the third in 2026.
+LRC-3, the FHE-encrypted pair extension to today's [redacted], is what closes that gap. The 2021 framing was right about the protocol-level guarantee but missed the dimension of selective privacy. Hindsight benefit: protocols need to handle public, private, and selectively-disclosed positions in a single framework. We added the third in 2026.
 
 ## The five-year delay
 
@@ -77,20 +77,20 @@ A research idea that takes five years to ship at scale does so because three thi
 
 2. **Use-case multiplicity.** Conservation NFTs were one application. Compute receipts (Hanzo), DEX-native securities (Pars), confidential trading (D-Chain) are others. The general framework needs many specific instances before it's recognized as general.
 
-3. **Naming convergence.** "Liquidity Protocol" was used variously through 2022-2024 to mean different things. By late 2025 the meaning had stabilized in a community that included the Lux, Hanzo, Zoo, and Pars teams. April 1, 2026 is the formalization of a term that had been in active use for years.
+3. **Naming convergence.** "[redacted]" was used variously through 2022-2024 to mean different things. By late 2025 the meaning had stabilized in a community that included the Lux, Hanzo, Zoo, and Pars teams. April 1, 2026 is the formalization of a term that had been in active use for years.
 
 ## What I want this post to do
 
-I want it to mark the lineage. I do not own the term — it is in the public domain, the whitepaper is open access, the abstraction has many parents. But the name has a specific origin in §4 of an October 31, 2021 document I wrote. The fact that today's cross-chain Liquidity Protocol descends from that abstraction is worth noting, because the field benefits from preserving its intellectual lineage.
+I want it to mark the lineage. I do not own the term — it is in the public domain, the whitepaper is open access, the abstraction has many parents. But the name has a specific origin in §4 of an October 31, 2021 document I wrote. The fact that today's cross-chain [redacted] descends from that abstraction is worth noting, because the field benefits from preserving its intellectual lineage.
 
-Five years from idea to standard is roughly the cadence I expect for foundational protocol concepts. TCP/IP took eight years from RFC 793 to widespread adoption. HTTP took six years from RFC 1945. Liquidity Protocol's five is well within the band.
+Five years from idea to standard is roughly the cadence I expect for foundational protocol concepts. TCP/IP took eight years from RFC 793 to widespread adoption. HTTP took six years from RFC 1945. [redacted]'s five is well within the band.
 
 The work I did in October 2021 was naming. The work that made it real was done by many people over five years, on infrastructure that didn't exist when the name was coined. I want to honor both halves.
 
 ## Links
 
 - [The Zoo 2021 Original Whitepaper (PDF)](https://github.com/zooai/papers/blob/main/zoo-2021-original-whitepaper/zoo-2021-original-whitepaper.pdf)
-- [Liquidity Protocol spec](https://github.com/liquidity-io/spec)
+- [[redacted] spec](https://github.com/liquidity-io/spec)
 - Zoo Labs Foundation: zoo.ngo
 - This site: antjeworring.com
 `,
@@ -250,7 +250,7 @@ The objection that this is overkill — "why does my chatbot need a blockchain?"
 
 ## What I am working on now
 
-The current work is on chain interoperability between per-LLM chains. If Model A's chain and Model B's chain both have something to say about a user's question, can the user route to both with provable provenance for each? The answer is yes via the same infrastructure that makes Liquidity Protocol work — LRC-style envelopes for inference quotes, with each chain's signatures verified independently.
+The current work is on chain interoperability between per-LLM chains. If Model A's chain and Model B's chain both have something to say about a user's question, can the user route to both with provable provenance for each? The answer is yes via the same infrastructure that makes [redacted] work — LRC-style envelopes for inference quotes, with each chain's signatures verified independently.
 
 I expect this to ship as ZIP-0050 (working title) in early 2026.
 
@@ -387,7 +387,7 @@ Three concrete capabilities ship today:
 Impact-bond NFTs (WWF Tiger 2030, IUCN Reforestation Series A, Panthera Snow Leopard, ZSL Marine) are tradeable on the native DEX from genesis. They aren't wrapped, bridged, or proxied. The DEX understands them.
 
 **2. Conservation oracle precompile (\`0x0c01\`).**
-Field outcomes — population counts, habitat health indices, anti-poaching results — are signed by partner organizations (WWF, IUCN, ZSL, Panthera, the Foundation auditor) and queryable on-chain. Yield-paying contracts can call the oracle directly. This is the on-chain bridge between conservation outcomes and DeFi yield, and it shipping is what makes the original 2021 NFT Liquidity Protocol vision actually buildable.
+Field outcomes — population counts, habitat health indices, anti-poaching results — are signed by partner organizations (WWF, IUCN, ZSL, Panthera, the Foundation auditor) and queryable on-chain. Yield-paying contracts can call the oracle directly. This is the on-chain bridge between conservation outcomes and DeFi yield, and it shipping is what makes the original 2021 NFT [redacted] vision actually buildable.
 
 **3. FHE-private donor flows (LRC-3).**
 Donors who want privacy — large family offices, donor-advised funds, individuals giving anonymously — can route funds to specific species or regions without revealing identity, amount, or recipient until they choose to publish. The capability is shipping today; the use cases will accumulate over the next year.
@@ -406,7 +406,7 @@ The total operational cost increase from L2 to L1 is roughly 8x. The justificati
 
 ## The 2021 lineage
 
-I cannot write about Zoo 4.0 without noting that the original 2021 whitepaper named the abstraction that today's launch finally makes operational. In §4 of that document, I introduced "NFT Liquidity Protocol" — the framing of NFTs as continuous positions in a protocol-level liquidity curve, with collateral redistributable across life stages.
+I cannot write about Zoo 4.0 without noting that the original 2021 whitepaper named the abstraction that today's launch finally makes operational. In §4 of that document, I introduced "NFT [redacted]" — the framing of NFTs as continuous positions in a protocol-level liquidity curve, with collateral redistributable across life stages.
 
 In 2021 on BSC, that framing was simulated by metadata and a marketplace contract. The continuity was metaphorical. With the conservation oracle (\`0x0c01\`) and the LRC-1 contracts shipping on Zoo Chain 4.0, the continuity is finally enforceable. An animal NFT carries collateral. Field outcomes flow into the NFT via the oracle. As the animal "ages," collateral redistributes. The protocol guarantees liquidity at every stage.
 
@@ -418,13 +418,13 @@ Three things from the 4.0 launch that I am personally proud of:
 
 **The 211 conservation projects with verified field data ready for the oracle.** Five years of partner-relationship work has built a pipeline where, from genesis, the chain has *real* data flowing in. The oracle is not a placeholder; it is queryable today.
 
-**The retail purchasing flow.** $42K of Foundation Treasury accrual from 2,400 retail impact-bond purchases in the first six hours, at a median ticket of $312. That is the long-tail funder base conservation has needed and never had. The Liquidity Protocol rail makes this accessible to wallets on chains other than Zoo, which means non-crypto-native funders can participate without learning what a "subnet" is.
+**The retail purchasing flow.** $42K of Foundation Treasury accrual from 2,400 retail impact-bond purchases in the first six hours, at a median ticket of $312. That is the long-tail funder base conservation has needed and never had. The [redacted] rail makes this accessible to wallets on chains other than Zoo, which means non-crypto-native funders can participate without learning what a "subnet" is.
 
 **The team.** Zach on chain architecture. The Foundation engineering crew on contracts and oracle. The partner organizations (WWF, IUCN, ZSL, Panthera) on data feeds. The validator operators on uptime. Five years of work by many people, converging on a single activation moment. None of it was solo.
 
 ## What's next
 
-April 1 is the public Liquidity Protocol launch. April 20 is when the Zoo DEX rail opens cross-chain. Both build on what shipped today. There will be follow-up posts.
+April 1 is the public [redacted] launch. April 20 is when the Zoo DEX rail opens cross-chain. Both build on what shipped today. There will be follow-up posts.
 
 For now: Zoo Chain 4.0 is live. The conservation oracle is queryable. The trifecta is the topology. Five years from BSC to sovereign.
 
@@ -439,13 +439,13 @@ For now: Zoo Chain 4.0 is live. The conservation oracle is queryable. The trifec
 
   {
     slug: 'zoo-dex-and-the-liquidity-protocol-coming-home',
-    title: 'Zoo DEX and the Liquidity Protocol Coming Home',
+    title: 'Zoo DEX and the [redacted] Coming Home',
     date: '2026-04-20',
     description:
       'Today, the framework I named in §4 of the 2021 Zoo whitepaper became the cross-chain rail powering four sovereign DEXes. Closing the loop on a five-year arc.',
     tags: ['zoo', 'liquidity', 'dex', 'cross-chain', 'antje-worring', 'closure'],
     body: `
-Today is April 20, 2026. The Zoo DEX opened publicly on Liquidity Protocol, alongside Hanzo's HMM/Lightspeed and Pars' DEX, with Lux's D-Chain already on the rail since February. Four sovereign DEXes on four sovereign chains, sharing one wire format.
+Today is April 20, 2026. The Zoo DEX opened publicly on [redacted], alongside Hanzo's HMM/Lightspeed and Pars' DEX, with Lux's D-Chain already on the rail since February. Four sovereign DEXes on four sovereign chains, sharing one wire format.
 
 This post is short. I want to mark a moment, not analyze it.
 
@@ -455,7 +455,7 @@ In §4 of the original Zoo whitepaper, I wrote:
 
 > *Zoo is a liquidity protocol for NFTs, in the way that Uniswap or PancakeSwap is for tokens.*
 
-That sentence was the introduction of the term **NFT Liquidity Protocol**. The "NFT" prefix has since dropped (today's protocol handles all asset classes), but the abstraction is unchanged: liquidity is a property of the protocol, not the venue.
+That sentence was the introduction of the term **NFT [redacted]**. The "NFT" prefix has since dropped (today's protocol handles all asset classes), but the abstraction is unchanged: liquidity is a property of the protocol, not the venue.
 
 ## What happened today
 
@@ -480,7 +480,7 @@ Network-wide across the four DEXes:
 
 When you name an idea in 2021, you do not know what will become of it. Most ideas in this field do not become anything. They get discussed, refined, abandoned. A small fraction get tried; a smaller fraction work at scale.
 
-The framing I introduced has, over five years, become the standard way that four sovereign blockchains coordinate trading. That is not because I named it. It is because many people built it. Zach on Lux's chain architecture. The Hanzo team on HMM and AIVM. The Pars team on the DEX adapter. The Liquidity Protocol contributors. The validator operators. The market makers. The aggregator builders.
+The framing I introduced has, over five years, become the standard way that four sovereign blockchains coordinate trading. That is not because I named it. It is because many people built it. Zach on Lux's chain architecture. The Hanzo team on HMM and AIVM. The Pars team on the DEX adapter. The [redacted] contributors. The validator operators. The market makers. The aggregator builders.
 
 What naming does is set a direction. What building does is make the direction real. The five years between October 31, 2021 and April 20, 2026 are full of building. Today is when the direction, the building, and the substrate align.
 
@@ -496,7 +496,7 @@ For me: I am writing this from my desk in San Francisco, watching the dashboard 
 
 I want to acknowledge, for the record:
 
-- **Zach Kelling**, who has been my engineering counterpart for the chain architecture, the Liquidity Protocol design, and the Hamiltonian work, across all five years.
+- **Zach Kelling**, who has been my engineering counterpart for the chain architecture, the [redacted] design, and the Hamiltonian work, across all five years.
 - **The Zoo Labs Foundation team**, who built the impact bonds, the oracle integrations, and the partner network.
 - **The Lux core team**, who shipped the substrate that makes this possible.
 - **The Hanzo team**, who shipped HMM and the AI primitives that compose with it.
@@ -508,11 +508,11 @@ Five years is a long time. Today, the arc closes.
 
 ## Links
 
-- [Zoo 2021 Original Whitepaper](https://github.com/zooai/papers/blob/main/zoo-2021-original-whitepaper/zoo-2021-original-whitepaper.pdf) — where I named NFT Liquidity Protocol
-- [Liquidity Protocol spec](https://github.com/liquidity-io/spec) — what it became
+- [Zoo 2021 Original Whitepaper](https://github.com/zooai/papers/blob/main/zoo-2021-original-whitepaper/zoo-2021-original-whitepaper.pdf) — where I named NFT [redacted]
+- [[redacted] spec](https://github.com/liquidity-io/spec) — what it became
 - Zoo DEX: zoo.network/dex
-- Liquidity Protocol: <tenant>
-- Earlier post: [The 2021 NFT Liquidity Protocol Origin](/blog/zoo-2021-the-nft-liquidity-protocol-origin)
+- [redacted]: <tenant>
+- Earlier post: [The 2021 NFT [redacted] Origin](/blog/zoo-2021-the-nft-liquidity-protocol-origin)
 - Earlier post: [Zoo 4.0 Sovereign L1 Launch](/blog/zoo-4-0-sovereign-l1-launch)
 `,
   },
